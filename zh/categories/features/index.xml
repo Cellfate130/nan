@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Features on Engimo</title>
+    <link>http://www.dneg.org/zh/categories/features/</link>
+    <description>Recent content in Features on Engimo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 29 Jul 2018 09:00:00 +0600</lastBuildDate>
+    
+	<atom:link href="http://www.dneg.org/zh/categories/features/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Flowcharts support</title>
+      <link>http://www.dneg.org/zh/docs/flowcharts/</link>
+      <pubDate>Sun, 29 Jul 2018 09:00:00 +0600</pubDate>
+      
+      <guid>http://www.dneg.org/zh/docs/flowcharts/</guid>
+      <description>In order to include flowchart.js diagram, add the following attribute to the page metadata section:
+--- flowchart: true ---  You may then start embedding flowcharts.
+Flowchart To embed an example flowchart, add code block section labeled with flowchart as a language:
+```flowchart st=&amp;gt;start: Start:&amp;gt;http://www.google.com[blank] e=&amp;gt;end:&amp;gt;http://www.google.com op1=&amp;gt;operation: My Operation sub1=&amp;gt;subroutine: My Subroutine cond=&amp;gt;condition: Yes or No?:&amp;gt;http://www.google.com io=&amp;gt;inputoutput: catch something... para=&amp;gt;parallel: parallel tasks st-&amp;gt;op1-&amp;gt;cond cond(yes)-&amp;gt;io-&amp;gt;e cond(no)-&amp;gt;para para(path1, bottom)-&amp;gt;sub1(right)-&amp;gt;op1 para(path2, top)-&amp;gt;op1 ```  st=&amp;gt;start: Start:&amp;gt;http://www.</description>
+    </item>
+    
+  </channel>
+</rss>

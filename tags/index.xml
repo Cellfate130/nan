@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Engimo</title>
+    <link>http://www.dneg.org/tags/</link>
+    <description>Recent content in Tags on Engimo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 05 Jul 2018 23:30:00 +0600</lastBuildDate>
+    
+	<atom:link href="http://www.dneg.org/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Algolia</title>
+      <link>http://www.dneg.org/tags/algolia/</link>
+      <pubDate>Thu, 05 Jul 2018 23:30:00 +0600</pubDate>
+      
+      <guid>http://www.dneg.org/tags/algolia/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Authors</title>
+      <link>http://www.dneg.org/tags/authors/</link>
+      <pubDate>Tue, 26 Sep 2017 06:00:00 +0600</pubDate>
+      
+      <guid>http://www.dneg.org/tags/authors/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Chroma</title>
+      <link>http://www.dneg.org/tags/chroma/</link>
+      <pubDate>Wed, 27 Sep 2017 12:00:00 +0600</pubDate>
+      
+      <guid>http://www.dneg.org/tags/chroma/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Configuration</title>
+      <link>http://www.dneg.org/tags/config/</link>
+      <pubDate>Thu, 29 Mar 2018 09:00:00 +0600</pubDate>
+      
+      <guid>http://www.dneg.org/tags/config/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Engineering</title>
+      <link>http://www.dneg.org/tags/engineering/</link>
+      <pubDate>Thu, 26 Jul 2018 09:00:00 +0600</pubDate>
+      
+      <guid>http://www.dneg.org/tags/engineering/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Fuse.js</title>
+      <link>http://www.dneg.org/tags/fuse.js/</link>
+      <pubDate>Fri, 06 Jul 2018 01:00:00 +0600</pubDate>
+      
+      <guid>http://www.dneg.org/tags/fuse.js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>I18n</title>
+      <link>http://www.dneg.org/tags/i18n/</link>
+      <pubDate>Wed, 27 Sep 2017 14:00:00 +0600</pubDate>
+      
+      <guid>http://www.dneg.org/tags/i18n/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Lunr.js</title>
+      <link>http://www.dneg.org/tags/lunr.js/</link>
+      <pubDate>Thu, 05 Jul 2018 20:30:00 +0600</pubDate>
+      
+      <guid>http://www.dneg.org/tags/lunr.js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Menus</title>
+      <link>http://www.dneg.org/tags/menus/</link>
+      <pubDate>Wed, 27 Sep 2017 10:00:00 +0600</pubDate>
+      
+      <guid>http://www.dneg.org/tags/menus/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Opengraph</title>
+      <link>http://www.dneg.org/tags/og/</link>
+      <pubDate>Tue, 26 Sep 2017 08:00:00 +0600</pubDate>
+      
+      <guid>http://www.dneg.org/tags/og/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pygments</title>
+      <link>http://www.dneg.org/tags/pygments/</link>
+      <pubDate>Wed, 27 Sep 2017 12:00:00 +0600</pubDate>
+      
+      <guid>http://www.dneg.org/tags/pygments/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Search</title>
+      <link>http://www.dneg.org/tags/search/</link>
+      <pubDate>Fri, 06 Jul 2018 01:00:00 +0600</pubDate>
+      
+      <guid>http://www.dneg.org/tags/search/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Shortcode</title>
+      <link>http://www.dneg.org/tags/shortcode/</link>
+      <pubDate>Thu, 05 Oct 2017 20:00:00 +0600</pubDate>
+      
+      <guid>http://www.dneg.org/tags/shortcode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Translation</title>
+      <link>http://www.dneg.org/tags/translation/</link>
+      <pubDate>Wed, 27 Sep 2017 14:00:00 +0600</pubDate>
+      
+      <guid>http://www.dneg.org/tags/translation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Widgets</title>
+      <link>http://www.dneg.org/tags/widgets/</link>
+      <pubDate>Wed, 07 Feb 2018 18:30:00 +0600</pubDate>
+      
+      <guid>http://www.dneg.org/tags/widgets/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
