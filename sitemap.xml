@@ -1,18 +1,585 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-	
-	<sitemap>
-	   	<loc>http://www.dneg.org/en/sitemap.xml</loc>
-		
-	   	<lastmod>2018-07-29T19:30:00+06:00</lastmod>
-		
-	</sitemap>
-	
-	<sitemap>
-	   	<loc>http://www.dneg.org/zh/sitemap.xml</loc>
-		
-	   	<lastmod>2018-07-29T19:30:00+06:00</lastmod>
-		
-	</sitemap>
-	
-</sitemapindex>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://yihui.name/cn/2018/08/chen-yun/</loc>
+    <lastmod>2018-08-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/cn/2018/08/reading/</loc>
+    <lastmod>2018-08-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/en/2018/08/gifski-knitr/</loc>
+    <lastmod>2018-08-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/cn/2018/08/knitting-method/</loc>
+    <lastmod>2018-08-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/cn/2018/08/sweet-spicy/</loc>
+    <lastmod>2018-08-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/en/2018/08/make-active-binding/</loc>
+    <lastmod>2018-08-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/en/2018/08/double-negatives/</loc>
+    <lastmod>2018-08-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/en/2018/08/25-years-of-data-science/</loc>
+    <lastmod>2018-08-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/en/2018/08/bookdown-crc/</loc>
+    <lastmod>2018-08-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/en/2018/07/lazy-evaluation/</loc>
+    <lastmod>2018-07-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/xfun/</loc>
+    <lastmod>2018-07-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/cn/recipe/</loc>
+    <lastmod>2017-12-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/tinytex/pain/</loc>
+    <lastmod>2017-12-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/formatr/</loc>
+    <lastmod>2017-12-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/tinytex/r/</loc>
+    <lastmod>2017-12-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/tinytex/cn/</loc>
+    <lastmod>2017-12-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/tinytex/faq/</loc>
+    <lastmod>2017-12-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/tinytex/</loc>
+    <lastmod>2017-12-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/rd2roxygen/</loc>
+    <lastmod>2017-06-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/printr/</loc>
+    <lastmod>2017-05-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/bm-circle/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/mc-hitormiss/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/mc-samplemean/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/rosling-bubbles/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/ani-options/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/ani-record/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/animation-package/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/bisection-method/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/boot-iid/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/boot-lowess/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/brownian-motion/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/buffon-needle/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/clt-ani/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/conf-int/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/cv-ani/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/cv-nfeatureslda/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/flip-coin/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/grad-desc/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/im-convert/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/kmeans-ani/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/knn-ani/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/least-squares/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/lln-ani/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/moving-block/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/mwar-ani/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/newton-method/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/pdftk/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/price-ani/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/qpdf/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/quincunx/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/quincunx2/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/sample-cluster/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/sample-ratio/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/sample-simple/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/sample-strat/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/sample-system/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/savegif/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/savehtml/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/savelatex/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/saveswf/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/savevideo/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/sim-qqnorm/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/vanke1127/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/example/vi-lilac.chaser/</loc>
+    <lastmod>2017-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/examples/</loc>
+    <lastmod>2017-03-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/export/</loc>
+    <lastmod>2017-03-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/resources/</loc>
+    <lastmod>2017-03-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/faq/</loc>
+    <lastmod>2017-02-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/animation/</loc>
+    <lastmod>2017-02-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demos/</loc>
+    <lastmod>2017-02-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/hooks/</loc>
+    <lastmod>2017-02-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/objects/</loc>
+    <lastmod>2017-02-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/options/</loc>
+    <lastmod>2017-02-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/patterns/</loc>
+    <lastmod>2017-02-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/</loc>
+    <lastmod>2017-02-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/</loc>
+    <lastmod>2017-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/en/</loc>
+    <lastmod>2017-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/cn/</loc>
+    <lastmod>2017-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/rlp/</loc>
+    <lastmod>2014-12-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/showcase/</loc>
+    <lastmod>2013-03-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/pandoc/</loc>
+    <lastmod>2013-03-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/wordpress/</loc>
+    <lastmod>2013-02-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/javascript/</loc>
+    <lastmod>2012-11-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/engines/</loc>
+    <lastmod>2012-05-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/slides/</loc>
+    <lastmod>2012-05-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/editors/</loc>
+    <lastmod>2012-03-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/framed/</loc>
+    <lastmod>2012-02-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/eclipse/</loc>
+    <lastmod>2012-02-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/sweave/</loc>
+    <lastmod>2012-02-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/upload/</loc>
+    <lastmod>2012-02-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/pretty/</loc>
+    <lastmod>2012-02-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/rstudio/</loc>
+    <lastmod>2012-02-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/org/</loc>
+    <lastmod>2012-02-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/stitch/</loc>
+    <lastmod>2012-01-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/output/</loc>
+    <lastmod>2012-01-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/vignette/</loc>
+    <lastmod>2012-01-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/child/</loc>
+    <lastmod>2012-01-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/reference/</loc>
+    <lastmod>2012-01-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/listings/</loc>
+    <lastmod>2011-12-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/graphics/</loc>
+    <lastmod>2011-12-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/beamer/</loc>
+    <lastmod>2011-12-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/externalization/</loc>
+    <lastmod>2011-12-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/lyx/</loc>
+    <lastmod>2011-12-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/manual/</loc>
+    <lastmod>2011-12-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/cache/</loc>
+    <lastmod>2011-12-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/knitr/demo/minimal/</loc>
+    <lastmod>2011-12-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/en/about/</loc>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/en/vitae/</loc>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/en/guestbook/</loc>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/en/links/</loc>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/en/publication/</loc>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/cn/about/</loc>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/cn/publication/</loc>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/cn/guestbook/</loc>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/cn/vitae/</loc>
+  </url>
+  
+  <url>
+    <loc>https://yihui.name/cn/links/</loc>
+  </url>
+  
+</urlset>

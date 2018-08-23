@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Graphics - Power of graphics in knitr  - Yihui Xie | 谢益辉</title>
+    <meta property="og:title" content="Graphics - Yihui Xie | 谢益辉">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="The graphics manual shows all cool bells and whistles about graphics in knitr.
+[&amp;hellip;] You will probably realize how much room there is for improvement of R graphics in publications. Don&amp;rsquo;t &amp;hellip;">
+      <meta property="og:description" content="The graphics manual shows all cool bells and whistles about graphics in knitr.
+[&amp;hellip;] You will probably realize how much room there is for improvement of R graphics in publications. Don&amp;rsquo;t &amp;hellip;">
+      
+    
+
+    
+    
+    <meta name="twitter:image" content="https://db.yihui.name/imgur/HCkka.png">
+    
+    
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="knitr">
+    <header class="masthead">
+      
+
+<h1><a href="/knitr/"><img src="/knitr/images/knit-logo.png" alt="knitr logo" /></a></h1>
+<p class="tagline">knitr: elegant, flexible, and fast dynamic report generation with R</p>
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/knitr/">Home</a></li>
+  
+  <li><a href="/knitr/options/">Options</a></li>
+  
+  <li><a href="/knitr/hooks/">Hooks</a></li>
+  
+  <li><a href="/knitr/demos/">Examples</a></li>
+  
+  <li><a href="/knitr/faq/">FAQ</a></li>
+  
+  <li><a href="https://github.com/yihui/knitr">Github repo</a></li>
+  
+  <li><a href="/">Yihui Xie</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rbind/yihui/edit/master/content/knitr%5cdemo%5c2011-12-09-graphics.md" target="_blank">Edit this page</a></li>
+
+
+<li><a href="/knitr/index.xml" type="application/rss+xml" title="RSS feed">Subscribe</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">License</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Graphics</h1>
+<h1><span class="subtitle">Power of graphics in knitr</span></h2>
+
+<h3>
+2011-12-09</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<h2 id="the-graphics-manual">The Graphics Manual</h2>
+
+<p>The graphics manual shows all cool bells and whistles about graphics in <strong>knitr</strong>.</p>
+
+<ul>
+<li>Source and output of the graphics manual
+
+<ul>
+<li>Rnw source: <a href="https://github.com/yihui/knitr/blob/master/inst/examples/knitr-graphics.Rnw">knitr-graphics.Rnw</a></li>
+<li>LyX source: <a href="https://github.com/yihui/knitr/blob/master/inst/examples/knitr-graphics.lyx">knitr-graphics.lyx</a></li>
+<li>PDF output: <a href="https://github.com/yihui/knitr/releases/download/doc/knitr-graphics.pdf">knitr-graphics.pdf</a></li>
+</ul></li>
+</ul>
+
+<p>You will probably realize how much room there is for improvement of R graphics in publications. Don&rsquo;t accept whatever R gives you; it is time starting making your graphics beautiful and professional.</p>
+
+<p>A few screenshots from the manual:</p>
+
+<p><img src="https://db.yihui.name/imgur/HCkka.png" alt="tikz graphics in knitr" /></p>
+
+<p><img src="https://db.yihui.name/imgur/BTEiu.png" alt="ggplot2 in knitr" /></p>
+
+<p>I&rsquo;d like to thank the authors of the <a href="http://code.google.com/p/tufte-latex/"><code>tufte-handout</code></a> class, based on which this document was written, and the <strong>tikzDevice</strong> package makes the font styles in plots consistent with the document class (using serif fonts).</p>
+
+<h2 id="a-note-on-custom-graphical-devices">A note on custom graphical devices</h2>
+
+<p>The <a href="../../options/">chunk option</a> <code>dev</code> accepts custom graphical devices which can be defined as an R function with three arguments. Here is an example of a PDF device using <code>pointsize</code> 10:</p>
+
+<pre><code class="language-r">&lt;&lt;custom-dev&gt;&gt;=
+my_pdf = function(file, width, height) {
+  pdf(file, width = width, height = height, pointsize = 10)
+}
+@
+</code></pre>
+
+<p>Then we can use this device in chunk options, but one important thing to remember is to provide the <code>fig.ext</code> option at the same time, because <strong>knitr</strong> is unable to guess what should be a correct file extension for the plot file. Finally we will use the custom device like this:</p>
+
+<pre><code class="language-r">&lt;&lt;dev-demo, dev='my_pdf', fig.ext='pdf'&gt;&gt;=
+plot(rnorm(100))
+@
+</code></pre>
+
+<p>Of course you can set them globally using <code>\SweaveOpts{}</code> if you want to use this device through out the document.</p>
+
+<h2 id="passing-more-arguments-to-a-device">Passing more arguments to a device</h2>
+
+<p>We can actually have even finer control over graphical devices through the <code>dev.args</code> option. Instead of hardcoding <code>pointsize = 10</code>, we can add an option <code>dev.args = list(pointsize = 10)</code> to the chunk. Here is an example:</p>
+
+<pre><code class="language-r">&lt;&lt;pdf-pointsize, dev='pdf', dev.args=list(pointsize=10)&gt;&gt;=
+plot(rnorm(100))
+@
+</code></pre>
+
+<p>Since <code>dev.args</code> is a list, it can take any possible device arguments, e.g. <code>dev.args=list(pointsize=11, family='serif')</code> for the <code>pdf()</code> device. All elements of <code>dev.args</code> are passed to the graphical device of the chunk.</p>
+
+<h2 id="create-hyperlinks-in-r-graphics">Create hyperlinks in R graphics</h2>
+
+<p>With the help of the <strong>tikzDevice</strong> package, we can write almost any LaTeX commands in R graphics. Here is an example <a href="https://gist.github.com/1937313">links.Rnw</a> of writing hyperlinks (courtesy of Jonathan Kennel).</p>
+
+<p>An important note is you have to add <code>\usepackage{hyperref}</code> to the list of metrics packages used by <strong>tikzDevice</strong>, otherwise the command <code>\hyperlink</code> or <code>\hypertarget</code> will not be recognized.</p>
+
+<h2 id="encoding-of-multibyte-characters">Encoding of multibyte characters</h2>
+
+<p>When your plots contain multibyte characters, you may need set the <code>encoding</code> option of the <code>pdf()</code> device; see <a href="https://github.com/yihui/knitr/issues/172">#172</a> for a discussion. For a possible list of encodings, see</p>
+
+<pre><code class="language-r">list.files(system.file('enc', package = 'grDevices'))
+## e.g. you can set pdf.options(encoding = 'CP1250')
+</code></pre>
+
+<p>You probably need to set the encoding when you see a warning like this: <code>Warning: conversion failure on '&lt;var&gt;' in 'mbcsToSbcs': dot substituted for &lt;var&gt;</code>.</p>
+
+<p>Another possibility is to use the <code>cairo_pdf</code> device instead of <code>pdf</code> (see <a href="https://github.com/yihui/knitr/issues/436">#436</a>):</p>
+
+<pre><code class="language-r">options(device = function(file, width = 7, height = 7, ...) {
+  cairo_pdf(tempfile(), width = width, height = height, ...)
+})
+</code></pre>
+
+<p>If that fails under Windows, you may also take a look at <a href="https://github.com/yihui/knitr/issues/527">#527</a>.</p>
+
+<h2 id="the-dingbats-font">The Dingbats font</h2>
+
+<p>According to the documentation of <code>pdf()</code>, the <code>useDingbats</code> argument can reduce the file size of PDF&rsquo;s which contain small circles. If you are using <strong>knitr</strong> in RStudio, this option is disabled by default. You may want to enable it by putting <code>pdf.options(useDingbats = TRUE)</code> in your source document if you have large scatter plots. See <a href="https://github.com/yihui/knitr/issues/311">#311</a> for more comments and discussions.</p>
+
+<h2 id="animations">Animations</h2>
+
+<p>When the chunk option <code>fig.show='animate'</code> and there are multiple plots produced from a code chunk, all plots will be combined to an animation. For LaTeX output, the LaTeX package <strong>animate</strong> is used to create animations in PDF. For HTML/Markdown output, by default <a href="http://ffmpeg.org">FFmpeg</a> is used to create a <a href="http://www.webmproject.org">WebM</a> video. Note you have to enable the <strong>libvpx</strong> support when installing FFmpeg. Linux and Windows users can just follow the download links on the FFmpeg website (<strong>libvpx</strong> has been enabled in the binaries). For OS X users, you can install FFmpeg via <a href="http://brew.sh">Homebrew</a></p>
+
+<pre><code class="language-bash">brew install ffmpeg --with-libvpx
+</code></pre>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/knitr/demo/beamer/">Beamer</a></span>
+  <span class="nav-next"><a href="/knitr/demo/listings/">Listings</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/knitr\/demo\/beamer\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/knitr\/demo\/listings\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+<section class="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+    this.page.url = "http:\/\/yihui.name" + location.pathname;
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var disqus_js = '//yihui.disqus.com/embed.js';
+    var d = document, s = d.createElement('script');
+    s.src = disqus_js; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    var b = false, l = function() {
+      if (b) return;
+      (d.head || d.body).appendChild(s); b = true;
+    }
+    
+    if (location.hash.match(/^#comment/)) return(l());
+    var t = d.getElementById('disqus_thread');
+    var c = function() {
+      if (b) return;
+      var rect = t.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom >= 0) l();
+    };
+    window.addEventListener('load', c);
+    d.addEventListener('scroll', c);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="/">Yihui Xie</a> 2005 - 2018</div>
+  
+  </footer>
+  </article>
+  
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-1988641-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </body>
+</html>
+

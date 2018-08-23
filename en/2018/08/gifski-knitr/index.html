@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Create GIFs with gifski in knitr Documents - Yihui Xie | 谢益辉</title>
+    <meta property="og:title" content="Create GIFs with gifski in knitr Documents - Yihui Xie | 谢益辉">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="Last month Jeroen announced the gifski package, which looked pretty cool to me. While thinking about improving the gganimate support in knitr (per Thomas&amp;rsquo;s request), I learned a little more &amp;hellip;">
+      <meta property="og:description" content="Last month Jeroen announced the gifski package, which looked pretty cool to me. While thinking about improving the gganimate support in knitr (per Thomas&amp;rsquo;s request), I learned a little more &amp;hellip;">
+      
+    
+
+    
+    
+    <meta name="twitter:image" content="https://user-images.githubusercontent.com/163582/44246516-30c93000-a1a4-11e8-8aa5-8876e51a227f.gif">
+    
+    
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="en">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.png" alt="Yihui Xie" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">Home</a></li>
+  
+  <li><a href="/en/about/">About</a></li>
+  
+  <li><a href="/en/">Blog</a></li>
+  
+  <li><a href="/en/vitae/">Vitae</a></li>
+  
+  <li><a href="/cn/">中文</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rbind/yihui/edit/master/content/en%5c2018-08-16-gifski-knitr.md" target="_blank">Edit this page</a></li>
+
+
+<li><a href="/en/index.xml" type="application/rss+xml" title="RSS feed">Subscribe</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">License</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Create GIFs with gifski in knitr Documents</h1>
+
+
+<h3>Yihui Xie / 
+2018-08-16</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<p>Last month Jeroen announced <a href="https://ropensci.org/technotes/2018/07/23/gifski-release/">the <strong>gifski</strong> package</a>, which looked pretty cool to me. While thinking about improving the <strong>gganimate</strong> support in <strong>knitr</strong> (per <a href="https://twitter.com/thomasp85/status/1021456429855780865">Thomas&rsquo;s request</a>), I learned a little more about <strong>gifski</strong>. The usage seems to be quite straightforward to me, so I wrote a hook function in <strong>knitr</strong> today to support this package, which means you can easily create a GIF animation from a code chunk now if you have installed <strong>gifski</strong>, and at least version 1.20.14 of <strong>knitr</strong>:</p>
+
+<pre><code class="language-r">install.packages('gifski')
+if (packageVersion('knitr') &lt; '1.20.14') {
+  remotes::install_github('yihui/knitr')
+}
+</code></pre>
+
+<h2 id="basic-usage">Basic usage</h2>
+
+<p>To make use of <strong>gifski</strong>, you may set the chunk option <code>animation.hook='gifski'</code>. Below is an R Markdown example:</p>
+
+<pre><code class="language-md">```{r, animation.hook='gifski'}
+for (i in 1:2) {
+  pie(c(i %% 2, 6), col = c('red', 'yellow'), labels = NA)
+}
+```
+</code></pre>
+
+<p>This will produce the &ldquo;Pac man&rdquo; below (assuming the output format is HTML):</p>
+
+<p><img src="https://user-images.githubusercontent.com/163582/44246516-30c93000-a1a4-11e8-8aa5-8876e51a227f.gif" alt="A gif animation of Pac man" /></p>
+
+<h2 id="customization">Customization</h2>
+
+<p>The main things you may want to tweak for the GIF animation are perhaps the dimension (controlled by <code>fig.width</code> and <code>fig.height</code>, or <code>fig.dim</code>), and <code>interval</code> (the delay between frames), e.g.,</p>
+
+<pre><code class="language-md">```{r, animation.hook='gifski', interval=0.2, fig.width=4}
+for (i in 1:2) {
+  pie(c(i %% 2, 6), col = c('red', 'yellow'), labels = NA)
+}
+```
+</code></pre>
+
+<p>There are other options that you can customize, but I guess you probably don&rsquo;t care (e.g., <code>dpi</code>). Note that the graphical device must produce PNG images since <strong>gifski</strong> only supports PNG at the moment, which means the chunk option <code>dev</code> must be a PNG device (e.g., <code>'png'</code> or <code>'CairoPNG'</code>).</p>
+
+<h2 id="ffmpeg-also-works">FFmpeg also works</h2>
+
+<p>You can also use <a href="https://ffmpeg.org">FFmpeg</a> to create a GIF animation, e.g.,</p>
+
+<pre><code class="language-md">```{r, animation.hook='ffmpeg', ffmpeg.format='gif', dev='jpeg'}
+for (i in 1:2) {
+  pie(c(i %% 2, 6), col = c('red', 'yellow'), labels = NA)
+}
+```
+</code></pre>
+
+<p>Without setting <code>ffmpeg.format='gif'</code>, you will get a video instead (the default format is WebM). Gifski claims to be &ldquo;the fastest GIF encoder in the universe&rdquo;, and the package <strong>gifski</strong> does not have system dependencies (you don&rsquo;t need to install external software like FFmpeg), so if you want to create a GIF, it is probably the best way to go.</p>
+
+<h2 id="please-test-it-yourself">Please test it yourself</h2>
+
+<p>Please help me test the development version of <strong>knitr</strong>, and I&rsquo;ll appreciate your feedback. Many thanks to the R ninja Jeroen Ooms for the <strong>gifski</strong> package! For <strong>gganimate</strong> users, I guess a tighter integration between <strong>knitr</strong> and <strong>gganimate</strong> should be coming soon. <a href="https://github.com/thomasp85/gganimate/issues/134">Please stay tuned</a>.</p>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/en/2018/08/make-active-binding/">makeActiveBinding(): The Most Magical Hidden Gem in Base R</a></span>
+  <span class="nav-next"></span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/en\/2018\/08\/make-active-binding\/';
+    
+  } else if (e.which == 39) {  
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+<section class="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+    this.page.url = "http:\/\/yihui.name" + location.pathname;
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var disqus_js = '//yihui.disqus.com/embed.js';
+    var d = document, s = d.createElement('script');
+    s.src = disqus_js; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    var b = false, l = function() {
+      if (b) return;
+      (d.head || d.body).appendChild(s); b = true;
+    }
+    
+    if (location.hash.match(/^#comment/)) return(l());
+    var t = d.getElementById('disqus_thread');
+    var c = function() {
+      if (b) return;
+      var rect = t.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom >= 0) l();
+    };
+    window.addEventListener('load', c);
+    d.addEventListener('scroll', c);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+
+
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="/">Yihui Xie</a> 2005 - 2018</div>
+  
+  </footer>
+  </article>
+  
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-1988641-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </body>
+</html>
+

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>TinyTeX - A lightweight, cross-platform, portable, and easy-to-maintain LaTeX distribution based on TeX Live  - Yihui Xie | 谢益辉</title>
+    <meta property="og:title" content="TinyTeX - Yihui Xie | 谢益辉">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="TinyTeX is a custom LaTeX distribution based on TeX Live that is small in size but functions well in most cases, especially for R users. If you run into the problem of missing LaTeX packages, it &amp;hellip;">
+      <meta property="og:description" content="TinyTeX is a custom LaTeX distribution based on TeX Live that is small in size but functions well in most cases, especially for R users. If you run into the problem of missing LaTeX packages, it &amp;hellip;">
+      
+    
+
+    
+    
+    
+    <meta name="twitter:image" content="https://yihui.name/images/logo.png">
+    
+    
+
+    
+
+    
+    <link href="/tinytex/index.xml" rel="alternate" type="application/rss+xml" title="Yihui Xie | 谢益辉" />
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="tinytex">
+    <header class="masthead">
+      
+
+<h1><a href="/tinytex/"><img src="/images/logo-tinytex.png" alt="tinytex logo" /></a></h1>
+<p class="tagline">TinyTeX: A lightweight and easy-to-maintain LaTeX distribution</p>
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li class="active"><a href="/tinytex/">Home</a></li>
+  
+  <li><a href="/tinytex/faq/">FAQs</a></li>
+  
+  <li><a href="/tinytex/r/">R package</a></li>
+  
+  <li><a href="/tinytex/pain/">Hall of Pain</a></li>
+  
+  <li><a href="/tinytex/cn/">中文文档</a></li>
+  
+  <li><a href="https://github.com/yihui/tinytex">Github repo</a></li>
+  
+  <li><a href="/">Yihui Xie</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rbind/yihui/edit/master/content/tinytex%5c_index.md" target="_blank">Edit this page</a></li>
+
+
+<li><a href="/tinytex/index.xml" type="application/rss+xml" title="RSS feed">Subscribe</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">License</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>TinyTeX</h1>
+<h1><span class="subtitle">A lightweight, cross-platform, portable, and easy-to-maintain LaTeX distribution based on TeX Live</span></h2>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<p>TinyTeX is a custom LaTeX distribution based on TeX Live that is small in size but functions well in most cases, especially for R users. If you run into the problem of missing LaTeX packages, it should be super clear to you what you need to do (in fact, R users won&rsquo;t need to do anything). <em>You only install LaTeX packages you actually need.</em></p>
+
+<p>TinyTeX only provides an installation script that downloads and installs TeX Live over the network. It may take a couple of minutes, depending on your network speed. Before you install TinyTeX, I recommend that <em>you uninstall your existing LaTeX distribution</em>. Currently TinyTeX works best for R users. Other users can use it, too (it is just that missing LaTeX packages won&rsquo;t be automatically installed).</p>
+
+<h2 id="for-r-users">For R Users</h2>
+
+<p>Installing and maintaining TinyTeX are easy for R users, since <a href="/tinytex/r/">the R package <strong>tinytex</strong></a> has provided wrapper functions (N.B. the lowercase and bold <strong>tinytex</strong> means <em>the R package</em>, and the camel-case TinyTeX means <em>the LaTeX distribution</em>). You can use <strong>tinytex</strong> to install TinyTeX:</p>
+
+<pre><code class="language-r">install.packages('tinytex')
+tinytex::install_tinytex()
+</code></pre>
+
+<p>What <code>install_tinytex()</code> does will be explained later. If you need to uninstall TinyTeX, run <code>tinytex::uninstall_tinytex()</code>. To compile an R Markdown document to PDF, there is nothing else you have to know. To compile a LaTeX document to PDF, call one of these functions (depending on the LaTeX engine you want to use) in <strong>tinytex</strong>: <code>pdflatex()</code>, <code>xelatex()</code>, and <code>lualatex()</code>. When these functions detect LaTeX packages required but not installed in TinyTeX, they will automatically install the missing packages by default.</p>
+
+<pre><code class="language-r"># writeLines(c(
+#   '\\documentclass{article}',
+#   '\\begin{document}', 'Hello world!', '\\end{document}'
+# ), 'test.tex')
+tinytex::pdflatex('test.tex')
+</code></pre>
+
+<p>That is all an average R user needs to know. If you do not use R, you need to know one more thing: the <code>tlmgr</code> command.</p>
+
+<h2 id="for-other-users">For Other Users</h2>
+
+<p>TinyTeX assumes that you are not afraid of using the command line. If you are, please use other popular LaTeX distributions instead. In fact, there is only one single command that you need to know: <code>tlmgr</code>. It is probably not too scary.</p>
+
+<h3 id="installation">Installation</h3>
+
+<p>For Linux users, TinyTeX will be installed to <code>$HOME/.TinyTeX</code> and symlinks of executables (such as <code>pdflatex</code>) are created under <code>$HOME/bin</code>, which should be on the <code>PATH</code> environment variable:<sup class="footnote-ref" id="fnref:If-not-you-know"><a href="#fn:If-not-you-know">1</a></sup></p>
+
+<pre><code class="language-sh">wget -qO- &quot;https://yihui.name/gh/tinytex/tools/install-unx.sh&quot; | sh
+</code></pre>
+
+<p>For macOS users, TinyTeX will be installed to <code>~/Library/TinyTeX</code>, and executables are symlinked to <code>/usr/local/bin</code>:</p>
+
+<pre><code class="language-sh">curl -sL &quot;https://yihui.name/gh/tinytex/tools/install-unx.sh&quot; | sh
+</code></pre>
+
+<p>For Windows users, save the batch file <a href="https://yihui.name/gh/tinytex/tools/install-windows.bat">install-windows.bat</a> (open this link and press <code>Ctrl + S</code>), and double click it.<sup class="footnote-ref" id="fnref:You-anti-virus-s"><a href="#fn:You-anti-virus-s">2</a></sup> Please note that it requires PowerShell (<a href="https://docs.microsoft.com/en-us/powershell/scripting/setup/starting-windows-powershell-on-earlier-versions-of-windows">at least version 3.0</a>). If your Windows version is too low and does not have PowerShell, follow <a href="https://docs.microsoft.com/en-us/powershell/scripting/setup/starting-windows-powershell-on-earlier-versions-of-windows">this article</a> to install it. There might be an error dialog or two about <code>luatex.dll</code> during the installation (<a href="https://db.yihui.name/images/install-tl-win-lua.png">like this</a>), but that does not seem to hurt, and I just clicked &ldquo;OK&rdquo;. The installation directory is <code>%APPDATA%/TinyTeX</code>, where <code>APPDATA</code> is an environment variable that typically points to the path <code>C:\Users\Your Name\AppData\Roaming</code>.<sup class="footnote-ref" id="fnref:Click-the-Start"><a href="#fn:Click-the-Start">3</a></sup></p>
+
+<p>To uninstall TinyTeX, simply delete the folder from your file manager/browser, or use command line:</p>
+
+<pre><code class="language-sh"># Linux
+tlmgr path remove
+rm -r &quot;~/.TinyTeX&quot;
+
+# macOS
+tlmgr path remove
+rm -r &quot;~/Library/TinyTeX&quot;
+
+# Windows
+tlmgr path remove
+rd /s /q &quot;%APPDATA%\TinyTeX&quot;
+</code></pre>
+
+<p>Compare the way to uninstall TinyTeX with the ways to uninstall other LaTeX distributions, and you may appreciate how much simpler it is to get rid of TinyTeX than other LaTeX distributions. That is because TinyTeX is just a self-contained folder.</p>
+
+<h3 id="maintenance">Maintenance</h3>
+
+<p>This section is only for those who are <em>not</em> R Markdown users &mdash; everything is automatic for R Markdown users, and you don&rsquo;t need to manually search for or install missing LaTeX packages.</p>
+
+<p>If you compile a LaTeX document and run into an error message like this:</p>
+
+<pre><code>! LaTeX Error: File `times.sty' not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: sty)
+</code></pre>
+
+<p>It basically indicates a missing LaTeX package. Do not panic. Open a command window, and use the command <code>tlmgr search --global --file</code> followed by the filename,<sup class="footnote-ref" id="fnref:Add-a-forward-sl"><a href="#fn:Add-a-forward-sl">4</a></sup> e.g.,</p>
+
+<pre><code class="language-sh">$ tlmgr search --global --file &quot;/times.sty&quot;
+psnfss:
+        texmf-dist/tex/latex/psnfss/times.sty
+...
+</code></pre>
+
+<p>Find the package that contains the file with the exact name in the error log above. In this case, the missing package is <code>psnfss</code>, and we can install a package via <code>tlmgr install</code>, e.g.,</p>
+
+<pre><code class="language-sh">tlmgr install psnfss
+</code></pre>
+
+<p>If you still see error messages that you don&rsquo;t understand, you may update everything:</p>
+
+<pre><code class="language-sh">tlmgr update --self --all
+tlmgr path add
+fmtutil-sys --all
+</code></pre>
+
+<p>For R users, you can use the corresponding helper functions. Some examples:</p>
+
+<pre><code class="language-r">library(tinytex)
+tlmgr_search('/times.sty')   # search for times.sty
+tlmgr_install('psnfss')      # install the psnfss package
+tlmgr_update()               # update everything
+</code></pre>
+
+<p>If you see an error message &ldquo;Remote repository newer than local&rdquo;, it means it is time for you need to upgrade (reinstall) TinyTeX annually:</p>
+
+<pre><code class="language-r">tinytex::reinstall_tinytex()
+</code></pre>
+
+<p>That is all for an average user. Read <a href="/tinytex/faq/">the FAQ page</a> if you wish to know more technical details about TinyTeX.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>The installation and maintenance of LaTeX have bothered me for several years. Yes, there are MiKTeX, MacTeX, and TeX Live, but the common problems are:</p>
+
+<ol>
+<li><p>You have to either install a basic version that is relatively small (several hundred MB) but basically doesn&rsquo;t work, because it is very likely that certain frequently used LaTeX packages are missing; or you install the full version that is several GB, but in your whole life, you probably will only use 1% of the packages.</p></li>
+
+<li><p>The documentation for installation and maintenance is often way too long for beginners. For example, I doubt if anyone has the courage or patience to read <a href="https://www.tug.org/texlive/doc/tlmgr.html">the <code>tlmgr</code> manual</a> (yes, it is very useful, thanks to the TeX Live team).</p></li>
+</ol>
+
+<p>Fortunately, there is a nice way out based on TeX Live. TeX Live is great: it is cross-platform (yes, it works on Windows, too), and it <em>can</em> be portable. We just need to make it lightweight, and easier to maintain, so here comes TinyTeX.</p>
+
+<h2 id="acknowledgements">Acknowledgements</h2>
+
+<p>I&rsquo;d like to thank the TeX Live team for the great work, without which TinyTeX wouldn&rsquo;t be possible. I&rsquo;m particularly grateful that they offered the options to remove source code and documentation from the installation.</p>
+
+<p>I cannot thank <a href="http://www.pzhao.org">Peng Zhao</a> and <a href="https://yufree.cn">Miao Yu</a> enough for their extremely careful and patient <a href="https://d.cosx.org/d/419672">testing</a> as well as the very useful feedback. Several other users also helped test the beta version, including <a href="https://www.carlboettiger.info">Carl Boettiger</a>, <a href="http://tc.rbind.io">TC</a>, <a href="https://github.com/gaocegege">Ce Gao</a>, and <a href="https://github.com/XiangyunHuang">Xiangyun Huang</a>.</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:If-not-you-know">If not, you know how to add it to <code>PATH</code>, just because you are a Linux user! <a class="footnote-return" href="#fnref:If-not-you-know">↩</a></li>
+<li id="fn:You-anti-virus-s">You anti-virus software might warn against certain <code>*.dll</code> files, and you may want to trust these files. However, I&rsquo;m not a Windows expert, so I&rsquo;ll leave the decision to yourself. <a class="footnote-return" href="#fnref:You-anti-virus-s">↩</a></li>
+<li id="fn:Click-the-Start">Click the Start menu, Run, type <code>cmd</code> to open a command window, and type <code>echo %APPDATA%</code> to figure out the actual path if you are curious. <a class="footnote-return" href="#fnref:Click-the-Start">↩</a></li>
+<li id="fn:Add-a-forward-sl">Add a forward slash before the filename for an exact match. Without the slash, other packages may be matched, e.g., <code>chemtimes.sty</code>. <a class="footnote-return" href="#fnref:Add-a-forward-sl">↩</a></li>
+</ol>
+</div>
+
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev"></span>
+  <span class="nav-next"></span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+  } else if (e.which == 39) {  
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+<section class="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+    this.page.url = "http:\/\/yihui.name" + location.pathname;
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var disqus_js = '//yihui.disqus.com/embed.js';
+    var d = document, s = d.createElement('script');
+    s.src = disqus_js; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    var b = false, l = function() {
+      if (b) return;
+      (d.head || d.body).appendChild(s); b = true;
+    }
+    
+    if (location.hash.match(/^#comment/)) return(l());
+    var t = d.getElementById('disqus_thread');
+    var c = function() {
+      if (b) return;
+      var rect = t.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom >= 0) l();
+    };
+    window.addEventListener('load', c);
+    d.addEventListener('scroll', c);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="/">Yihui Xie</a> 2005 - 2018</div>
+  
+  </footer>
+  </article>
+  
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-1988641-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </body>
+</html>
+

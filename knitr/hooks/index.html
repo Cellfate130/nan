@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Hooks - Customizable functions to run before / after a code chunk, tweak the output, and manipulate chunk options  - Yihui Xie | 谢益辉</title>
+    <meta property="og:title" content="Hooks - Yihui Xie | 谢益辉">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="The object knit_hooks in the knitr package is used to set hooks; the basic usage is knit_hooks$set(param = FUN) (see objects for details) where param is the name of a chunk option (can be arbitrary), &amp;hellip;">
+      <meta property="og:description" content="The object knit_hooks in the knitr package is used to set hooks; the basic usage is knit_hooks$set(param = FUN) (see objects for details) where param is the name of a chunk option (can be arbitrary), &amp;hellip;">
+      
+    
+
+    
+    
+    
+    <meta name="twitter:image" content="https://yihui.name/images/logo.png">
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="knitr">
+    <header class="masthead">
+      
+
+<h1><a href="/knitr/"><img src="/knitr/images/knit-logo.png" alt="knitr logo" /></a></h1>
+<p class="tagline">knitr: elegant, flexible, and fast dynamic report generation with R</p>
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/knitr/">Home</a></li>
+  
+  <li><a href="/knitr/options/">Options</a></li>
+  
+  <li class="active"><a href="/knitr/hooks/">Hooks</a></li>
+  
+  <li><a href="/knitr/demos/">Examples</a></li>
+  
+  <li><a href="/knitr/faq/">FAQ</a></li>
+  
+  <li><a href="https://github.com/yihui/knitr">Github repo</a></li>
+  
+  <li><a href="/">Yihui Xie</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rbind/yihui/edit/master/content/knitr%5chooks.md" target="_blank">Edit this page</a></li>
+
+
+<li><a href="/knitr/index.xml" type="application/rss+xml" title="RSS feed">Subscribe</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">License</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Hooks</h1>
+<h1><span class="subtitle">Customizable functions to run before / after a code chunk, tweak the output, and manipulate chunk options</span></h2>
+
+<h3>
+2017-02-03</h3>
+
+<hr>
+
+
+      </header>
+
+
+ <nav id="TableOfContents">
+<ul>
+<li><a href="#chunk-hooks">Chunk hooks</a></li>
+<li><a href="#output-hooks">Output hooks</a>
+<ul>
+<li><a href="#latex-render-latex">LaTeX: render_latex()</a></li>
+<li><a href="#sweave-render-sweave">Sweave: render_sweave()</a></li>
+<li><a href="#listings-render-listings">Listings: render_listings()</a></li>
+<li><a href="#html-render-html">HTML: render_html()</a></li>
+<li><a href="#markdown-render-markdown">Markdown: render_markdown()</a></li>
+<li><a href="#jekyll-render-jekyll">Jekyll: render_jekyll()</a></li>
+<li><a href="#restructuredtext-render-rst">reStructuredText: render_rst()</a></li>
+</ul></li>
+<li><a href="#option-hooks">Option hooks</a></li>
+</ul>
+</nav> 
+
+
+<p>The object <code>knit_hooks</code> in the <strong>knitr</strong> package is used to set hooks; the basic usage is <code>knit_hooks$set(param = FUN)</code> (see <a href="../objects">objects</a> for details) where <code>param</code> is the name of a chunk option (can be arbitrary), and <code>FUN</code> is a function. There are two types of hooks: chunk hooks and output hooks. Hook functions may have different forms, depending what they are designed to do.</p>
+
+<h1 id="chunk-hooks">Chunk hooks</h1>
+
+<p>Chunk hooks are functions to be called before or after a code chunk when the chunk option is not <code>NULL</code> (it basically means as long as you set a option, the hook will be run), and they should be defined with three arguments:</p>
+
+<pre><code class="language-r">foo_hook = function(before, options, envir) {
+    if (before) {
+        ## code to be run before a chunk
+    } else {
+        ## code to be run after a chunk
+    }
+}
+</code></pre>
+
+<p>When <strong>knitr</strong> is processing the document, <code>foo_hook(before = TRUE)</code> will be called before a code chunk is executed (unless the chunk is cached or set not to be evaluated), and <code>foo_hook(before = FALSE)</code> is called after a chunk; the argument <code>options</code> is a list of <a href="options">options</a> in the current chunk (e.g. <code>options$label</code> is the label of the current chunk), and <code>envir</code> is the environment in which the code chunk is evaluated. The latter two arguments can be optionally used in a chunk hook. For example, if we set a hook for the <code>small.mar</code> option as:</p>
+
+<pre><code class="language-r">knit_hooks$set(small.mar = function(before, options, envir) {
+    if (before) par(mar = c(4, 4, .1, .1))  # smaller margin on top and right
+})
+</code></pre>
+
+<p>Then this function will be called for a chunk like this:</p>
+
+<pre><code class="language-r">% small.mar does not have to be TRUE, it can be any non-null value
+&lt;&lt;myplot, small.mar=TRUE&gt;&gt;=
+hist(rnorm(100), main = '')  # no main title
+@
+</code></pre>
+
+<p>In <strong>knitr</strong>, hooks can also be used to insert texts into the output. To do this, the hook function must return a character result. This feature can greatly extend the power of hooks. Take the <strong>rgl</strong> package for example: if we want to insert 3D snapshots produced in <strong>rgl</strong> into our LaTeX document, we may consider this hook function (see the more sophisticated <code>hook_rgl()</code> in this package):</p>
+
+<pre><code class="language-r">knit_hooks$set(rgl = function(before, options, envir) {
+  if (!before) {
+    ## after a chunk has been evaluated
+    if (rgl.cur() == 0) return()  # no active device
+    name = paste(options$fig.path, options$label, sep = '')
+    rgl.snapshot(paste(name, '.png', sep = ''), fmt = 'png')
+    return(paste('\\includegraphics{', name, '}\n', sep = ''))
+  }
+})
+</code></pre>
+
+<p>And the code chunk may look like this:</p>
+
+<pre><code class="language-r">&lt;&lt;fancy-rgl, rgl=TRUE&gt;&gt;=
+library(rgl)  # example taken from ?plot3d
+open3d()
+x = sort(rnorm(1000)); y = rnorm(1000); z = rnorm(1000) + atan2(x,y)
+plot3d(x, y, z, col = rainbow(1000))
+@
+</code></pre>
+
+<p>In the LaTeX output, we will see <code>\includegraphics{fancy-rgl}</code>.</p>
+
+<p>To sum up,</p>
+
+<ol>
+<li>the hook can be set in <code>knit_hooks</code> by <code>knit_hooks$set(foo = FUN)</code>;</li>
+<li>the chunk option <code>foo</code> should take a non-<code>NULL</code> value in this chunk for the hook function to run;</li>
+<li>a hook can be run before and/or after a chunk;</li>
+<li>character results returned by hooks will be written into the output without modifications;</li>
+</ol>
+
+<p>See <a href="https://github.com/yihui/knitr-examples/blob/master/045-chunk-hook.md">045-chunk-hook.md</a> (<a href="https://github.com/yihui/knitr-examples/blob/master/045-chunk-hook.Rmd">source</a>) for further examples.</p>
+
+<h1 id="output-hooks">Output hooks</h1>
+
+<p>Output hooks are used to customize and polish the <em>raw</em> output from chunks. There are 8 output hooks in all to deal with different types of output:</p>
+
+<ul>
+<li><code>source</code>: the source code</li>
+<li><code>output</code>: ordinary R output (i.e., what would have been printed in an R terminal) except warnings, messages and errors</li>
+<li><code>warning</code>: warnings from <code>warning()</code></li>
+<li><code>message</code>: messages from <code>message()</code></li>
+<li><code>error</code>: errors from <code>stop()</code> (applies to errors in both code chunks and inline R code)</li>
+<li><code>plot</code>: graphics output</li>
+<li><code>inline</code>: output of inline R code</li>
+<li><code>chunk</code>: all the output of a chunk (i.e., those produced by the previous hooks)</li>
+<li><code>document</code>: the output of the whole document (is <code>base::identity</code> by default)</li>
+</ul>
+
+<p>All these hooks should be of the form <code>function(x, options)</code> (except the <code>inline</code> and <code>document</code> hooks which only have one argument <code>x</code>), where <code>x</code> is the character string of the output, and <code>options</code> is a list of current chunk options. Unlike chunk hooks which are empty by default, output hooks all come with default values.</p>
+
+<p>This package tried hard to set reasonable default output hooks for different parts of output and to accommodate different output formats such as LaTeX, HTML and even Jekyll. A series of functions of the form <code>render_xxx()</code> are provided to set built-in output hooks for different output formats, e.g. <code>render_latex()</code> and <code>render_html()</code>, etc. Details for these formats:</p>
+
+<h2 id="latex-render-latex">LaTeX: render_latex()</h2>
+
+<p>If the output file type is LaTeX, default hooks will put most output in the <code>verbatim</code> environment, and numeric <code>inline</code> output will be formatted in scientific notation (see <a href="../demo/output/">output demo</a> for details); <code>plot</code> and <code>chunk</code> hooks are more complicated:</p>
+
+<ul>
+<li>the default <code>plot</code> hook takes many factors into account to give a reasonable output, for example, if the graphics device is <code>tikz</code>, the command <code>\input{}</code> will be used, otherwise it uses the normal <code>\includegraphics{}</code>; depending on the <code>out.width</code> and <code>out.height</code> options, the hook will reset the size of the plot (e.g. <code>\includegraphics[width=.8\textwidth]{file}</code>); if there are multiple plots per chunk, we can set the option <code>fig.show='hold'</code> with an appropriate width so more than one plot can be arranged in a row (e.g., <code>.45\textwidth</code> means 2 plots per row); note this is not true for tikz graphics because they are inserted by <code>\input{}</code>, however, the chunk option <code>resize.width</code> and <code>resize.height</code> can be used to arrange multiple tikz plots in a row (via <code>\resizebox{resize.width}{resize.height}{file.tikz}</code>; if one option is <code>NULL</code>, it will be replaced by <code>!</code>; see LaTeX package <code>graphicx</code> for details); this hook function gives the user full power of using graphics in automatic report generation &ndash; not only multiple plots per chunk and setting sizes of plots become possible, but also we can even put base graphics and grid graphics (e.g. <strong>ggplot2</strong>) or multiple grid plots side by side (think how hard it is, if not possible, for one to put two such plots in one window in R); there are four values for the <code>fig.align</code> option to decide how to align plots (<code>default</code>, <code>left</code>, <code>right</code>, <code>center</code>), e.g., it is easy to center the plots (set chunk option <code>fig.align='center'</code>)</li>
+<li>the default <code>chunk</code> hook is mainly used to decorate chunks; if the LaTeX package <code>framed</code> is available in the user&rsquo;s TeX software package (TeXLive or MikTeX or other packages), the chunk hook will put the whole output in the <code>kframe</code> environment with customizable background colors (default is very light gray), which makes the chunks cognitively better (they stands out from other normal texts yet do not have a too strong visual impact); in the end, all the output is wrapped in a <code>knitrout</code> environment, and the user can redefine this environment in LaTeX</li>
+</ul>
+
+<h2 id="sweave-render-sweave">Sweave: render_sweave()</h2>
+
+<p>Put source code in the <code>Sinput</code> environment, output in the <code>Soutput</code> environment and the whole chunk in the <code>Schunk</code> environment. The style file <code>Sweave.sty</code> is required to use this theme, or at least these three environments have to be defined.</p>
+
+<h2 id="listings-render-listings">Listings: render_listings()</h2>
+
+<p>Similar to Sweave, and <a href="https://github.com/yihui/knitr/blob/master/inst/misc/Sweavel.sty"><code>Sweavel.sty</code></a> is used instead.</p>
+
+<h2 id="html-render-html">HTML: render_html()</h2>
+
+<p>To write output into an HTML file, the hooks will be automatically adjusted. Basically the output from chunks is put in <code>div</code> layers with classes, e.g. source code is in <code>&lt;div class=&quot;knitr source&quot;&gt;&lt;/div&gt;</code>; the whole chunk output is in <code>&lt;pre&gt;&lt;/pre&gt;</code>; inline output is in <code>&lt;code class=&quot;knitr inline&quot;&gt;&lt;/code&gt;</code>.</p>
+
+<h2 id="markdown-render-markdown">Markdown: render_markdown()</h2>
+
+<p>The source code and output will be indented by 4 spaces. For GitHub Flavored Markdown, the source code is put in between <code>```r</code> and <code>```</code>; output is between <code>```</code> and <code>```</code>.</p>
+
+<h2 id="jekyll-render-jekyll">Jekyll: render_jekyll()</h2>
+
+<p>I need to build this site so I also set up some hooks especially for Jekyll, and they are actually quite simple: R source code is put in a highlight environment with the language set to <code>r</code>, and the rest of output belongs to the highlight environment with the <code>text</code> language (nearly no highlighting at all). Currently plots are written out according to the syntax of Markdown.</p>
+
+<h2 id="restructuredtext-render-rst">reStructuredText: render_rst()</h2>
+
+<p>Code is put after <code>::</code> and indented by 4 spaces, or in the <code>sourcecode</code> directive.</p>
+
+<h1 id="option-hooks">Option hooks</h1>
+
+<p>Sometimes you may want to change certain chunk options according to the values of other chunk options, and you may use the object <code>opts_hooks</code> to set up an option hook to do it. An option hook is executed when a corresponding chunk option is not <code>NULL</code>. For example, we can tweak the <code>figure.width</code> option so that it is always no smaller than <code>fig.height</code>:</p>
+
+<pre><code class="language-r">opts_hooks$set(fig.width = function(options) {
+  if (options$fig.width &lt; options$fig.height) {
+    options$fig.width = options$fig.height
+  }
+  options
+})
+</code></pre>
+
+<p>Because <code>fig.width</code> will never be <code>NULL</code>, this hook function is always executed before a code chunk to update its chunk options. For the code chunk below, the actual value of <code>fig.width</code> will be 6 instead of the initial 5 if the above option hook has been set up:</p>
+
+<pre><code class="language-markdown">```{r fig.width = 5, fig.height = 6}
+plot(1:10)
+```
+</code></pre>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/knitr/objects/">Objects</a></span>
+  <span class="nav-next"><a href="/knitr/demos/">Examples</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/knitr\/objects\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/knitr\/demos\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+<section class="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+    this.page.url = "http:\/\/yihui.name" + location.pathname;
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var disqus_js = '//yihui.disqus.com/embed.js';
+    var d = document, s = d.createElement('script');
+    s.src = disqus_js; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    var b = false, l = function() {
+      if (b) return;
+      (d.head || d.body).appendChild(s); b = true;
+    }
+    
+    if (location.hash.match(/^#comment/)) return(l());
+    var t = d.getElementById('disqus_thread');
+    var c = function() {
+      if (b) return;
+      var rect = t.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom >= 0) l();
+    };
+    window.addEventListener('load', c);
+    d.addEventListener('scroll', c);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="/">Yihui Xie</a> 2005 - 2018</div>
+  
+  </footer>
+  </article>
+  
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-1988641-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </body>
+</html>
+

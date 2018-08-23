@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>An Introduction to the printr Package - Yihui Xie | 谢益辉</title>
+    <meta property="og:title" content="An Introduction to the printr Package - Yihui Xie | 谢益辉">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="The printr (read &amp;ldquo;printer&amp;rdquo; or &amp;ldquo;print R&amp;rdquo;) package is a companion package to knitr. Its main purpose is to extend the S3 generic function knit_print() in knitr, which is the &amp;hellip;">
+      <meta property="og:description" content="The printr (read &amp;ldquo;printer&amp;rdquo; or &amp;ldquo;print R&amp;rdquo;) package is a companion package to knitr. Its main purpose is to extend the S3 generic function knit_print() in knitr, which is the &amp;hellip;">
+      
+    
+
+    
+    
+    
+    <meta name="twitter:image" content="https://yihui.name/images/logo.png">
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="printr">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.png" alt="Yihui Xie" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/en/about/">About</a></li>
+  
+  <li><a href="/en/">Blog</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">博客</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/yihui/printr/edit/master/vignettes/printr.Rmd" target="_blank">Edit this page</a></li>
+
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">License</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>An Introduction to the printr Package</h1>
+
+
+<h3>Yihui Xie / 
+2017-05-18</h3>
+
+<hr>
+
+
+      </header>
+
+
+ <nav id="TableOfContents">
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#examples">Examples</a>
+<ul>
+<li><a href="#matrices-data-frames-tables">Matrices/data frames/tables</a></li>
+<li><a href="#search-results-from-help-search">Search results from <code>help.search()</code></a></li>
+<li><a href="#help-pages">Help pages</a></li>
+<li><a href="#vignette-dataset-lists">Vignette/dataset lists</a></li>
+<li><a href="#package-info">Package info</a></li>
+</ul></li>
+</ul>
+</nav> 
+
+
+<p>The <strong>printr</strong> (read &ldquo;printer&rdquo; or &ldquo;print R&rdquo;) package is a companion package to
+<a href="https://yihui.name/knitr/"><strong>knitr</strong></a>. Its main purpose is to extend the S3
+generic function <code>knit_print()</code> in <strong>knitr</strong>, which is the default value of the
+chunk option <code>render</code>, as explained in the vignette
+<a href="https://cran.rstudio.org/web/packages/knitr/vignettes/knit_print.html">knit_print.html</a>.</p>
+
+<h1 id="overview">Overview</h1>
+
+<p>To enable the printing methods defined in this package, just <code>library(printr)</code> or <code>loadNamespace('printr')</code>
+in a code chunk (in the beginning) of your <strong>knitr</strong> document. Then some objects
+will be printed differently with what you would have seen in a normal R console.
+For example:</p>
+
+<ul>
+<li>matrices, data frames, and contingency tables are printed as tables (LaTeX,
+HTML, or Markdown, depending on your output format)</li>
+<li>the help page (from <code>?foo</code> or <code>help(foo)</code>) can be rendered as HTML, LaTeX, or
+plain text, and you can also specify which section(s) of the help page to
+include in the output</li>
+<li>the results from <code>browseVignettes()</code>, <code>help.search()</code>, <code>data()</code>, and
+<code>vignette()</code> are rendered as tables</li>
+<li>the package information from <code>library(help = 'foo')</code> is rendered as plain text</li>
+</ul>
+
+<p>To disable the printing methods in this package, you can call
+<code>detach('package:printr', unload = TRUE)</code> if you <em>attached</em> the package via
+<code>library(printr)</code> before, or <code>unloadNamespace('printr')</code> if you <em>loaded</em> it via
+<code>loadNamespace('printr')</code>.</p>
+
+<p>This package aims to be portable in the sense that it should work in most
+document formats, including <code>*.Rnw</code> (R + LaTeX), <code>*.Rmd</code> (R Markdown), and
+<code>*.Rhtml</code> (R + HTML) files, etc.</p>
+
+<p>You can find the package source as well as installation instructions on <a href="https://github.com/yihui/printr">Github</a>,
+and you are welcome to contribute code via pull requests, or file feature
+requests and bug reports via <a href="https://github.com/yihui/printr/issues">Github
+issues</a>.</p>
+
+<h1 id="examples">Examples</h1>
+
+<p>First we take a look at a quick example of printing some R objects in the R
+console:</p>
+
+<pre><code class="language-r">&gt; # R uses plain text representation for data frames/matrices/...
+&gt; head(mtcars)
+</code></pre>
+
+<pre><code>                   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+</code></pre>
+
+<pre><code class="language-r">&gt; head(iris)
+</code></pre>
+
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+</code></pre>
+
+<p>Then we attach the <strong>printr</strong> package in this R session, and see how things
+change later:</p>
+
+<pre><code class="language-r">library(printr)
+</code></pre>
+
+<h2 id="matrices-data-frames-tables">Matrices/data frames/tables</h2>
+
+<p>Matrices and data frames are printed as tables using the <code>kable()</code> function in
+<strong>knitr</strong>:</p>
+
+<pre><code class="language-r">options(digits = 4)
+set.seed(123)
+x = matrix(rnorm(40), 5)
+x
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right"></th>
+<th align="right"></th>
+<th align="right"></th>
+<th align="right"></th>
+<th align="right"></th>
+<th align="right"></th>
+<th align="right"></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="right">-0.5605</td>
+<td align="right">1.7151</td>
+<td align="right">1.2241</td>
+<td align="right">1.7869</td>
+<td align="right">-1.0678</td>
+<td align="right">-1.6867</td>
+<td align="right">0.4265</td>
+<td align="right">0.6886</td>
+</tr>
+
+<tr>
+<td align="right">-0.2302</td>
+<td align="right">0.4609</td>
+<td align="right">0.3598</td>
+<td align="right">0.4979</td>
+<td align="right">-0.2180</td>
+<td align="right">0.8378</td>
+<td align="right">-0.2951</td>
+<td align="right">0.5539</td>
+</tr>
+
+<tr>
+<td align="right">1.5587</td>
+<td align="right">-1.2651</td>
+<td align="right">0.4008</td>
+<td align="right">-1.9666</td>
+<td align="right">-1.0260</td>
+<td align="right">0.1534</td>
+<td align="right">0.8951</td>
+<td align="right">-0.0619</td>
+</tr>
+
+<tr>
+<td align="right">0.0705</td>
+<td align="right">-0.6869</td>
+<td align="right">0.1107</td>
+<td align="right">0.7014</td>
+<td align="right">-0.7289</td>
+<td align="right">-1.1381</td>
+<td align="right">0.8781</td>
+<td align="right">-0.3060</td>
+</tr>
+
+<tr>
+<td align="right">0.1293</td>
+<td align="right">-0.4457</td>
+<td align="right">-0.5558</td>
+<td align="right">-0.4728</td>
+<td align="right">-0.6250</td>
+<td align="right">1.2538</td>
+<td align="right">0.8216</td>
+<td align="right">-0.3805</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># with colunm names
+dimnames(x) = list(NULL, head(LETTERS, ncol(x)))
+x
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="right">A</th>
+<th align="right">B</th>
+<th align="right">C</th>
+<th align="right">D</th>
+<th align="right">E</th>
+<th align="right">F</th>
+<th align="right">G</th>
+<th align="right">H</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="right">-0.5605</td>
+<td align="right">1.7151</td>
+<td align="right">1.2241</td>
+<td align="right">1.7869</td>
+<td align="right">-1.0678</td>
+<td align="right">-1.6867</td>
+<td align="right">0.4265</td>
+<td align="right">0.6886</td>
+</tr>
+
+<tr>
+<td align="right">-0.2302</td>
+<td align="right">0.4609</td>
+<td align="right">0.3598</td>
+<td align="right">0.4979</td>
+<td align="right">-0.2180</td>
+<td align="right">0.8378</td>
+<td align="right">-0.2951</td>
+<td align="right">0.5539</td>
+</tr>
+
+<tr>
+<td align="right">1.5587</td>
+<td align="right">-1.2651</td>
+<td align="right">0.4008</td>
+<td align="right">-1.9666</td>
+<td align="right">-1.0260</td>
+<td align="right">0.1534</td>
+<td align="right">0.8951</td>
+<td align="right">-0.0619</td>
+</tr>
+
+<tr>
+<td align="right">0.0705</td>
+<td align="right">-0.6869</td>
+<td align="right">0.1107</td>
+<td align="right">0.7014</td>
+<td align="right">-0.7289</td>
+<td align="right">-1.1381</td>
+<td align="right">0.8781</td>
+<td align="right">-0.3060</td>
+</tr>
+
+<tr>
+<td align="right">0.1293</td>
+<td align="right">-0.4457</td>
+<td align="right">-0.5558</td>
+<td align="right">-0.4728</td>
+<td align="right">-0.6250</td>
+<td align="right">1.2538</td>
+<td align="right">0.8216</td>
+<td align="right">-0.3805</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r"># further customization via kable(), e.g. digits and captions
+knitr::kable(x, digits = 2, caption = &quot;A table produced by printr.&quot;)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="right">A</th>
+<th align="right">B</th>
+<th align="right">C</th>
+<th align="right">D</th>
+<th align="right">E</th>
+<th align="right">F</th>
+<th align="right">G</th>
+<th align="right">H</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="right">-0.56</td>
+<td align="right">1.72</td>
+<td align="right">1.22</td>
+<td align="right">1.79</td>
+<td align="right">-1.07</td>
+<td align="right">-1.69</td>
+<td align="right">0.43</td>
+<td align="right">0.69</td>
+</tr>
+
+<tr>
+<td align="right">-0.23</td>
+<td align="right">0.46</td>
+<td align="right">0.36</td>
+<td align="right">0.50</td>
+<td align="right">-0.22</td>
+<td align="right">0.84</td>
+<td align="right">-0.30</td>
+<td align="right">0.55</td>
+</tr>
+
+<tr>
+<td align="right">1.56</td>
+<td align="right">-1.27</td>
+<td align="right">0.40</td>
+<td align="right">-1.97</td>
+<td align="right">-1.03</td>
+<td align="right">0.15</td>
+<td align="right">0.90</td>
+<td align="right">-0.06</td>
+</tr>
+
+<tr>
+<td align="right">0.07</td>
+<td align="right">-0.69</td>
+<td align="right">0.11</td>
+<td align="right">0.70</td>
+<td align="right">-0.73</td>
+<td align="right">-1.14</td>
+<td align="right">0.88</td>
+<td align="right">-0.31</td>
+</tr>
+
+<tr>
+<td align="right">0.13</td>
+<td align="right">-0.45</td>
+<td align="right">-0.56</td>
+<td align="right">-0.47</td>
+<td align="right">-0.63</td>
+<td align="right">1.25</td>
+<td align="right">0.82</td>
+<td align="right">-0.38</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r">head(mtcars)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="right">mpg</th>
+<th align="right">cyl</th>
+<th align="right">disp</th>
+<th align="right">hp</th>
+<th align="right">drat</th>
+<th align="right">wt</th>
+<th align="right">qsec</th>
+<th align="right">vs</th>
+<th align="right">am</th>
+<th align="right">gear</th>
+<th align="right">carb</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">Mazda RX4</td>
+<td align="right">21.0</td>
+<td align="right">6</td>
+<td align="right">160</td>
+<td align="right">110</td>
+<td align="right">3.90</td>
+<td align="right">2.620</td>
+<td align="right">16.46</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">4</td>
+</tr>
+
+<tr>
+<td align="left">Mazda RX4 Wag</td>
+<td align="right">21.0</td>
+<td align="right">6</td>
+<td align="right">160</td>
+<td align="right">110</td>
+<td align="right">3.90</td>
+<td align="right">2.875</td>
+<td align="right">17.02</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">4</td>
+</tr>
+
+<tr>
+<td align="left">Datsun 710</td>
+<td align="right">22.8</td>
+<td align="right">4</td>
+<td align="right">108</td>
+<td align="right">93</td>
+<td align="right">3.85</td>
+<td align="right">2.320</td>
+<td align="right">18.61</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">1</td>
+</tr>
+
+<tr>
+<td align="left">Hornet 4 Drive</td>
+<td align="right">21.4</td>
+<td align="right">6</td>
+<td align="right">258</td>
+<td align="right">110</td>
+<td align="right">3.08</td>
+<td align="right">3.215</td>
+<td align="right">19.44</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">1</td>
+</tr>
+
+<tr>
+<td align="left">Hornet Sportabout</td>
+<td align="right">18.7</td>
+<td align="right">8</td>
+<td align="right">360</td>
+<td align="right">175</td>
+<td align="right">3.15</td>
+<td align="right">3.440</td>
+<td align="right">17.02</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">2</td>
+</tr>
+
+<tr>
+<td align="left">Valiant</td>
+<td align="right">18.1</td>
+<td align="right">6</td>
+<td align="right">225</td>
+<td align="right">105</td>
+<td align="right">2.76</td>
+<td align="right">3.460</td>
+<td align="right">20.22</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r">head(iris, 10)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="right">Sepal.Length</th>
+<th align="right">Sepal.Width</th>
+<th align="right">Petal.Length</th>
+<th align="right">Petal.Width</th>
+<th align="left">Species</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="right">5.1</td>
+<td align="right">3.5</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+
+<tr>
+<td align="right">4.9</td>
+<td align="right">3.0</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+
+<tr>
+<td align="right">4.7</td>
+<td align="right">3.2</td>
+<td align="right">1.3</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+
+<tr>
+<td align="right">4.6</td>
+<td align="right">3.1</td>
+<td align="right">1.5</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+
+<tr>
+<td align="right">5.0</td>
+<td align="right">3.6</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+
+<tr>
+<td align="right">5.4</td>
+<td align="right">3.9</td>
+<td align="right">1.7</td>
+<td align="right">0.4</td>
+<td align="left">setosa</td>
+</tr>
+
+<tr>
+<td align="right">4.6</td>
+<td align="right">3.4</td>
+<td align="right">1.4</td>
+<td align="right">0.3</td>
+<td align="left">setosa</td>
+</tr>
+
+<tr>
+<td align="right">5.0</td>
+<td align="right">3.4</td>
+<td align="right">1.5</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+
+<tr>
+<td align="right">4.4</td>
+<td align="right">2.9</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+
+<tr>
+<td align="right">4.9</td>
+<td align="right">3.1</td>
+<td align="right">1.5</td>
+<td align="right">0.1</td>
+<td align="left">setosa</td>
+</tr>
+</tbody>
+</table>
+
+<p>For contingency tables, 1-d tables are printed as a 1-row matrix, 2-d tables are
+printed an <code>\(n \times m\)</code> matrix, and tables of higher dimensions are printed as
+data frames with frequencies.</p>
+
+<pre><code class="language-r">x1 = sample(letters[1:3], 1000, TRUE)
+x2 = sample(letters[1:3], 1000, TRUE)
+x3 = sample(letters[1:3], 1000, TRUE)
+table(x1)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="right">a</th>
+<th align="right">b</th>
+<th align="right">c</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="right">332</td>
+<td align="right">342</td>
+<td align="right">326</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r">table(x1, x2)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">x1/x2</th>
+<th align="right">a</th>
+<th align="right">b</th>
+<th align="right">c</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">a</td>
+<td align="right">98</td>
+<td align="right">117</td>
+<td align="right">117</td>
+</tr>
+
+<tr>
+<td align="left">b</td>
+<td align="right">123</td>
+<td align="right">114</td>
+<td align="right">105</td>
+</tr>
+
+<tr>
+<td align="left">c</td>
+<td align="right">111</td>
+<td align="right">113</td>
+<td align="right">102</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r">table(x1, x2, x3)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">x1</th>
+<th align="left">x2</th>
+<th align="left">x3</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">a</td>
+<td align="left">a</td>
+<td align="left">a</td>
+<td align="right">33</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">b</td>
+<td align="right">35</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">c</td>
+<td align="right">30</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left">b</td>
+<td align="left">a</td>
+<td align="right">45</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">b</td>
+<td align="right">37</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">c</td>
+<td align="right">35</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left">c</td>
+<td align="left">a</td>
+<td align="right">42</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">b</td>
+<td align="right">34</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">c</td>
+<td align="right">41</td>
+</tr>
+
+<tr>
+<td align="left">b</td>
+<td align="left">a</td>
+<td align="left">a</td>
+<td align="right">44</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">b</td>
+<td align="right">40</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">c</td>
+<td align="right">39</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left">b</td>
+<td align="left">a</td>
+<td align="right">41</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">b</td>
+<td align="right">42</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">c</td>
+<td align="right">31</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left">c</td>
+<td align="left">a</td>
+<td align="right">26</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">b</td>
+<td align="right">35</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">c</td>
+<td align="right">44</td>
+</tr>
+
+<tr>
+<td align="left">c</td>
+<td align="left">a</td>
+<td align="left">a</td>
+<td align="right">40</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">b</td>
+<td align="right">23</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">c</td>
+<td align="right">48</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left">b</td>
+<td align="left">a</td>
+<td align="right">29</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">b</td>
+<td align="right">43</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">c</td>
+<td align="right">41</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left">c</td>
+<td align="left">a</td>
+<td align="right">37</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">b</td>
+<td align="right">26</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">c</td>
+<td align="right">39</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="search-results-from-help-search">Search results from <code>help.search()</code></h2>
+
+<p>Here are some examples demonstrating the results of <code>help.search()</code>, or you can
+also use <code>??</code> to search for a string.</p>
+
+<pre><code class="language-r">??sunflower
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">Package</th>
+<th align="left">Topic</th>
+<th align="left">Title</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">graphics</td>
+<td align="left">sunflowerplot</td>
+<td align="left">Produce a Sunflower Scatter Plot</td>
+</tr>
+
+<tr>
+<td align="left">grDevices</td>
+<td align="left">xyTable</td>
+<td align="left">Multiplicities of (x,y) Points, e.g., for a Sunflower Plot</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r">help.search('contourplot')
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">Package</th>
+<th align="left">Topic</th>
+<th align="left">Title</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">raster</td>
+<td align="left">contour</td>
+<td align="left">Contour plot</td>
+</tr>
+
+<tr>
+<td align="left">raster</td>
+<td align="left">filledContour</td>
+<td align="left">Filled contour plot</td>
+</tr>
+
+<tr>
+<td align="left">graphics</td>
+<td align="left">filled.contour</td>
+<td align="left">Level (Contour) Plots</td>
+</tr>
+
+<tr>
+<td align="left">lattice</td>
+<td align="left">levelplot</td>
+<td align="left">Level plots and contour plots</td>
+</tr>
+
+<tr>
+<td align="left">lattice</td>
+<td align="left">panel.levelplot</td>
+<td align="left">Panel Functions for levelplot and contourplot</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r">help.search('foo', package = 'base')
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">Package</th>
+<th align="left">Topic</th>
+<th align="left">Title</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">base</td>
+<td align="left">is.things</td>
+<td align="left">Explore some properties of R objects and is.FOO() functions. Not for newbies!</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r">help.search('foooooooo', package = 'utils')
+</code></pre>
+
+<pre><code>## No results found
+</code></pre>
+
+<p>In a normal R session, the results will be displayed as an HTML page by default,
+but normally these functions are meant to be called in an interactive R session,
+and <strong>knitr</strong> documents are often compiled in non-interactive R sessions, so we
+changed the printing behavior of these results, and readers will get the basic
+idea of these functions when reading the <strong>knitr</strong> output. If they want to run
+these functions by themselves, they can do it in an interactive R session.</p>
+
+<h2 id="help-pages">Help pages</h2>
+
+<p>When you want to read the help page of a certain R object, you normally use <code>?</code>
+or <code>help()</code>, which will launch a separate help page from the R session, and
+require human interaction. Again, we may not desire human interactions in
+<strong>knitr</strong> documents, so the help pages are printed as static documents here.</p>
+
+<pre><code class="language-r">?coef
+</code></pre>
+
+<pre><code>Extract Model Coefficients
+
+Description:
+
+     'coef' is a generic function which extracts model coefficients
+     from objects returned by modeling functions.  'coefficients' is an
+     _alias_ for it.
+
+Usage:
+
+     coef(object, ...)
+     coefficients(object, ...)
+     
+Arguments:
+
+  object: an object for which the extraction of model coefficients is
+          meaningful.
+
+     ...: other arguments.
+
+Details:
+
+     All object classes which are returned by model fitting functions
+     should provide a 'coef' method or use the default one.  (Note that
+     the method is for 'coef' and not 'coefficients'.)
+
+     Class '&quot;aov&quot;' has a 'coef' method that does not report aliased
+     coefficients (see 'alias').
+
+Value:
+
+     Coefficients extracted from the model object 'object'.
+
+     For standard model fitting classes this will be a named numeric
+     vector.  For '&quot;maov&quot;' objects (produced by 'aov') it will be a
+     matrix.
+
+References:
+
+     Chambers, J. M. and Hastie, T. J. (1992) _Statistical Models in
+     S_.  Wadsworth &amp; Brooks/Cole.
+
+See Also:
+
+     'fitted.values' and 'residuals' for related methods; 'glm', 'lm'
+     for model fitting.
+
+Examples:
+
+     x &lt;- 1:5; coef(lm(c(1:3, 7, 6) ~ x))
+</code></pre>
+
+<p>When help pages are really long, we can use the chunk option
+<code>printr.help.sections</code> to select
+a few sections to display, e.g. we only show the sections <code>description</code> and
+<code>usage</code> of the <code>paste()</code> function:</p>
+
+<pre><code class="language-r">?paste
+</code></pre>
+
+<pre><code>Concatenate Strings
+
+Description:
+
+     Concatenate vectors after converting to character.
+
+Usage:
+
+     paste (..., sep = &quot; &quot;, collapse = NULL)
+     paste0(..., collapse = NULL)
+</code></pre>
+
+<h2 id="vignette-dataset-lists">Vignette/dataset lists</h2>
+
+<p>We can print the lists of vignettes and datasets in packages using <code>vignette()</code>
+and <code>data()</code>, respectively.</p>
+
+<pre><code class="language-r">vignette(package = &quot;rpart&quot;)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">Item</th>
+<th align="left">Title</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">longintro</td>
+<td align="left">Introduction to Rpart (source, pdf)</td>
+</tr>
+
+<tr>
+<td align="left">usercode</td>
+<td align="left">User Written Split Functions (source, pdf)</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r">vignette(package = c(&quot;rpart&quot;, &quot;knitr&quot;))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">Package</th>
+<th align="left">Item</th>
+<th align="left">Title</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">rpart</td>
+<td align="left">longintro</td>
+<td align="left">Introduction to Rpart (source, pdf)</td>
+</tr>
+
+<tr>
+<td align="left">rpart</td>
+<td align="left">usercode</td>
+<td align="left">User Written Split Functions (source, pdf)</td>
+</tr>
+
+<tr>
+<td align="left">knitr</td>
+<td align="left">knitr-html</td>
+<td align="left">An R HTML Vignette with knitr (source, html)</td>
+</tr>
+
+<tr>
+<td align="left">knitr</td>
+<td align="left">knitr-markdown</td>
+<td align="left">An R Markdown Vignette with knitr (source, html)</td>
+</tr>
+
+<tr>
+<td align="left">knitr</td>
+<td align="left">knit_print</td>
+<td align="left">Custom Print Methods (source, html)</td>
+</tr>
+
+<tr>
+<td align="left">knitr</td>
+<td align="left">datatables</td>
+<td align="left">Display Tables with the JavaScript Library DataTables (source, html)</td>
+</tr>
+
+<tr>
+<td align="left">knitr</td>
+<td align="left">knitr-refcard</td>
+<td align="left">knitr Reference Card (source, pdf)</td>
+</tr>
+
+<tr>
+<td align="left">knitr</td>
+<td align="left">knitr-intro</td>
+<td align="left">Not an Introduction to knitr (source, html)</td>
+</tr>
+
+<tr>
+<td align="left">knitr</td>
+<td align="left">docco-classic</td>
+<td align="left">R Markdown with the Docco Classic Style (source, html)</td>
+</tr>
+
+<tr>
+<td align="left">knitr</td>
+<td align="left">docco-linear</td>
+<td align="left">R Markdown with the Docco Linear Style (source, html)</td>
+</tr>
+
+<tr>
+<td align="left">knitr</td>
+<td align="left">knit_expand</td>
+<td align="left">Templating with knit_expand() (source, html)</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r">data(package = &quot;lattice&quot;)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">Item</th>
+<th align="left">Title</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">USMortality</td>
+<td align="left">Mortality Rates in US by Cause and Gender</td>
+</tr>
+
+<tr>
+<td align="left">USRegionalMortality</td>
+<td align="left">Mortality Rates in US by Cause and Gender</td>
+</tr>
+
+<tr>
+<td align="left">barley</td>
+<td align="left">Yield data from a Minnesota barley trial</td>
+</tr>
+
+<tr>
+<td align="left">environmental</td>
+<td align="left">Atmospheric environmental conditions in New York City</td>
+</tr>
+
+<tr>
+<td align="left">ethanol</td>
+<td align="left">Engine exhaust fumes from burning ethanol</td>
+</tr>
+
+<tr>
+<td align="left">melanoma</td>
+<td align="left">Melanoma skin cancer incidence</td>
+</tr>
+
+<tr>
+<td align="left">singer</td>
+<td align="left">Heights of New York Choral Society singers</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r">data(package = c(&quot;rpart&quot;, &quot;lattice&quot;))
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">Package</th>
+<th align="left">Item</th>
+<th align="left">Title</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">rpart</td>
+<td align="left">car.test.frame</td>
+<td align="left">Automobile Data from &lsquo;Consumer Reports&rsquo; 1990</td>
+</tr>
+
+<tr>
+<td align="left">rpart</td>
+<td align="left">car90</td>
+<td align="left">Automobile Data from &lsquo;Consumer Reports&rsquo; 1990</td>
+</tr>
+
+<tr>
+<td align="left">rpart</td>
+<td align="left">cu.summary</td>
+<td align="left">Automobile Data from &lsquo;Consumer Reports&rsquo; 1990</td>
+</tr>
+
+<tr>
+<td align="left">rpart</td>
+<td align="left">kyphosis</td>
+<td align="left">Data on Children who have had Corrective Spinal Surgery</td>
+</tr>
+
+<tr>
+<td align="left">rpart</td>
+<td align="left">solder</td>
+<td align="left">Soldering of Components on Printed-Circuit Boards</td>
+</tr>
+
+<tr>
+<td align="left">rpart</td>
+<td align="left">stagec</td>
+<td align="left">Stage C Prostate Cancer</td>
+</tr>
+
+<tr>
+<td align="left">lattice</td>
+<td align="left">USMortality</td>
+<td align="left">Mortality Rates in US by Cause and Gender</td>
+</tr>
+
+<tr>
+<td align="left">lattice</td>
+<td align="left">USRegionalMortality</td>
+<td align="left">Mortality Rates in US by Cause and Gender</td>
+</tr>
+
+<tr>
+<td align="left">lattice</td>
+<td align="left">barley</td>
+<td align="left">Yield data from a Minnesota barley trial</td>
+</tr>
+
+<tr>
+<td align="left">lattice</td>
+<td align="left">environmental</td>
+<td align="left">Atmospheric environmental conditions in New York City</td>
+</tr>
+
+<tr>
+<td align="left">lattice</td>
+<td align="left">ethanol</td>
+<td align="left">Engine exhaust fumes from burning ethanol</td>
+</tr>
+
+<tr>
+<td align="left">lattice</td>
+<td align="left">melanoma</td>
+<td align="left">Melanoma skin cancer incidence</td>
+</tr>
+
+<tr>
+<td align="left">lattice</td>
+<td align="left">singer</td>
+<td align="left">Heights of New York Choral Society singers</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-r">data(package = &quot;knitr&quot;)  # no datasets here
+</code></pre>
+
+<pre><code>## Data sets not found
+</code></pre>
+
+<pre><code class="language-r">browseVignettes(package = &quot;knitr&quot;)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">Vignette</th>
+<th align="left">Title</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">knitr-html.html</td>
+<td align="left">An R HTML Vignette with knitr</td>
+</tr>
+
+<tr>
+<td align="left">knitr-markdown.html</td>
+<td align="left">An R Markdown Vignette with knitr</td>
+</tr>
+
+<tr>
+<td align="left">knit_print.html</td>
+<td align="left">Custom Print Methods</td>
+</tr>
+
+<tr>
+<td align="left">datatables.html</td>
+<td align="left">Display Tables with the JavaScript Library DataTables</td>
+</tr>
+
+<tr>
+<td align="left">knitr-refcard.pdf</td>
+<td align="left">knitr Reference Card</td>
+</tr>
+
+<tr>
+<td align="left">knitr-intro.html</td>
+<td align="left">Not an Introduction to knitr</td>
+</tr>
+
+<tr>
+<td align="left">docco-classic.html</td>
+<td align="left">R Markdown with the Docco Classic Style</td>
+</tr>
+
+<tr>
+<td align="left">docco-linear.html</td>
+<td align="left">R Markdown with the Docco Linear Style</td>
+</tr>
+
+<tr>
+<td align="left">knit_expand.html</td>
+<td align="left">Templating with knit_expand()</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="package-info">Package info</h2>
+
+<p>A description of a package can be printed via <code>library(help = 'foo')</code>:</p>
+
+<pre><code class="language-r">library(help = &quot;printr&quot;)
+</code></pre>
+
+<pre><code>        Information on package 'printr'
+
+Description:
+
+Package:            printr
+Type:               Package
+Title:              Automatically Print R Objects to Different Formats According to the
+                    'knitr' Output Format
+Version:            0.1
+Date:               2017-05-19
+Author:             Yihui Xie
+Maintainer:         Yihui Xie &lt;xie@yihui.name&gt;
+Description:        Extends the S3 generic function knit_print() in knitr to
+                    automatically print some objects using an appropriate format such as
+                    Markdown or LaTeX. For example, data frames are automatically printed
+                    as tables, and the help() pages can also be rendered in knitr
+                    documents.
+Imports:            knitr (&gt;= 1.11)
+Suggests:           tools, rmarkdown
+License:            GPL
+URL:                http://yihui.name/printr
+BugReports:         https://github.com/yihui/printr/issues
+VignetteBuilder:    knitr
+LazyData:           TRUE
+RoxygenNote:        6.0.1
+NeedsCompilation:   no
+Packaged:           2017-05-18 20:44:47 UTC; yihui
+Built:              R 3.4.0; ; 2017-05-18 20:44:47 UTC; unix
+
+Index:
+
+printr                  Print R objects in 'knitr' documents nicely
+
+Further information is available in the following vignettes in directory
+'/Users/yihui/R/printr/doc':
+
+printr: An Introduction to the printr Package (source, pdf)
+</code></pre>
+
+
+  <footer>
+  
+
+
+<section class="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+    this.page.url = "http:\/\/yihui.name" + location.pathname;
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var disqus_js = '//yihui.disqus.com/embed.js';
+    var d = document, s = d.createElement('script');
+    s.src = disqus_js; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    var b = false, l = function() {
+      if (b) return;
+      (d.head || d.body).appendChild(s); b = true;
+    }
+    
+    if (location.hash.match(/^#comment/)) return(l());
+    var t = d.getElementById('disqus_thread');
+    var c = function() {
+      if (b) return;
+      var rect = t.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom >= 0) l();
+    };
+    window.addEventListener('load', c);
+    d.addEventListener('scroll', c);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="/">Yihui Xie</a> 2005 - 2018</div>
+  
+  </footer>
+  </article>
+  
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-1988641-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </body>
+</html>
+

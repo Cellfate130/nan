@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>formatR - Format R code automatically  - Yihui Xie | 谢益辉</title>
+    <meta property="og:title" content="formatR - Yihui Xie | 谢益辉">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="You can install formatR from CRAN, or XRAN if you want to test the latest development version:
+install.packages(&amp;quot;formatR&amp;quot;, repos = &amp;quot;http://cran.rstudio.com&amp;quot;) #&#39; to install the &amp;hellip;">
+      <meta property="og:description" content="You can install formatR from CRAN, or XRAN if you want to test the latest development version:
+install.packages(&amp;quot;formatR&amp;quot;, repos = &amp;quot;http://cran.rstudio.com&amp;quot;) #&#39; to install the &amp;hellip;">
+      
+    
+
+    
+    
+    <meta name="twitter:image" content="https://db.yihui.name/imgur/lUgtEAb.png">
+    
+    
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="formatr">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.png" alt="Yihui Xie" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/en/about/">About</a></li>
+  
+  <li><a href="/en/">Blog</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">博客</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/yihui/formatR/edit/master/vignettes/formatR.Rmd" target="_blank">Edit this page</a></li>
+
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">License</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>formatR</h1>
+<h1><span class="subtitle">Format R code automatically</span></h2>
+
+<h3>Yihui Xie / 
+2017-12-07</h3>
+
+<hr>
+
+
+      </header>
+
+
+ <nav id="TableOfContents">
+<ul>
+<li><a href="#1-installation">1. Installation</a></li>
+<li><a href="#2-reformat-r-code">2. Reformat R code</a></li>
+<li><a href="#3-the-graphical-user-interface">3. The Graphical User Interface</a></li>
+<li><a href="#4-evaluate-the-code-and-mask-output-in-comments">4. Evaluate the code and mask output in comments</a></li>
+<li><a href="#5-showcase">5. Showcase</a>
+<ul>
+<li><a href="#replace-with">Replace <code>=</code> with <code>&lt;-</code></a></li>
+<li><a href="#discard-blank-lines">Discard blank lines</a></li>
+<li><a href="#reindent-code-2-spaces-instead-of-4">Reindent code (2 spaces instead of 4)</a></li>
+<li><a href="#move-left-braces-to-new-lines">Move left braces <code>{</code> to new lines</a></li>
+<li><a href="#discard-comments">Discard comments</a></li>
+</ul></li>
+<li><a href="#6-further-notes">6. Further notes</a>
+<ul>
+<li><a href="#in-line-comments-after-an-incomplete-expression-or">In-line comments after an incomplete expression or ;</a></li>
+<li><a href="#inappropriate-blank-lines">Inappropriate blank lines</a></li>
+<li><a href="#with-comments"><code>?</code> with comments</a></li>
+<li><a href="#and-from-the-rlang-package"><code>!!</code> and <code>!!!</code> from the <strong>rlang</strong> package</a></li>
+<li><a href="#with-comments-1"><code>-&gt;</code> with comments</a></li>
+<li><a href="#the-pipe-operator">The pipe operator <code>%&gt;%</code></a></li>
+</ul></li>
+<li><a href="#7-how-does-tidy-source-actually-work">7. How does <code>tidy_source()</code> actually work?</a></li>
+<li><a href="#8-global-options">8. Global options</a></li>
+</ul>
+</nav> 
+
+
+<script type="text/javascript">
+// redirect from CRAN to my personal website
+if (location.protocol === 'https:' && location.href.match('yihui.name') === null)
+  location.href = 'https://yihui.name/formatR';
+</script>
+
+<h1 id="1-installation">1. Installation</h1>
+
+<p>You can install <strong>formatR</strong> from <a href="https://cran.r-project.org/package=formatR">CRAN</a>, or <a href="https://xran.yihui.name">XRAN</a> if you want to test the latest development version:</p>
+
+<pre><code class="language-r">install.packages(&quot;formatR&quot;, repos = &quot;http://cran.rstudio.com&quot;)
+#' to install the development version, run
+#' install.packages('formatR', repos = 'https://xran.yihui.name')
+</code></pre>
+
+<p>Or check out the <a href="https://github.com/yihui/formatR">Github repository</a> and install from source if you know what this means. This page is always based on the development version.</p>
+
+<pre><code class="language-r">library(formatR)
+sessionInfo()
+</code></pre>
+
+<pre><code>## R version 3.4.2 (2017-09-28)
+## Platform: x86_64-apple-darwin15.6.0 (64-bit)
+## Running under: macOS High Sierra 10.13.1
+## 
+## Matrix products: default
+## BLAS: /Library/Frameworks/R.framework/Versions/3.4/Resources/lib/libRblas.0.dylib
+## LAPACK: /Library/Frameworks/R.framework/Versions/3.4/Resources/lib/libRlapack.dylib
+## 
+## locale:
+## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  base     
+## 
+## other attached packages:
+## [1] formatR_1.5
+## 
+## loaded via a namespace (and not attached):
+## [1] compiler_3.4.2  magrittr_1.5    tools_3.4.2     stringi_1.1.6  
+## [5] knitr_1.18      methods_3.4.2   stringr_1.2.0   evaluate_0.10.1
+</code></pre>
+
+<h1 id="2-reformat-r-code">2. Reformat R code</h1>
+
+<p>The <strong>formatR</strong> package was designed to reformat R code to improve readability; the main workhorse is the function <code>tidy_source()</code>. Features include:</p>
+
+<ul>
+<li>long lines of code and comments are reorganized into appropriately shorter ones</li>
+<li>spaces and indent are added where necessary</li>
+<li>comments are preserved in most cases</li>
+<li>the number of spaces to indent the code (i.e. tab width) can be specified (default is 4)</li>
+<li>an <code>else</code> statement in a separate line without the leading <code>}</code> will be moved one line back</li>
+<li><code>=</code> as an assignment operator can be replaced with <code>&lt;-</code></li>
+<li>the left brace <code>{</code> can be moved to a new line</li>
+</ul>
+
+<p>Below is an example of what <code>tidy_source()</code> can do. The source code is:</p>
+
+<pre><code class="language-r">## comments are retained;
+# a comment block will be reflowed if it contains long comments;
+#' roxygen comments will not be wrapped in any case
+1+1
+
+if(TRUE){
+x=1  # inline comments
+}else{
+x=2;print('Oh no... ask the right bracket to go away!')}
+1*3 # one space before this comment will become two!
+2+2+2    # only 'single quotes' are allowed in comments
+
+lm(y~x1+x2, data=data.frame(y=rnorm(100),x1=rnorm(100),x2=rnorm(100)))  ### a linear model
+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1  # comment after a long line
+## here is a long long long long long long long long long long long long long comment which will be wrapped
+</code></pre>
+
+<p>We can copy the above code to clipboard, and type <code>tidy_source(width.cutoff = 50)</code> to get:</p>
+
+<pre><code class="language-r">## comments are retained; a comment block will be
+## reflowed if it contains long comments;
+#' roxygen comments will not be wrapped in any case
+1 + 1
+
+if (TRUE) {
+    x = 1  # inline comments
+} else {
+    x = 2
+    print(&quot;Oh no... ask the right bracket to go away!&quot;)
+}
+1 * 3  # one space before this comment will become two!
+2 + 2 + 2  # only 'single quotes' are allowed in comments
+
+lm(y ~ x1 + x2, data = data.frame(y = rnorm(100), x1 = rnorm(100), 
+    x2 = rnorm(100)))  ### a linear model
+1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 
+    1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1  # comment after a long line
+## here is a long long long long long long long long
+## long long long long long comment which will be
+## wrapped
+</code></pre>
+
+<p>Two applications of <code>tidy_source()</code>:</p>
+
+<ul>
+<li><code>tidy_dir()</code> can reformat all R scripts under a directory</li>
+
+<li><p><code>usage()</code> can reformat the usage of a function, e.g. compare <code>usage()</code> with the default output of <code>args()</code>:</p>
+
+<pre><code class="language-r">library(formatR)
+usage(glm, width = 40)  # can set arbitrary width here
+## glm(formula, family = gaussian, data,
+##     weights, subset, na.action,
+##     start = NULL, etastart, mustart,
+##     offset, control = list(...),
+##     model = TRUE, method = &quot;glm.fit&quot;,
+##     x = FALSE, y = TRUE,
+##     contrasts = NULL, ...)
+args(glm)
+## function (formula, family = gaussian, data, weights, subset, 
+##     na.action, start = NULL, etastart, mustart, offset, control = list(...), 
+##     model = TRUE, method = &quot;glm.fit&quot;, x = FALSE, y = TRUE, contrasts = NULL, 
+##     ...) 
+## NULL
+</code></pre></li>
+</ul>
+
+<h1 id="3-the-graphical-user-interface">3. The Graphical User Interface</h1>
+
+<p>If the <strong>shiny</strong> packages has been installed, the function <code>tidy_app()</code> can launch a Shiny app to reformat R code like this (<a href="https://yihui.shinyapps.io/formatR/">live demo</a>):</p>
+
+<pre><code class="language-r">formatR::tidy_app()
+</code></pre>
+
+<p><a href="https://yihui.shinyapps.io/formatR/"><img src="https://db.yihui.name/imgur/lUgtEAb.png" alt="R source code before tidying" /></a></p>
+
+<p>After hitting the <code>Tidy</code> button:</p>
+
+<p><a href="https://yihui.shinyapps.io/formatR/"><img src="https://db.yihui.name/imgur/TBZm0B8.png" alt="R source code after tidying" /></a></p>
+
+<h1 id="4-evaluate-the-code-and-mask-output-in-comments">4. Evaluate the code and mask output in comments</h1>
+
+<p>It is often a pain when trying to copy R code from other people&rsquo;s code which has been run in R and the prompt characters (usually <code>&gt;</code>) are attached in the beginning of code, because we have to remove all the prompts <code>&gt;</code> and <code>+</code> manually before we are able to run the code. However, it will be convenient for the reader to understand the code if the output of the code can be attached. This motivates the function <code>tidy_eval()</code>, which uses <code>tidy_source()</code> to reformat the source code, evaluates the code in chunks, and attaches the output of each chunk as comments which will not actually break the original source code. Here is an example:</p>
+
+<pre><code class="language-r">set.seed(123)
+tidy_eval(text = c(&quot;a&lt;-1+1;a  # print the value&quot;, &quot;matrix(rnorm(10),5)&quot;))
+</code></pre>
+
+<pre><code>a &lt;- 1 + 1
+a  # print the value
+## [1] 2
+
+matrix(rnorm(10), 5)
+##          [,1]    [,2]
+## [1,] -0.56048  1.7151
+## [2,] -0.23018  0.4609
+## [3,]  1.55871 -1.2651
+## [4,]  0.07051 -0.6869
+## [5,]  0.12929 -0.4457
+</code></pre>
+
+<p>The default source of the code is from clipboard like <code>tidy_source()</code>, so we can copy our code to clipboard, and simply run this in R:</p>
+
+<pre><code class="language-r">library(formatR)
+tidy_eval()
+# without specifying any arguments, it reads code from clipboard
+</code></pre>
+
+<h1 id="5-showcase">5. Showcase</h1>
+
+<p>We continue the example code in Section 2, using different arguments in <code>tidy_source()</code> such as <code>arrow</code>, <code>blank</code>, <code>indent</code>, <code>brace.newline</code> and <code>comment</code>, etc.</p>
+
+<h2 id="replace-with">Replace <code>=</code> with <code>&lt;-</code></h2>
+
+<pre><code class="language-r">if (TRUE) {
+    x &lt;- 1  # inline comments
+} else {
+    x &lt;- 2
+    print(&quot;Oh no... ask the right bracket to go away!&quot;)
+}
+</code></pre>
+
+<h2 id="discard-blank-lines">Discard blank lines</h2>
+
+<p>Note the 5th line (an empty line) was discarded:</p>
+
+<pre><code class="language-r">## comments are retained; a comment block will be reflowed if it
+## contains long comments;
+#' roxygen comments will not be wrapped in any case
+1 + 1
+if (TRUE) {
+    x = 1  # inline comments
+} else {
+    x = 2
+    print(&quot;Oh no... ask the right bracket to go away!&quot;)
+}
+1 * 3  # one space before this comment will become two!
+</code></pre>
+
+<h2 id="reindent-code-2-spaces-instead-of-4">Reindent code (2 spaces instead of 4)</h2>
+
+<pre><code class="language-r">if (TRUE) {
+  x = 1  # inline comments
+} else {
+  x = 2
+  print(&quot;Oh no... ask the right bracket to go away!&quot;)
+}
+</code></pre>
+
+<h2 id="move-left-braces-to-new-lines">Move left braces <code>{</code> to new lines</h2>
+
+<pre><code class="language-r">if (TRUE)
+{
+    x = 1  # inline comments
+} else
+{
+    x = 2
+    print(&quot;Oh no... ask the right bracket to go away!&quot;)
+}
+</code></pre>
+
+<h2 id="discard-comments">Discard comments</h2>
+
+<pre><code class="language-r">1 + 1
+if (TRUE) {
+    x = 1
+} else {
+    x = 2
+    print(&quot;Oh no... ask the right bracket to go away!&quot;)
+}
+1 * 3
+2 + 2 + 2
+lm(y ~ x1 + x2, data = data.frame(y = rnorm(100), x1 = rnorm(100), 
+    x2 = rnorm(100)))
+1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 
+    1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1
+</code></pre>
+
+<h1 id="6-further-notes">6. Further notes</h1>
+
+<p>The tricks used in this packages are very dirty. There might be dangers in using the functions in <strong>formatR</strong>. Please read the next section carefully to know exactly how comments are preserved. The best strategy to avoid failure is to put comments in complete lines or after <em>complete</em> R expressions. Below are some known cases in which <code>tidy_source()</code> fails.</p>
+
+<h2 id="in-line-comments-after-an-incomplete-expression-or">In-line comments after an incomplete expression or ;</h2>
+
+<pre><code class="language-r">1 + 2 + ## comments after an incomplete line
+    3 + 4
+x &lt;- ## this is not a complete expression
+     5
+x &lt;- 1; # you should not use ; here!
+</code></pre>
+
+<p>It is not a good idea to interrupt R code with comments and sometimes it can be confusing &ndash; comments should come after a complete R expression naturally; by the way, <code>tidy_source()</code> will move the comments after <code>{</code> to the next line, e.g.</p>
+
+<pre><code class="language-r">if (TRUE) {## comments
+}
+</code></pre>
+
+<p>will become</p>
+
+<pre><code class="language-r">if (TRUE) {
+    ## comments
+}
+</code></pre>
+
+<h2 id="inappropriate-blank-lines">Inappropriate blank lines</h2>
+
+<p>Blank lines are often used to separate complete chunks of R code, and arbitrary blank lines may cause failures in <code>tidy_source()</code> as well when the argument <code>blank = TRUE</code>, e.g.</p>
+
+<pre><code class="language-r">if (TRUE)
+
+{'this is a BAD style of R programming!'} else 'failure!'
+</code></pre>
+
+<p>There should not be a blank line after the <code>if</code> statement. Of course <code>blank = FALSE</code> will not fail in this case.</p>
+
+<h2 id="with-comments"><code>?</code> with comments</h2>
+
+<p>We can use the question mark (<code>?</code>) to view the help page, but <strong>formatR</strong> package is unable to correctly format the code using <code>?</code> with comments, e.g.</p>
+
+<pre><code class="language-r">?sd  # help on sd()
+</code></pre>
+
+<p>In this case, it is recommended to use the function <code>help()</code> instead of the short-hand version <code>?</code>.</p>
+
+<h2 id="and-from-the-rlang-package"><code>!!</code> and <code>!!!</code> from the <strong>rlang</strong> package</h2>
+
+<p>The syntactic shortcuts <code>!!</code> and <code>!!!</code> from the <strong>rlang</strong> packages will be ruined by <code>tidy_source()</code>, e.g.,</p>
+
+<pre><code class="language-r">rlang::quo(mean(!! 1:10 * 2))
+</code></pre>
+
+<p>will be reformatted as:</p>
+
+<pre><code class="language-r">rlang::quo(mean(!(!1:10 * 2)))
+</code></pre>
+
+<h2 id="with-comments-1"><code>-&gt;</code> with comments</h2>
+
+<p>We can also use the right arrow <code>-&gt;</code> for assignment, e.g. <code>1:10 -&gt; x</code>. I believe this flexibility is worthless, and it is amazing that a language has three assignment operators: <code>&lt;-</code>, <code>=</code> and <code>-&gt;</code> (whereas almost all other languages uses <code>=</code> for assignment). Bad news for <strong>formatR</strong> is that it is unable to format code using both <code>-&gt;</code> and comments in a line, e.g.</p>
+
+<pre><code class="language-r">1:10 -&gt; x  # assignment with right arrow
+</code></pre>
+
+<p>I recommend you to use <code>&lt;-</code> or <code>=</code> consistently. What is more important is consistency. I always use <code>=</code> because it causes me no confusion (I do not believe it is ever possible for people to interpret <code>fun(a = 1)</code> as assigning <code>1</code> to a variable <code>a</code> instead of passing an argument value) and <code>&lt;-</code> is more dangerous because it works everywhere (you might have unconsciously created a new variable <code>a</code> in <code>fun(a &lt;- 1)</code>; see <a href="https://stat.ethz.ch/pipermail/r-devel/2011-December/062786.html">an example here</a>). The only disadvantage is that most R people use <code>&lt;-</code> so it may be difficult to collaborate with other people.</p>
+
+<h2 id="the-pipe-operator">The pipe operator <code>%&gt;%</code></h2>
+
+<p>Although <code>tidy_source()</code> won&rsquo;t ruin your code that contains the pipes, you won&rsquo;t be happy with it: your line breaks after the pipes won&rsquo;t be preserved. See <a href="https://github.com/yihui/formatR/issues/54">#54</a>.</p>
+
+<h1 id="7-how-does-tidy-source-actually-work">7. How does <code>tidy_source()</code> actually work?</h1>
+
+<p>In a nutshell, <code>tidy_source(text = code)</code> is basically <code>deparse(parse(text = code))</code>, but actually it is more complicated only because of one thing: <code>deparse()</code> drops comments, e.g.,</p>
+
+<pre><code class="language-r">deparse(parse(text = &quot;1+2-3*4/5 # a comment&quot;))
+</code></pre>
+
+<pre><code>## [1] &quot;expression(1 + 2 - 3 * 4/5)&quot;
+</code></pre>
+
+<p>The method to preserve comments is to protect them as strings in R expressions. For example, there is a single line of comments in the source code:</p>
+
+<pre><code class="language-r">  # asdf
+</code></pre>
+
+<p>It will be first masked as</p>
+
+<pre><code class="language-r">invisible(&quot;.IDENTIFIER1  # asdf.IDENTIFIER2&quot;)
+</code></pre>
+
+<p>which is a legal R expression, so <code>base::parse()</code> can deal with it and will no longer remove the disguised comments.  In the end the identifiers will be removed to restore the original comments, i.e. the strings <code>invisible(&quot;.IDENTIFIER1</code> and <code>.IDENTIFIER2&quot;)</code> are replaced with empty strings.</p>
+
+<p>Inline comments are handled differently: two spaces will be added before the hash symbol <code>#</code>, e.g.</p>
+
+<pre><code class="language-r">1+1#  comments
+</code></pre>
+
+<p>will become</p>
+
+<pre><code class="language-r">1+1  #  comments
+</code></pre>
+
+<p>Inline comments are first disguised as a weird operation with its preceding R code, which is essentially meaningless but syntactically correct!  For example,</p>
+
+<pre><code class="language-r">1+1 %InLiNe_IdEnTiFiEr% &quot;#  comments&quot;
+</code></pre>
+
+<p>then <code>base::parse()</code> will deal with this expression; again, the disguised comments will not be removed. In the end, inline comments will be freed as well (remove the operator <code>%InLiNe_IdEnTiFiEr%</code> and surrounding double quotes).</p>
+
+<p>All these special treatments to comments are due to the fact that <code>base::parse()</code> and <code>base::deparse()</code> can tidy the R code at the price of dropping all the comments.</p>
+
+<h1 id="8-global-options">8. Global options</h1>
+
+<p>There are global options which can override some arguments in <code>tidy_source()</code>:</p>
+
+<table>
+<thead>
+<tr>
+<th>argument</th>
+<th>global option</th>
+<th>default</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>comment</code></td>
+<td><code>options('formatR.comment')</code></td>
+<td><code>TRUE</code></td>
+</tr>
+
+<tr>
+<td><code>blank</code></td>
+<td><code>options('formatR.blank')</code></td>
+<td><code>TRUE</code></td>
+</tr>
+
+<tr>
+<td><code>arrow</code></td>
+<td><code>options('formatR.arrow')</code></td>
+<td><code>FALSE</code></td>
+</tr>
+
+<tr>
+<td><code>indent</code></td>
+<td><code>options('formatR.indent')</code></td>
+<td><code>4</code></td>
+</tr>
+
+<tr>
+<td><code>brace.newline</code></td>
+<td><code>options('formatR.brace.newline')</code></td>
+<td><code>FALSE</code></td>
+</tr>
+</tbody>
+</table>
+
+<p>Also note that single lines of long comments will be wrapped into shorter ones automatically, but roxygen comments will not be wrapped (i.e., comments that begin with <code>#'</code>).</p>
+
+
+  <footer>
+  
+
+
+<section class="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+    this.page.url = "http:\/\/yihui.name" + location.pathname;
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var disqus_js = '//yihui.disqus.com/embed.js';
+    var d = document, s = d.createElement('script');
+    s.src = disqus_js; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    var b = false, l = function() {
+      if (b) return;
+      (d.head || d.body).appendChild(s); b = true;
+    }
+    
+    if (location.hash.match(/^#comment/)) return(l());
+    var t = d.getElementById('disqus_thread');
+    var c = function() {
+      if (b) return;
+      var rect = t.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom >= 0) l();
+    };
+    window.addEventListener('load', c);
+    d.addEventListener('scroll', c);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+
+
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="/">Yihui Xie</a> 2005 - 2018</div>
+  
+  </footer>
+  </article>
+  
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-1988641-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </body>
+</html>
+

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>saveHTML() - Insert animations into an HTML page  - Yihui Xie | 谢益辉</title>
+    <meta property="og:title" content="saveHTML() - Yihui Xie | 谢益辉">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="This function first records all the plots in the R expression as bitmap images, then inserts them into an HTML page and finally creates the animation using the SciAnimator library.
+It mainly uses the &amp;hellip;">
+      <meta property="og:description" content="This function first records all the plots in the R expression as bitmap images, then inserts them into an HTML page and finally creates the animation using the SciAnimator library.
+It mainly uses the &amp;hellip;">
+      
+    
+
+    
+    
+    
+    <meta name="twitter:image" content="https://yihui.name/images/logo.png">
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="animation">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.png" alt="Yihui Xie" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/animation/">Home</a></li>
+  
+  <li><a href="/animation/examples/">Examples</a></li>
+  
+  <li><a href="/animation/export/">Export</a></li>
+  
+  <li><a href="/animation/resources/">Resources</a></li>
+  
+  <li><a href="https://github.com/yihui/animation">Github repo</a></li>
+  
+  <li><a href="/">Yihui Xie</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+
+
+
+<li><a href="https://github.com/rbind/yihui/edit/master/content/animation/example/saveHTML.Rmd" target="_blank">Edit this page</a></li>
+
+
+<li><a href="/animation/index.xml" type="application/rss+xml" title="RSS feed">Subscribe</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">License</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>saveHTML()</h1>
+<h1><span class="subtitle">Insert animations into an HTML page</span></h2>
+
+<h3>Yihui Xie &amp; Lijia Yu / 
+2017-04-04</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+<p>This function first records all the plots in the R expression as bitmap
+images, then inserts them into an HTML page and finally creates the animation
+using the SciAnimator library.</p>
+
+<p>It mainly uses the SciAnimator library, which is based on jQuery. It has a
+neat interface (both technically and visually) and is much easier to use or
+extend. Moreover, this function allows multiple animations in a single HTML
+page &ndash; just use the same HTML filename.</p>
+
+<p>Optionally the source code and some session information can be added below
+the animations for the sake of reproducibility (specified by the option
+<code>ani.options('verbose')</code> &ndash; if <code>TRUE</code>, the description, loaded
+packages, the code to produce the animation, as well as a part of
+<code>sessionInfo()</code> will be written in the bottom of the animation;
+the R code will be highlighted using the SyntaxHighlighter library for better
+reading experience).</p>
+
+<pre><code class="language-r">library(animation)
+## A quick and dirty demo
+des = c(&quot;This is a silly example.\n\n&quot;, &quot;You can describe it in more detail.&quot;, 
+  &quot;For example, bla bla...&quot;)
+saveHTML({
+  par(mar = c(4, 4, 0.5, 0.5))
+  for (i in 1:20) {
+    plot(runif(20), ylim = c(0, 1))
+    ani.pause()
+  }
+}, img.name = &quot;unif_plot&quot;, imgdir = &quot;unif_dir&quot;, htmlfile = &quot;random.html&quot;, 
+  autobrowse = FALSE, title = &quot;Demo of 20 uniform random numbers&quot;, 
+  description = des)
+
+
+
+## we can merge another animation into the former page as long
+## as 'htmlfile' is the same; this time I don't want the
+## animation to autoplay, and will use text labels for the
+## buttons (instead of UTF-8 symbols)
+des = c(&quot;When you write a long long long long description, R will try to wrap the&quot;, 
+  &quot;words automatically.&quot;, &quot;Oh, really?!&quot;)
+saveHTML({
+  par(mar = c(4, 4, 0.5, 0.5))
+  ani.options(interval = 0.5)
+  for (i in 1:10) {
+    plot(rnorm(50), ylim = c(-3, 3))
+    ani.pause()
+  }
+}, img.name = &quot;norm_plot&quot;, single.opts = &quot;utf8: false&quot;, autoplay = FALSE, 
+  interval = 0.5, imgdir = &quot;norm_dir&quot;, htmlfile = &quot;random.html&quot;, 
+  ani.height = 400, ani.width = 600, title = &quot;Demo of 50 Normal random numbers&quot;, 
+  description = des)
+
+
+
+## use the function brownian.motion() in this package; this
+## page is created in 'index.html' under the current working
+## directory
+des = c(&quot;Random walk of 10 points on the 2D plane:&quot;, &quot;for each point (x, y),&quot;, 
+  &quot;x = x + rnorm(1) and y = y + rnorm(1).&quot;)
+saveHTML({
+  par(mar = c(3, 3, 1, 0.5), mgp = c(2, 0.5, 0), tcl = -0.3, 
+    cex.axis = 0.8, cex.lab = 0.8, cex.main = 1)
+  ani.options(interval = 0.05, nmax = 150)
+  brownian.motion(pch = 21, cex = 5, col = &quot;red&quot;, bg = &quot;yellow&quot;)
+}, img.name = &quot;brownian_motion_a&quot;, htmlfile = &quot;index.html&quot;, description = des)
+
+
+
+## remove the 'navigator' (progress bar)
+saveHTML({
+  par(mar = c(3, 3, 1, 0.5), mgp = c(2, 0.5, 0), tcl = -0.3, 
+    cex.axis = 0.8, cex.lab = 0.8, cex.main = 1)
+  ani.options(interval = 0.05, nmax = 150)
+  brownian.motion(pch = 21, cex = 5, col = &quot;red&quot;, bg = &quot;yellow&quot;)
+}, img.name = &quot;brownian_motion_b&quot;, htmlfile = &quot;index.html&quot;, navigator = FALSE, 
+  description = c(&quot;Random walk of 10 points on the 2D plane&quot;, 
+    &quot;(without the navigation panel)&quot;))
+
+
+## use Rweb to create animations
+if (interactive()) browseURL(system.file(&quot;misc&quot;, &quot;Rweb&quot;, &quot;demo.html&quot;, 
+  package = &quot;animation&quot;))
+</code></pre>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/animation/example/savelatex/">saveLatex()</a></span>
+  <span class="nav-next"><a href="/animation/example/savegif/">saveGIF()</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/animation\/example\/savelatex\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/animation\/example\/savegif\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+<section class="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+    this.page.url = "http:\/\/yihui.name" + location.pathname;
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var disqus_js = '//yihui.disqus.com/embed.js';
+    var d = document, s = d.createElement('script');
+    s.src = disqus_js; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    var b = false, l = function() {
+      if (b) return;
+      (d.head || d.body).appendChild(s); b = true;
+    }
+    
+    if (location.hash.match(/^#comment/)) return(l());
+    var t = d.getElementById('disqus_thread');
+    var c = function() {
+      if (b) return;
+      var rect = t.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom >= 0) l();
+    };
+    window.addEventListener('load', c);
+    d.addEventListener('scroll', c);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="/">Yihui Xie</a> 2005 - 2018</div>
+  
+  </footer>
+  </article>
+  
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-1988641-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </body>
+</html>
+

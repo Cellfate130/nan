@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Upload images - Publish images from chunks in the web  - Yihui Xie | 谢益辉</title>
+    <meta property="og:title" content="Upload images - Yihui Xie | 谢益辉">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="The function imgur_upload() in the knitr package enables one to upload images to the image host http://imgur.com in R using the RCurl package. If the package option upload.fun is a function (e.g. &amp;hellip;">
+      <meta property="og:description" content="The function imgur_upload() in the knitr package enables one to upload images to the image host http://imgur.com in R using the RCurl package. If the package option upload.fun is a function (e.g. &amp;hellip;">
+      
+    
+
+    
+    
+    
+    <meta name="twitter:image" content="https://yihui.name/images/logo.png">
+    
+    
+
+    
+
+    
+    
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="knitr">
+    <header class="masthead">
+      
+
+<h1><a href="/knitr/"><img src="/knitr/images/knit-logo.png" alt="knitr logo" /></a></h1>
+<p class="tagline">knitr: elegant, flexible, and fast dynamic report generation with R</p>
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/knitr/">Home</a></li>
+  
+  <li><a href="/knitr/options/">Options</a></li>
+  
+  <li><a href="/knitr/hooks/">Hooks</a></li>
+  
+  <li><a href="/knitr/demos/">Examples</a></li>
+  
+  <li><a href="/knitr/faq/">FAQ</a></li>
+  
+  <li><a href="https://github.com/yihui/knitr">Github repo</a></li>
+  
+  <li><a href="/">Yihui Xie</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rbind/yihui/edit/master/content/knitr%5cdemo%5c2012-02-12-upload.md" target="_blank">Edit this page</a></li>
+
+
+<li><a href="/knitr/index.xml" type="application/rss+xml" title="RSS feed">Subscribe</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">License</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Upload images</h1>
+<h1><span class="subtitle">Publish images from chunks in the web</span></h2>
+
+<h3>
+2012-02-12</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+<p>The function <code>imgur_upload()</code> in the <strong>knitr</strong> package enables one to upload images to the image host <a href="http://imgur.com">http://imgur.com</a> in R using the <strong>RCurl</strong> package. If the package <a href="../../options/">option</a> <code>upload.fun</code> is a function (e.g. <code>imgur_upload</code>) that uploads files to a certain server/host, all plots generated in chunks will be uploaded automatically when the output format is HTML or Markdown.</p>
+
+<ul>
+<li>A simple example
+
+<ul>
+<li>source: <a href="https://github.com/yihui/knitr-examples/blob/master/010-upload.Rmd">knitr-upload.Rmd</a></li>
+<li>output: <a href="https://github.com/yihui/knitr-examples/blob/master/010-upload.md">knitr-upload.md</a></li>
+</ul></li>
+<li>Two blog posts by Carl Boettiger on how to publish a post to Wordpress.com with knitr and RWordPress purely in R, with images uploaded to
+
+<ul>
+<li><a href="http://www.carlboettiger.info/archives/3974">Imgur</a></li>
+<li>or <a href="http://www.carlboettiger.info/archives/3988">Flickr</a></li>
+</ul></li>
+</ul>
+
+<p>This allows you to publish web pages quickly without worrying about image files; you only need to upload a single HTML (to any web servers) or Markdown file (to GitHub, for example).</p>
+
+<p>Brave professors may encourage their brave students to write homeworks with a simple Markdown file, instead of MS Word (which is usually difficult to reproduce and frustrating to format elegantly).</p>
+
+<p>The package option <code>opts_knit$get('upload.fun')</code> is customizable so that you can use your own function to upload an image. See the script <a href="https://github.com/cboettig/socialR/blob/master/R/custom_knit.R">custom_knit.R</a> by Carl for examples.</p>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/knitr/demo/pretty/">Pretty printing</a></span>
+  <span class="nav-next"><a href="/knitr/demo/sweave/">Sweave</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/knitr\/demo\/pretty\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/knitr\/demo\/sweave\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+<section class="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+    this.page.url = "http:\/\/yihui.name" + location.pathname;
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var disqus_js = '//yihui.disqus.com/embed.js';
+    var d = document, s = d.createElement('script');
+    s.src = disqus_js; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    var b = false, l = function() {
+      if (b) return;
+      (d.head || d.body).appendChild(s); b = true;
+    }
+    
+    if (location.hash.match(/^#comment/)) return(l());
+    var t = d.getElementById('disqus_thread');
+    var c = function() {
+      if (b) return;
+      var rect = t.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom >= 0) l();
+    };
+    window.addEventListener('load', c);
+    d.addEventListener('scroll', c);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="/">Yihui Xie</a> 2005 - 2018</div>
+  
+  </footer>
+  </article>
+  
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-1988641-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </body>
+</html>
+

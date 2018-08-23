@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>ani.record() - Record and replay animations  - Yihui Xie | 谢益辉</title>
+    <meta property="og:title" content="ani.record() - Yihui Xie | 谢益辉">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="These two functions use recordPlot and replayPlot to record image frames and replay the animation respectively.
+One difficulty in capturing images in R (base graphics) is that the off-screen graphics &amp;hellip;">
+      <meta property="og:description" content="These two functions use recordPlot and replayPlot to record image frames and replay the animation respectively.
+One difficulty in capturing images in R (base graphics) is that the off-screen graphics &amp;hellip;">
+      
+    
+
+    
+    
+    
+    <meta name="twitter:image" content="https://yihui.name/images/logo.png">
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="animation">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.png" alt="Yihui Xie" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/animation/">Home</a></li>
+  
+  <li><a href="/animation/examples/">Examples</a></li>
+  
+  <li><a href="/animation/export/">Export</a></li>
+  
+  <li><a href="/animation/resources/">Resources</a></li>
+  
+  <li><a href="https://github.com/yihui/animation">Github repo</a></li>
+  
+  <li><a href="/">Yihui Xie</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+
+
+
+<li><a href="https://github.com/rbind/yihui/edit/master/content/animation/example/ani-record.Rmd" target="_blank">Edit this page</a></li>
+
+
+<li><a href="/animation/index.xml" type="application/rss+xml" title="RSS feed">Subscribe</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">License</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>ani.record()</h1>
+<h1><span class="subtitle">Record and replay animations</span></h2>
+
+<h3>Yihui Xie &amp; Lijia Yu / 
+2017-04-04</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+<p>These two functions use <code>recordPlot</code> and <code>replayPlot</code>
+to record image frames and replay the animation respectively.</p>
+
+<p>One difficulty in capturing images in R (base graphics) is that the
+off-screen graphics devices cannot capture low-level plotting commands as
+<strong>new</strong> image files &ndash; only high-level plotting commands can produce new
+image files; <code>ani.record</code> uses <code>recordPlot</code> to record
+the plots when any changes are made on the current plot. For a graphical
+device to be recordable, you have to call <code>dev.control('enable')</code> before
+plotting.</p>
+
+<pre><code class="language-r">library(animation)
+
+n = 20
+x = sort(rnorm(n))
+y = rnorm(n)
+## set up an empty frame, then add points one by one
+par(bg = &quot;white&quot;)  # ensure the background color is white
+plot(x, y, type = &quot;n&quot;)
+
+ani.record(reset = TRUE)  # clear history before recording
+
+for (i in 1:n) {
+  points(x[i], y[i], pch = 19, cex = 2)
+  ani.record()  # record the current frame
+}
+
+## now we can replay it, with an appropriate pause between
+## frames
+oopts = ani.options(interval = 0.5)
+ani.replay()
+
+## or export the animation to an HTML page
+saveHTML(ani.replay(), img.name = &quot;record_plot&quot;)
+
+## record plots and replay immediately
+saveHTML({
+  dev.control(&quot;enable&quot;)  # enable recording
+  par(bg = &quot;white&quot;)  # ensure the background color is white
+  plot(x, y, type = &quot;n&quot;)
+  for (i in 1:n) {
+    points(x[i], y[i], pch = 19, cex = 2)
+    ani.record(reset = TRUE, replay.cur = TRUE)  # record the current frame
+  }
+})
+
+ani.options(oopts)
+</code></pre>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/animation/example/animation-package/">animation-package()</a></span>
+  <span class="nav-next"><a href="/animation/example/ani-options/">ani.options()</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/animation\/example\/animation-package\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/animation\/example\/ani-options\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+<section class="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+    this.page.url = "http:\/\/yihui.name" + location.pathname;
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var disqus_js = '//yihui.disqus.com/embed.js';
+    var d = document, s = d.createElement('script');
+    s.src = disqus_js; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    var b = false, l = function() {
+      if (b) return;
+      (d.head || d.body).appendChild(s); b = true;
+    }
+    
+    if (location.hash.match(/^#comment/)) return(l());
+    var t = d.getElementById('disqus_thread');
+    var c = function() {
+      if (b) return;
+      var rect = t.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom >= 0) l();
+    };
+    window.addEventListener('load', c);
+    d.addEventListener('scroll', c);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+
+
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="/">Yihui Xie</a> 2005 - 2018</div>
+  
+  </footer>
+  </article>
+  
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-1988641-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </body>
+</html>
+

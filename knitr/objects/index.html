@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Objects - Objects to manipulate options, patterns and hooks  - Yihui Xie | 谢益辉</title>
+    <meta property="og:title" content="Objects - Yihui Xie | 谢益辉">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="The knitr package uses a special object to control options and settings (denoted as obj below); it has the following methods:
+[&amp;hellip;] These objects are visible to users in knitr:
+[&amp;hellip;] Except &amp;hellip;">
+      <meta property="og:description" content="The knitr package uses a special object to control options and settings (denoted as obj below); it has the following methods:
+[&amp;hellip;] These objects are visible to users in knitr:
+[&amp;hellip;] Except &amp;hellip;">
+      
+    
+
+    
+    
+    
+    <meta name="twitter:image" content="https://yihui.name/images/logo.png">
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="knitr">
+    <header class="masthead">
+      
+
+<h1><a href="/knitr/"><img src="/knitr/images/knit-logo.png" alt="knitr logo" /></a></h1>
+<p class="tagline">knitr: elegant, flexible, and fast dynamic report generation with R</p>
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/knitr/">Home</a></li>
+  
+  <li><a href="/knitr/options/">Options</a></li>
+  
+  <li><a href="/knitr/hooks/">Hooks</a></li>
+  
+  <li><a href="/knitr/demos/">Examples</a></li>
+  
+  <li><a href="/knitr/faq/">FAQ</a></li>
+  
+  <li><a href="https://github.com/yihui/knitr">Github repo</a></li>
+  
+  <li><a href="/">Yihui Xie</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rbind/yihui/edit/master/content/knitr%5cobjects.md" target="_blank">Edit this page</a></li>
+
+
+<li><a href="/knitr/index.xml" type="application/rss+xml" title="RSS feed">Subscribe</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">License</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Objects</h1>
+<h1><span class="subtitle">Objects to manipulate options, patterns and hooks</span></h2>
+
+<h3>
+2017-02-03</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+<p>The <strong>knitr</strong> package uses a special object to control options and settings (denoted as <code>obj</code> below); it has the following methods:</p>
+
+<ul>
+<li><code>obj$get(name)</code>: returns an option named <code>name</code> or a list of several options if <code>name</code> is a character vector of length greater than 1, and it returns all the options if <code>name</code> not provided</li>
+<li><code>obj$set(...)</code>: permanently changes options; the argument <code>...</code> can be of the form <code>tag = value</code> or a list of options <code>list(opt1 = value1, opt2 = value2)</code></li>
+<li><code>obj$merge(values)</code>: temporarily merges a list of new options into the current list and returns the merged list (original list not changed)</li>
+<li><code>obj$restore()</code>: restores the object</li>
+</ul>
+
+<p>These objects are visible to users in <strong>knitr</strong>:</p>
+
+<ul>
+<li><a href="../options/#chunk_options"><code>opts_chunk</code></a> and <code>opts_current</code>: manages <strong>opt</strong>ions for code <strong>chunk</strong>s</li>
+<li><a href="../options/#package_options"><code>opts_knit</code></a>: manages <strong>opt</strong>ions for the <strong>knit</strong>r package</li>
+<li><a href="../hooks"><code>knit_hooks</code></a>: manages hook functions</li>
+<li><a href="../patterns"><code>knit_patterns</code></a>: manages regular expressions to extract R code from the input document</li>
+<li><code>knit_engines</code>: functions to deal with other languages</li>
+</ul>
+
+<p>Except <code>knit_patterns</code>, all other objects are initialized with default values, and <code>knit_patterns</code> will be automatically determined according to the type of input document if not provided. The <code>knit_hooks</code> object is supposed to be used most frequently, and the other three are usually not to be used directly. For example, <code>opts_chunk</code> is usually set in the input document rather than using the command line directly.</p>
+
+<p>Knitr&rsquo;s settings <em>must</em> be set in a chunk before any chunks which rely
+on those settings to be active. It is recommended to create a <strong>knit</strong>
+configuration chunk as the first chunk in a script with <code>cache =
+FALSE</code> and <code>include = FALSE</code> options set. This chunk <em>must not</em> contain
+any commands which expect the settings in the configuration chunk to
+be in effect at the time of execution. The configuration chunk could
+look something like this:</p>
+
+<pre><code class="language-r">&lt;&lt;setup, cache=FALSE, include=FALSE&gt;&gt;=
+library(knitr)
+opts_knit$set(upload.fun = imgur_upload, self.contained = FALSE,
+              root.dir = '~/R/project')
+@
+</code></pre>
+
+<p>On a technical note, these objects are similar to closures &ndash; they
+consist of a list of functions returned by a function. For details,
+see the unexported function <code>knitr:::new_defaults</code>. The chunk options
+are also managed by closures.</p>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/knitr/options/">Options</a></span>
+  <span class="nav-next"><a href="/knitr/hooks/">Hooks</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/knitr\/options\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/knitr\/hooks\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+<section class="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+    this.page.url = "http:\/\/yihui.name" + location.pathname;
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var disqus_js = '//yihui.disqus.com/embed.js';
+    var d = document, s = d.createElement('script');
+    s.src = disqus_js; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    var b = false, l = function() {
+      if (b) return;
+      (d.head || d.body).appendChild(s); b = true;
+    }
+    
+    if (location.hash.match(/^#comment/)) return(l());
+    var t = d.getElementById('disqus_thread');
+    var c = function() {
+      if (b) return;
+      var rect = t.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom >= 0) l();
+    };
+    window.addEventListener('load', c);
+    d.addEventListener('scroll', c);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="/">Yihui Xie</a> 2005 - 2018</div>
+  
+  </footer>
+  </article>
+  
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-1988641-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </body>
+</html>
+

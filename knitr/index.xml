@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>knitr on Yihui Xie | 谢益辉</title>
+    <link>https://yihui.name/knitr/</link>
+    <description>Recent content in knitr on Yihui Xie | 谢益辉</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 03 Feb 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://yihui.name/knitr/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Frequently Asked Questions</title>
+      <link>https://yihui.name/knitr/faq/</link>
+      <pubDate>Fri, 17 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/faq/</guid>
+      <description>This FAQ is compiled from the issues and messages I received from blog posts and emails, etc. Personally I&amp;rsquo;m not big fan of FAQ&amp;rsquo;s, and I believe sometimes FAQ&amp;rsquo;s are nearly bugs. Software package authors should think why users ask some questions so frequently (it is unlikely that users are always stupid). At least I&amp;rsquo;m not patient enough to read, say, 128 FAQ&amp;rsquo;s one by one, so I won&amp;rsquo;t let you do it, either.</description>
+    </item>
+    
+    <item>
+      <title>Examples</title>
+      <link>https://yihui.name/knitr/demos/</link>
+      <pubDate>Fri, 03 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demos/</guid>
+      <description>Note there is a larger collection of examples in the knitr-examples repository on Github. This page is more for the documentation purpose. You can take a look at the collection of knitr applications by other users as well.</description>
+    </item>
+    
+    <item>
+      <title>Hooks</title>
+      <link>https://yihui.name/knitr/hooks/</link>
+      <pubDate>Fri, 03 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/hooks/</guid>
+      <description>The object knit_hooks in the knitr package is used to set hooks; the basic usage is knit_hooks$set(param = FUN) (see objects for details) where param is the name of a chunk option (can be arbitrary), and FUN is a function. There are two types of hooks: chunk hooks and output hooks. Hook functions may have different forms, depending what they are designed to do.
+Chunk hooks Chunk hooks are functions to be called before or after a code chunk when the chunk option is not NULL (it basically means as long as you set a option, the hook will be run), and they should be defined with three arguments:</description>
+    </item>
+    
+    <item>
+      <title>Objects</title>
+      <link>https://yihui.name/knitr/objects/</link>
+      <pubDate>Fri, 03 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/objects/</guid>
+      <description>The knitr package uses a special object to control options and settings (denoted as obj below); it has the following methods:
+ obj$get(name): returns an option named name or a list of several options if name is a character vector of length greater than 1, and it returns all the options if name not provided obj$set(...): permanently changes options; the argument ... can be of the form tag = value or a list of options list(opt1 = value1, opt2 = value2) obj$merge(values): temporarily merges a list of new options into the current list and returns the merged list (original list not changed) obj$restore(): restores the object  These objects are visible to users in knitr:</description>
+    </item>
+    
+    <item>
+      <title>Options</title>
+      <link>https://yihui.name/knitr/options/</link>
+      <pubDate>Fri, 03 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/options/</guid>
+      <description>The knitr package shares most options with Sweave, but some were dropped or changed, and some new options were added. The default values are in the parentheses below. Note that the chunk label for each chunk is assumed to be unique, i.e., no two chunks should share the same label. This is especially important for cache and plot filenames. Chunks without labels will be assigned labels like unnamed-chunk-i where i is an incremental number.</description>
+    </item>
+    
+    <item>
+      <title>Patterns</title>
+      <link>https://yihui.name/knitr/patterns/</link>
+      <pubDate>Fri, 03 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/patterns/</guid>
+      <description>The object knit_patterns manages patterns in knitr. For example, we can use knit_patterns$get() to check the current pattern list. A pattern list includes the following components:
+ chunk.begin: the pattern for the beginning of a code chunk; it must contain a group defined by (), which will be used to extract chunk options chunk.end: the pattern for the end of a chunk (the original meaning of this pattern in literate programming is different: it used to indicate the beginning of normal text; if you want the original meaning, see the package option filter.</description>
+    </item>
+    
+    <item>
+      <title>knitr showcase</title>
+      <link>https://yihui.name/knitr/demo/showcase/</link>
+      <pubDate>Mon, 11 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/showcase/</guid>
+      <description>Below are links related to knitr in other websites and applications (if you have more, or you do not like your links to be listed here, please feel free to let me know). Websites RPubs: Easy web publishing from R knitr in a knutshell, a short tutorial by Karl Broman R learning resources at UCLA by Joshua Wiley et al (dynamically built with knitr) knitr on ShareLaTeX (an online LaTeX</description>
+    </item>
+    
+    <item>
+      <title>Pandoc</title>
+      <link>https://yihui.name/knitr/demo/pandoc/</link>
+      <pubDate>Wed, 06 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/pandoc/</guid>
+      <description>Note: you are no longer recommended to use the pandoc() function in knitr. Please try the rmarkdown package instead: http://rmarkdown.rstudio.com
+The function pandoc() in knitr (since version 1.2) was designed to convert Markdown documents to other formats such as LaTeX/PDF, HTML and Word (odt/docx). The main idea is to minimize the command-line call by wrapping commands into a configuration file or embedded configurations. Normally we call Pandoc via command line like this:</description>
+    </item>
+    
+    <item>
+      <title>WordPress</title>
+      <link>https://yihui.name/knitr/demo/wordpress/</link>
+      <pubDate>Sun, 10 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/wordpress/</guid>
+      <description>The RWordPress package allows one to publish blog posts from R to WordPress (see the newPost() function in the package). A blog post is essentially an HTML fragment, and knitr can create such a fragment from R Markdown with the markdown package. Below is how to do this with the function knit2wp() in knitr:
+if (!require(&#39;RWordPress&#39;)) { devtools::install_github(c(&amp;quot;duncantl/XMLRPC&amp;quot;, &amp;quot;duncantl/RWordPress&amp;quot;)) } library(RWordPress) options(WordpressLogin = c(user = &#39;password&#39;), WordpressURL = &#39;https://user.wordpress.com/xmlrpc.php&#39;) library(knitr) knit2wp(&#39;yourfile.</description>
+    </item>
+    
+    <item>
+      <title>JavaScript</title>
+      <link>https://yihui.name/knitr/demo/javascript/</link>
+      <pubDate>Fri, 09 Nov 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/javascript/</guid>
+      <description>Due to the option results=&#39;asis&#39;, we can write anything to the output, including JavaScript. Here are some examples:
+ Contour Plots with D3 and R (source)  </description>
+    </item>
+    
+    <item>
+      <title>Language engines</title>
+      <link>https://yihui.name/knitr/demo/engines/</link>
+      <pubDate>Fri, 04 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/engines/</guid>
+      <description>We can use any languages in knitr, including but not limited to R. Here are some simple demos with Python, Awk, Ruby, Haskell, Bash, Perl, Graphviz, TikZ, SAS, Scala, and CoffeeScript, etc:
+ python.Rmd (output) c.Rmd (output) fortran.Rmd (output) sql.Rmd (output) awk.Rmd (output) ruby.Rmd (output) haskell.Rmd (output) bash.Rmd (output) perl.Rmd (output) dot.Rmd (output) tikz.Rmd (output) sas.Rmd (output) coffeescript.Rmd (output) polyglot.Rmd (output)  Scala, Python, and Bash   These languages are easy to deal with because they can be called by pure command line, e.</description>
+    </item>
+    
+    <item>
+      <title>HTML5 slides</title>
+      <link>https://yihui.name/knitr/demo/slides/</link>
+      <pubDate>Tue, 01 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/slides/</guid>
+      <description>Update (2014/12/24): the rmarkdown package has made this much much easier, so you should probably ignore this page. Please see http://rmarkdown.rstudio.com.
+ Here is a simple demo of making DZslides with knitr and pandoc:
+ Rmd source: knitr-slides.Rmd markdown output: knitr-slides.md  Run the pandoc command mentioned in the slides to get the HTML output. Use Left/Right arrows to navigate through the slides.
+Also see slides made by other users in the showcase page, e.</description>
+    </item>
+    
+    <item>
+      <title>Editors for knitr</title>
+      <link>https://yihui.name/knitr/demo/editors/</link>
+      <pubDate>Fri, 16 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/editors/</guid>
+      <description>I have written about LyX, RStudio, Emacs Org-mode and Eclipse. There are still other editors that we can use with knitr, such as Texmaker and WinEdt. The key is that you call R and load the knitr package, then call the function knit() or knit2pdf().
+Texmaker You can define a custom command to process Rnw documents by User --&amp;gt; User Commands --&amp;gt; Edit User Commands:
+Note if you have not added R&amp;rsquo;s bin path to the PATH variable, you need to use the full path to Rscript.</description>
+    </item>
+    
+    <item>
+      <title>Package framed</title>
+      <link>https://yihui.name/knitr/demo/framed/</link>
+      <pubDate>Wed, 29 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/framed/</guid>
+      <description>By default, knitr uses a LaTeX package named framed for typesetting; the most obvious feature is the light gray shading. In this page, we introduce some tricks and known problems.
+As listed in FAQ&amp;rsquo;s, you may see the output overflow the shading box, and you can set options(&#39;width&#39;) to a smaller value in this case.
+Overflow of elements Besides text overflow, figures may also exceed the margin of the shading.</description>
+    </item>
+    
+    <item>
+      <title>Eclipse</title>
+      <link>https://yihui.name/knitr/demo/eclipse/</link>
+      <pubDate>Mon, 27 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/eclipse/</guid>
+      <description>A tutorial on using knitr in Eclipse by courtesy of Jenny Hutchison is available for download. It is probably too long for an experienced Eclipse user, and as a person who does not use Eclipse, I believe one screenshot can explain the setup:
+You do not have to follow this. For example, you can run knit() first to get the tex document, and let Eclipse compile tex to PDF; in the above configuration, the two steps were combined into one knit2pdf().</description>
+    </item>
+    
+    <item>
+      <title>Sweave</title>
+      <link>https://yihui.name/knitr/demo/sweave/</link>
+      <pubDate>Fri, 24 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/sweave/</guid>
+      <description>Before knitr 1.0, it was compatible with Sweave for easier transition from Sweave to knitr, but the compatibility was dropped since v1.0 for (much) easier maintenance of this package. If you have an Rnw document written for Sweave, the first step you can do is to call Sweave2knitr() on it, and knitr will automatically correct the syntax (mainly chunk options, e.g. results=hide should be results=&#39;hide&#39;, and eval=true should be eval=TRUE, etc).</description>
+    </item>
+    
+    <item>
+      <title>Upload images</title>
+      <link>https://yihui.name/knitr/demo/upload/</link>
+      <pubDate>Sun, 12 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/upload/</guid>
+      <description>The function imgur_upload() in the knitr package enables one to upload images to the image host http://imgur.com in R using the RCurl package. If the package option upload.fun is a function (e.g. imgur_upload) that uploads files to a certain server/host, all plots generated in chunks will be uploaded automatically when the output format is HTML or Markdown.
+ A simple example  source: knitr-upload.Rmd output: knitr-upload.md  Two blog posts by Carl Boettiger on how to publish a post to Wordpress.</description>
+    </item>
+    
+    <item>
+      <title>Pretty printing</title>
+      <link>https://yihui.name/knitr/demo/pretty/</link>
+      <pubDate>Sat, 11 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/pretty/</guid>
+      <description>In the knitr mailing list there was a question on how to print the highlighted source code of functions.
+Of course it is fairly easy to print the source code of a function, as long as it is available to the user &amp;ndash; just write the name of the function, and R will print its source when this name is evaluated, but the problem is the printed result is treated as text output from a chunk, so it is put in the verbatim environment, and nothing is highlighted.</description>
+    </item>
+    
+    <item>
+      <title>RStudio</title>
+      <link>https://yihui.name/knitr/demo/rstudio/</link>
+      <pubDate>Thu, 02 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/rstudio/</guid>
+      <description>The knitr support in RStudio was added since 0.96. You can download the latest version and enjoy the one-click PDF compilation in RStudio through knitr.
+You are free to choose different engines to knit or weave the document, such as Sweave or knitr (please note the default is Sweave and you may want to change it to knitr), and you can also use different LaTeX backends such as pdflatex or xelatex.</description>
+    </item>
+    
+    <item>
+      <title>Org-mode</title>
+      <link>https://yihui.name/knitr/demo/org/</link>
+      <pubDate>Wed, 01 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/org/</guid>
+      <description>Update: ravel.org looks like a better solution for knitr in Org-mode. Thanks, Charles Berry.
+ The syntax of knitr/Sweave is not compatible with the Org-mode in Emacs. Ideally we should be able to write an R code chunk like this:
+#+begin_src R chunk options... x = rnorm(10) plot(x) #+end_src  If we want to use knitr in the Org-mode, we have to cheat a little bit by putting the R code chunks in #+begin_LATEX and #+end_LATEX, then convert the org document to tex, then rename to rnw, and finally process with knitr to get the real tex output.</description>
+    </item>
+    
+    <item>
+      <title>Quick reporting</title>
+      <link>https://yihui.name/knitr/demo/stitch/</link>
+      <pubDate>Thu, 26 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/stitch/</guid>
+      <description>Sometimes we just want to run the code in an R script to create a report. Indeed you can paste the code in an R console, and copy the results. This is often very messy (code mangled with results), and most importantly, you lose the graphics output.
+stitch(): feed a template with an R script Knitr introduced a function stitch() to conveniently insert an R script into a template to create a simple report, preserving everything in the R output (either text results or plots).</description>
+    </item>
+    
+    <item>
+      <title>Control output</title>
+      <link>https://yihui.name/knitr/demo/output/</link>
+      <pubDate>Wed, 25 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/output/</guid>
+      <description>As introduced in the main manual, knitr uses the evaluate package to evaluate R code chunks, and there are six types of output: source code, normal text output, messages, warnings, errors and plots. Below we give a summary on the fine control over them.
+ source code: use chunk option echo, e.g. echo=FALSE hides the R code normal text output: use option results (markup marks up the results; asis return texts as-is; hide hides the results) messages: option message (FALSE hides messages in the output) warnings: option warning (FALSE hides warnings in the output) errors: option error (FALSE will make R stop if an error occurs; TRUE will show the error messages in the output) plots: option fig.</description>
+    </item>
+    
+    <item>
+      <title>Package vignettes</title>
+      <link>https://yihui.name/knitr/demo/vignette/</link>
+      <pubDate>Sun, 22 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/vignette/</guid>
+      <description>Since R 3.0.0, non-Sweave vignettes are officially supported. Please see the section &amp;ldquo;Non-Sweave vignettes&amp;rdquo; in the manual &amp;ldquo;Writing R Extensions&amp;rdquo;. Basically what you need to do for Rnw vignettes are:
+ add %\VignetteEngine{knitr::knitr} to the Rnw source document (note you still need %\VignetteIndexEntry{} as before); specify VignetteBuilder: knitr in the package DESCRIPTION file; add Suggests: knitr in DESCRIPTION if knitr is needed only for vignettes;  Vignette engines Then all your Rnw vignettes will be compiled by knitr instead of the default engine Sweave.</description>
+    </item>
+    
+    <item>
+      <title>Child documents</title>
+      <link>https://yihui.name/knitr/demo/child/</link>
+      <pubDate>Wed, 18 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/child/</guid>
+      <description>It can sometimes be convenient to separate a large document in several smaller documents that are reunited as necessary at compilation time in a main document. Like the command \SweaveInput{} in Sweave, knitr also has the similar functionality, which enables us to insert child documents into a main document. The idea is like the command \input{} or \include{} in LaTeX to manage a large document in smaller parts. There are two approaches to input child documents in a main document.</description>
+    </item>
+    
+    <item>
+      <title>Chunk Reference/Macro</title>
+      <link>https://yihui.name/knitr/demo/reference/</link>
+      <pubDate>Sat, 14 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/reference/</guid>
+      <description>Sweave has the feature of chunk reference to reuse chunks with the syntax &amp;lt;&amp;lt;chunk-label&amp;gt;&amp;gt; (without = compared to &amp;lt;&amp;lt;&amp;gt;&amp;gt;=), e.g.
+&amp;lt;&amp;lt;chunk1&amp;gt;&amp;gt;= 1 + 1 @ &amp;lt;&amp;lt;chunk2&amp;gt;&amp;gt;= &amp;lt;&amp;lt;chunk1&amp;gt;&amp;gt; @  In chunk2, the code in chunk1 will be inserted. This feature is also available in knitr, but note knitr supports arbitrary (finite) levels of recursion in chunk references (Sweave only supports one level), i.e. one chunk can reference another chunk which references yet another chunk.</description>
+    </item>
+    
+    <item>
+      <title>Listings</title>
+      <link>https://yihui.name/knitr/demo/listings/</link>
+      <pubDate>Sat, 10 Dec 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/listings/</guid>
+      <description>It is easy to define your own output hooks in knitr to decorate your results with the LaTeX listings package. Here is a snippet that you may use:
+## a common hook for messages, warnings and errors hook_lst_bf = function(x, options) { paste(&amp;quot;\\begin{lstlisting}[basicstyle={\\bfseries}]\n&amp;quot;, x, &amp;quot;\\end{lstlisting}\n&amp;quot;, sep = &amp;quot;&amp;quot;) } knit_hooks$set(source = function(x, options) { paste(&amp;quot;\\begin{lstlisting}[language=R,numbers=left,stepnumber=2]\n&amp;quot;, x, &amp;quot;\\end{lstlisting}\n&amp;quot;, sep = &amp;quot;&amp;quot;) }, output = function(x, options) { paste(&amp;quot;\\begin{lstlisting}[basicstyle={\\ttfamily}]\n&amp;quot;, x, &amp;quot;\\end{lstlisting}\n&amp;quot;, sep = &amp;quot;&amp;quot;) }, warning = hook_lst_bf, message = hook_lst_bf, error = hook_lst_bf) ## empty highlight header since it is not useful any more set_header(highlight = &amp;quot;&amp;quot;)  As you can see, knitr exposes everything to the user.</description>
+    </item>
+    
+    <item>
+      <title>Graphics</title>
+      <link>https://yihui.name/knitr/demo/graphics/</link>
+      <pubDate>Fri, 09 Dec 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/graphics/</guid>
+      <description>The Graphics Manual The graphics manual shows all cool bells and whistles about graphics in knitr.
+ Source and output of the graphics manual  Rnw source: knitr-graphics.Rnw LyX source: knitr-graphics.lyx PDF output: knitr-graphics.pdf   You will probably realize how much room there is for improvement of R graphics in publications. Don&amp;rsquo;t accept whatever R gives you; it is time starting making your graphics beautiful and professional.
+A few screenshots from the manual:</description>
+    </item>
+    
+    <item>
+      <title>Beamer</title>
+      <link>https://yihui.name/knitr/demo/beamer/</link>
+      <pubDate>Thu, 08 Dec 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/beamer/</guid>
+      <description>It is straightforward to use Sweave or knitr with beamer; the only thing you need to be careful of is you have to add the fragile option to the frames that contain verbatim code. For LyX users, make sure you use the latest version of LyX (&amp;gt;= 2.1.2), and then you can use the FragileFrame environment instead of a standard Frame environment.
+ A minimal beamer example for knitr  Rnw source: knitr-beamer.</description>
+    </item>
+    
+    <item>
+      <title>Code Externalization</title>
+      <link>https://yihui.name/knitr/demo/externalization/</link>
+      <pubDate>Wed, 07 Dec 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/externalization/</guid>
+      <description>You do not have to put the R code in the input document; with knitr, you can separate your input document with the R script (think the reverse of Stangle).
+There are several advantages of separating the main document with the R script(s), e.g., R code can be reusable across several documents, and you can run the R code continuously in a separate file (if you embed the code in the document, you often have to jump through texts); this feature is especially useful for LyX users, and it saves a huge amount of time since you do not have to re-compile the whole document to see the results; instead, you can tune your R code freely in another R session.</description>
+    </item>
+    
+    <item>
+      <title>LyX</title>
+      <link>https://yihui.name/knitr/demo/lyx/</link>
+      <pubDate>Tue, 06 Dec 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/lyx/</guid>
+      <description>Since LyX 2.0.3, knitr can be used in LyX via a module named Rnw (knitr). See knitr.lyx for a simple example (pdf output). Just add the module to your document and install knitr in R; then you are done.
+An important note to all LyX users: a big trouble with LyX+Sweave is that we have got too many instructions in the past on how to configure LyX in order to work with Sweave.</description>
+    </item>
+    
+    <item>
+      <title>Manual</title>
+      <link>https://yihui.name/knitr/demo/manual/</link>
+      <pubDate>Mon, 05 Dec 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/manual/</guid>
+      <description>The package manual itself can be a good example demonstrating most of the features in knitr. It was actually written in LyX (knitr-manual.lyx), and you can use the exported Rnw source knitr-manual.Rnw to produce the PDF output knitr-manual.pdf.
+Three add-on packages are required to compile the manual: rgl, animation and tikzDevice.
+See the LyX page for instructions on how to use knitr with LyX.</description>
+    </item>
+    
+    <item>
+      <title>Cache</title>
+      <link>https://yihui.name/knitr/demo/cache/</link>
+      <pubDate>Sun, 04 Dec 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/cache/</guid>
+      <description>We can use the chunk option cache=TRUE to enable cache, and the option cache.path can be used to set the cache directory. See the options page.
+Cache examples The cache feature is used extensively in many of my documents, e.g. you can find it in the knitr main manual or its graphics manual. Here are a few more examples:
+ basic examples  cache large data: 056-huge-plot.Rmd (output) an example using the Rtex syntax: knitr-latex.</description>
+    </item>
+    
+    <item>
+      <title>Minimal examples</title>
+      <link>https://yihui.name/knitr/demo/minimal/</link>
+      <pubDate>Sat, 03 Dec 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/knitr/demo/minimal/</guid>
+      <description>For beginners, it is probably a good idea to start with some minimal examples; here I provide a few examples for Rnw, LaTeX, Markdown and HTML, respectively.
+How is a report generated from R code Regardless of which format you use, the basic idea is the same: knitr extracts R code in the input document, evaluates it and writes the results to the output document. There are two types of R code: chunks (code as separate paragraphs) and inline R code.</description>
+    </item>
+    
+  </channel>
+</rss>

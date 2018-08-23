@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Eclipse - Configure Eclipse to work with knitr  - Yihui Xie | 谢益辉</title>
+    <meta property="og:title" content="Eclipse - Yihui Xie | 谢益辉">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="A tutorial on using knitr in Eclipse by courtesy of Jenny Hutchison is available for download. It is probably too long for an experienced Eclipse user, and as a person who does not use Eclipse, I &amp;hellip;">
+      <meta property="og:description" content="A tutorial on using knitr in Eclipse by courtesy of Jenny Hutchison is available for download. It is probably too long for an experienced Eclipse user, and as a person who does not use Eclipse, I &amp;hellip;">
+      
+    
+
+    
+    
+    <meta name="twitter:image" content="https://db.yihui.name/imgur/00ub1.png">
+    
+    
+    
+    
+
+    
+
+    
+    
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="knitr">
+    <header class="masthead">
+      
+
+<h1><a href="/knitr/"><img src="/knitr/images/knit-logo.png" alt="knitr logo" /></a></h1>
+<p class="tagline">knitr: elegant, flexible, and fast dynamic report generation with R</p>
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/knitr/">Home</a></li>
+  
+  <li><a href="/knitr/options/">Options</a></li>
+  
+  <li><a href="/knitr/hooks/">Hooks</a></li>
+  
+  <li><a href="/knitr/demos/">Examples</a></li>
+  
+  <li><a href="/knitr/faq/">FAQ</a></li>
+  
+  <li><a href="https://github.com/yihui/knitr">Github repo</a></li>
+  
+  <li><a href="/">Yihui Xie</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rbind/yihui/edit/master/content/knitr%5cdemo%5c2012-02-27-eclipse.md" target="_blank">Edit this page</a></li>
+
+
+<li><a href="/knitr/index.xml" type="application/rss+xml" title="RSS feed">Subscribe</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">License</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Eclipse</h1>
+<h1><span class="subtitle">Configure Eclipse to work with knitr</span></h2>
+
+<h3>
+2012-02-27</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+<p>A tutorial on <a href="https://github.com/yihui/knitr/releases/download/doc/knitr-eclipse.pdf">using <strong>knitr</strong> in Eclipse</a> by courtesy of Jenny Hutchison is available for download. It is probably too long for an experienced Eclipse user, and as a person who does not use Eclipse, I believe one screenshot can explain the setup:</p>
+
+<p><img src="https://db.yihui.name/imgur/00ub1.png" alt="knitr tool chain in Eclipse" /></p>
+
+<p>You do not have to follow this. For example, you can run <code>knit()</code> first to get the tex document, and let Eclipse compile tex to PDF; in the above configuration, the two steps were combined into one <code>knit2pdf()</code>. See the post in the blog <a href="http://danganothererror.wordpress.com/2012/04/13/getting-knitr-to-work-with-statet/">Dang, another error</a> for the alternative way of configuration.</p>
+
+<p>Thanks, Jenny!</p>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/knitr/demo/sweave/">Sweave</a></span>
+  <span class="nav-next"><a href="/knitr/demo/framed/">Package framed</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/knitr\/demo\/sweave\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/knitr\/demo\/framed\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+<section class="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+    this.page.url = "http:\/\/yihui.name" + location.pathname;
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var disqus_js = '//yihui.disqus.com/embed.js';
+    var d = document, s = d.createElement('script');
+    s.src = disqus_js; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    var b = false, l = function() {
+      if (b) return;
+      (d.head || d.body).appendChild(s); b = true;
+    }
+    
+    if (location.hash.match(/^#comment/)) return(l());
+    var t = d.getElementById('disqus_thread');
+    var c = function() {
+      if (b) return;
+      var rect = t.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom >= 0) l();
+    };
+    window.addEventListener('load', c);
+    d.addEventListener('scroll', c);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+
+
+
+  
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="/">Yihui Xie</a> 2005 - 2018</div>
+  
+  </footer>
+  </article>
+  
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-1988641-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </body>
+</html>
+

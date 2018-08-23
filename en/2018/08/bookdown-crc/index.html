@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Write a Book with bookdown and Publish with Chapman &amp; Hall - Yihui Xie | 谢益辉</title>
+    <meta property="og:title" content="Write a Book with bookdown and Publish with Chapman &amp; Hall - Yihui Xie | 谢益辉">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="My editor John Kimmel told me that many authors showed interest in bookdown at JSM 2018 in Vancouver last week. I was very glad to know that. In this post, I want to briefly explain how to publish a &amp;hellip;">
+      <meta property="og:description" content="My editor John Kimmel told me that many authors showed interest in bookdown at JSM 2018 in Vancouver last week. I was very glad to know that. In this post, I want to briefly explain how to publish a &amp;hellip;">
+      
+    
+
+    
+    
+    <meta name="twitter:image" content="https://user-images.githubusercontent.com/163582/43736420-218f56ec-9983-11e8-8740-ec0a1fce660f.png#border">
+    
+    
+    
+    
+
+    
+
+    
+    
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="en">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.png" alt="Yihui Xie" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/">Home</a></li>
+  
+  <li><a href="/en/about/">About</a></li>
+  
+  <li><a href="/en/">Blog</a></li>
+  
+  <li><a href="/en/vitae/">Vitae</a></li>
+  
+  <li><a href="/cn/">中文</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rbind/yihui/edit/master/content/en%5c2018-08-06-bookdown-crc.md" target="_blank">Edit this page</a></li>
+
+
+<li><a href="/en/index.xml" type="application/rss+xml" title="RSS feed">Subscribe</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">License</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Write a Book with bookdown and Publish with Chapman &amp; Hall</h1>
+
+
+<h3>Yihui Xie / 
+2018-08-06</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+
+
+<p>My editor John Kimmel told me that many authors showed interest in <strong>bookdown</strong> at JSM 2018 in Vancouver last week. I was very glad to know that. In this post, I want to briefly explain how to publish a book with Chapman &amp; Hall/CRC. Actually I <a href="/en/2013/06/tips-for-writing-an-r-book/">blogged about it</a> five years ago after I published my first book, but at that time, I was still in the LaTeX (LyX) world, and this time I want to talk about R Markdown instead. I have also written about my experience with <a href="/en/2017/09/the-bookdown-book-in-retrospect/">the <strong>bookdown</strong> book</a> and <a href="/en/2017/12/blogdown-book/">the <strong>blogdown</strong> book</a> previously.</p>
+
+<h2 id="the-minimal-template-bookdown-crc">The minimal template <code>bookdown-crc</code></h2>
+
+<p>While I was working on <a href="https://bookdown.org/yihui/bookdown">the <strong>bookdown</strong> book</a> in 2016, I created a minimal book example on Github in the repository <a href="https://github.com/yihui/bookdown-crc">https://github.com/yihui/bookdown-crc</a>. This repository contains the LaTeX class file <code>krantz.cls</code> as well as many LaTeX tricks that I copied and pasted from Stack Overflow (e.g., how to print the page numbers in the correct format&mdash;you&rsquo;ll need <code>\frontmatter</code>, <code>\mainmatter</code>, and <code>\backmatter</code>). Hopefully they will save you a lot of time. Basically you can just start writing the content of your book after you clone or download this repository.</p>
+
+<p><img src="https://user-images.githubusercontent.com/163582/43736420-218f56ec-9983-11e8-8740-ec0a1fce660f.png#border" alt="The front page of the bookdown-crc example" /></p>
+
+<h2 id="get-started">Get started</h2>
+
+<p>The first file you may edit is <code>index.Rmd</code>, in which you should change at least the title and author in the YAML metadata. You should update the <code>github-repo</code> field if your book source is available on Github, otherwise just delete this field.</p>
+
+<p>The <code>index.Rmd</code> is the preface of your book. It usually contains unnumbered sections (the syntax is <code>{-}</code> after a section header), such as &ldquo;Why read this book&rdquo; and &ldquo;Acknowledgements&rdquo;.</p>
+
+<p>You can edit/rename existing chapters (e.g., <code>01-introduction.Rmd</code>), or add new chapters. When you need an appendix, you need a special header <code># (APPENDIX) Appendix {-}</code>, which you can find in <code>90-more.Rmd</code> in the example. Any chapters after this chapter will be in the appendix.</p>
+
+<p>If you need an index at the end of your book, currently you have to use the raw LaTeX command <code>\index{}</code> in Markdown. When building your book to PDF, an index page will be generated automatically. Please note that you have to escape special LaTeX characters in <code>\index{}</code>, e.g., <code>\index{bookdown::pdf\_book}</code> (the underscore should be escaped).</p>
+
+<h2 id="customization">Customization</h2>
+
+<p>I have talked about the possible options to customize the PDF in <a href="https://bookdown.org/yihui/bookdown/publishers.html">Section 6.3</a> of the <strong>bookdown</strong> book. You are free to use any typeface you like. I have used Alegreya, Palatino, and Source Code Pro myself. When choosing fonts for your code blocks, I suggest you use either a relatively narrow font or reduce the font size (e.g., I use 70%), because your code can easily exceed the page margin when printed on a book (the paper size is roughly B5, which can hold about 55 characters on a line of code).</p>
+
+<p>I think the typeface should be the only thing you may want to customize. Other things are trivialities and not worth too much time. Don&rsquo;t be preoccupied with customizing the appearance of your PDF (at least don&rsquo;t do this too early). I guess the No.1 reason that authors fail to publish their books is not because the PDF does not look good, but they just cannot get the book done. Think about what is essential, and what are cosmetic issues.</p>
+
+<h2 id="need-more-examples">Need more examples?</h2>
+
+<p>The above example is a minimal one. If you want full examples, you can find a few more from <a href="https://bookdown.org">https://bookdown.org</a> (e.g., the three of my books, and Hadley&rsquo;s &ldquo;Advanced R&rdquo;). They will be more complicated, but may be useful if you want to learn a particular trick, such as how to place two figures side by side.</p>
+
+<h2 id="open-source-and-public-access-are-totally-possible">Open source and public access are totally possible</h2>
+
+<p>To me, the most exciting change brought by <strong>bookdown</strong> regarding publishing books with Chapman &amp; Hall is that there has been a trend for authors to make the source of books and the web versions of the full books freely available online. Now Chapman &amp; Hall only asks for the right for printing and selling the books. Authors can keep the free online versions. I consider one of my life dreams fulfilled.</p>
+
+<p>I have believed there are multiple ways of tearing down the paywall. Personally I want to choose a way that does not really hurt the publishers but benefits the readers nonetheless. I feel it is really unfortunate that some people think authors/readers and publishers must be enemies of each other, and we should either kill the publishers (by pirating) or (literally) kill ourselves. Sometimes we really need a little more patience and understanding.</p>
+
+<p>Anyway, I&rsquo;m looking forward to more exciting books! You don&rsquo;t have to publish with Chapman &amp; Hall. I just happened to choose them after hearing good words about John Kimmel from a random friend. You can certainly use <strong>bookdown</strong> to write books with Springer or O&rsquo;Reilly (there are examples on bookdown.org).</p>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/en/2018/07/lazy-evaluation/">Two of My Use Cases of Lazy Evaluation</a></span>
+  <span class="nav-next"><a href="/en/2018/08/25-years-of-data-science/">Reflections on 25&#43; Years of &#34;50 Years of Data Science&#34;</a> &rarr;</span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/en\/2018\/07\/lazy-evaluation\/';
+    
+  } else if (e.which == 39) {  
+    
+    url = '\/en\/2018\/08\/25-years-of-data-science\/';
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+<section class="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+    this.page.url = "http:\/\/yihui.name" + location.pathname;
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var disqus_js = '//yihui.disqus.com/embed.js';
+    var d = document, s = d.createElement('script');
+    s.src = disqus_js; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    var b = false, l = function() {
+      if (b) return;
+      (d.head || d.body).appendChild(s); b = true;
+    }
+    
+    if (location.hash.match(/^#comment/)) return(l());
+    var t = d.getElementById('disqus_thread');
+    var c = function() {
+      if (b) return;
+      var rect = t.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom >= 0) l();
+    };
+    window.addEventListener('load', c);
+    d.addEventListener('scroll', c);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="/">Yihui Xie</a> 2005 - 2018</div>
+  
+  </footer>
+  </article>
+  
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-1988641-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </body>
+</html>
+

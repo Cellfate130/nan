@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Why TinyTeX? - What is the pain with other LaTeX distributions?  - Yihui Xie | 谢益辉</title>
+    <meta property="og:title" content="Why TinyTeX? - Yihui Xie | 谢益辉">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="Some developers may doubt if I&amp;rsquo;m just reinventing wheels. I certainly don&amp;rsquo;t want to reinvent wheels for no reason. As I said on the homepage, my own pain with existing LaTeX distributions &amp;hellip;">
+      <meta property="og:description" content="Some developers may doubt if I&amp;rsquo;m just reinventing wheels. I certainly don&amp;rsquo;t want to reinvent wheels for no reason. As I said on the homepage, my own pain with existing LaTeX distributions &amp;hellip;">
+      
+    
+
+    
+    
+    
+    <meta name="twitter:image" content="https://yihui.name/images/logo.png">
+    
+    
+
+    
+
+    
+    
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="tinytex">
+    <header class="masthead">
+      
+
+<h1><a href="/tinytex/"><img src="/images/logo-tinytex.png" alt="tinytex logo" /></a></h1>
+<p class="tagline">TinyTeX: A lightweight and easy-to-maintain LaTeX distribution</p>
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/tinytex/">Home</a></li>
+  
+  <li><a href="/tinytex/faq/">FAQs</a></li>
+  
+  <li><a href="/tinytex/r/">R package</a></li>
+  
+  <li class="active"><a href="/tinytex/pain/">Hall of Pain</a></li>
+  
+  <li><a href="/tinytex/cn/">中文文档</a></li>
+  
+  <li><a href="https://github.com/yihui/tinytex">Github repo</a></li>
+  
+  <li><a href="/">Yihui Xie</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/rbind/yihui/edit/master/content/tinytex%5cpain.md" target="_blank">Edit this page</a></li>
+
+
+<li><a href="/tinytex/index.xml" type="application/rss+xml" title="RSS feed">Subscribe</a></li>
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">License</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Why TinyTeX?</h1>
+<h1><span class="subtitle">What is the pain with other LaTeX distributions?</span></h2>
+
+<h3>
+2017-12-15</h3>
+
+<hr>
+
+
+      </header>
+
+
+
+<p>Some developers may doubt if I&rsquo;m just reinventing wheels. I certainly don&rsquo;t want to reinvent wheels for no reason. As I said on the homepage, my own pain with existing LaTeX distributions is that they are often too big, and the documentation, while being comprehensive and useful, usually does not highlight the most useful part to me (how to find and install a missing package).</p>
+
+<p>I also dislike the fact that it often requires <code>sudo</code> (on *nix) to manage LaTeX packages. For personal computers, I don&rsquo;t see any point of requiring <code>sudo</code>, considering the fact that TeX Live can be a self-contained folder that can be placed anywhere on your computer. I waited for a couple of years before <code>tlmgr</code> was finally available on Debian/Ubuntu, and I was <a href="https://twitter.com/xieyihui/status/397238590523973632">extremely excited</a> about it, but soon disappointed, because it seemed to be broken and not usable at all (couldn&rsquo;t do anything with it). I checked it again this year, and it still seems to be broken. Perhaps I didn&rsquo;t use it correctly (anything I try will lead to errors), but you are only allowed to use the user mode of <code>tlmgr</code>, which is very restrictive to me.</p>
+
+<p>My daily OS is macOS, and the officially recommended TeX Live distribution is MacTeX, which contains several additional packages that I don&rsquo;t need, such as the TeX Live Utility (I know how to use the <code>tlmgr</code> command), TeXShop (I use R Markdown primarily and hope not to edit or even read raw LaTeX if possible), LaTeXiT, and so on.</p>
+
+<p>In fact, I appreciate one nice feature of MiKTeX on Windows (which seems to be cross-platform now): automatically installing missing LaTeX packages. I think this is very helpful, so I borrowed this feature to the R package <strong>tinytex</strong>, and R users can enjoy the same feature when using TeX Live or TinyTeX. That said, even the basic MiKTeX is still too big, and one issue that drives me crazy is <code>bibtex.exe</code> in MiKTeX: it always adds the <code>.bib</code> extension to the bibliography database file in the <code>.aux</code> file, e.g., when we have <code>\bibliography{foo.bib}</code> in <code>bar.tex</code>, <code>bibtex.exe</code> generates <code>\bibdata{foo.bib.bib}</code> in <code>bar.aux</code>. Anyway, I have <a href="https://github.com/yihui/tinytex/blob/4275a375c6/R/latex.R#L189-L196">patched this issue</a> in the R package <strong>tinytex</strong> for Windows users who use MiKTeX. TeX Live users don&rsquo;t suffer from this issue.</p>
+
+<p>On this page, I&rsquo;ll let other users share their stories of installing and managing LaTeX. First I want to show a list of painful cases that I was aware of:</p>
+
+<ul>
+<li><p><a href="https://ubuntuforums.org/showthread.php?t=395863">Why LaTeX is such a bloated system?</a></p></li>
+
+<li><p><a href="https://tex.stackexchange.com/q/43862/9128">Is there a lightweight implementation/distribution of TeX for Mac OSX?</a></p></li>
+
+<li><p><a href="https://tex.stackexchange.com/q/81802/9128">Installing (a lightweight version of) latex on an external hard drive</a></p></li>
+
+<li><p>texlive-full is <a href="https://github.com/rstudio/rticles/pull/130#issuecomment-313732003">too big</a>, <a href="https://github.com/rocker-org/rocker/issues/266">too big</a>, and <a href="https://github.com/road2stat/liftr/issues/25">just too big</a> for Docker images</p></li>
+
+<li><p><a href="https://tex.stackexchange.com/q/18939/9128">Which LaTeX to install on Linux?</a></p></li>
+
+<li><p>Missing LaTeX packages confuse users <a href="https://github.com/rstudio/rmarkdown/issues/359">forever</a>, <a href="https://github.com/rstudio/rmarkdown/issues/1076">forever</a>, <a href="https://github.com/rstudio/rmarkdown/issues/1393">forever</a>, and it takes <a href="https://twitter.com/xieyihui/status/763805846807547904">forever</a> to figure them out and install. <a href="https://stackoverflow.com/q/47400936/559676">Error messages</a> can also be confusing. Sometimes we just <a href="https://github.com/rstudio/bookdown/issues/507">don&rsquo;t have a clue</a>.</p></li>
+
+<li><p>MiKTeX <a href="https://github.com/rstudio/bookdown/issues/531">might fail</a> and we don&rsquo;t know what the error message &ldquo;GUI framework cannot be initialized&rdquo; means. Sometimes we have <a href="https://stackoverflow.com/questions/48892499/compile-rmarkdown-document-with-render#comment84801684_48892499">no clue</a> why it doesn&rsquo;t work.</p></li>
+</ul>
+
+<p>Below are stories and experiences contributed by other users:</p>
+
+<blockquote>
+<p>Removed TeX Live from my system (openSUSE): 1.5gb. Installed TinyTeX + the dependencies to compile my thesis: 150mb!!!! This is great!</p>
+
+<p>&mdash; <a href="https://twitter.com/brodriguesco/status/942162790587957248">Bruno Rodrigues</a></p>
+</blockquote>
+
+<!-- -->
+
+<blockquote>
+<p>Really liking the simplicity of tinytex package. Easy to get up and running to knit PDFs. No need for slow LaTeX install.</p>
+
+<p>&mdash; <a href="https://twitter.com/lingwhatics/status/941766989424537602">Daley Mikalson</a></p>
+</blockquote>
+
+<!-- -->
+
+<blockquote>
+<p>A tiny LaTeX distribution easy to install from RStudio or on Travis CI is just what we needed!</p>
+
+<p>&mdash; <a href="https://twitter.com/PhilGrosjean/status/941241878309232640">Philippe Grosjean</a></p>
+</blockquote>
+
+<!-- -->
+
+<blockquote>
+<p>Seriously one of my only holdups teaching LaTeX in Rmarkdown (still taught it anyway) is now solved.</p>
+
+<p>&mdash; <a href="https://twitter.com/healthandstats/status/941169151749406720"> Tyson Barrett</a></p>
+</blockquote>
+
+<!-- -->
+
+<blockquote>
+<p>Tried TinyTeX with rmarkdown and both English and Chinese rendering. The most smooth experience ever using LaTeX!</p>
+
+<p>&mdash; <a href="https://twitter.com/renkun_ken/status/941352666730455041">Kun Ren</a></p>
+</blockquote>
+
+<!-- -->
+
+<blockquote>
+<p>TinyTeX is awesome, if it had existed before I would have saved hours of my life spent dealing with LaTeX packages and failed R Markdown knits&hellip;</p>
+
+<p>&mdash; <a href="https://github.com/rstudio/bookdown/issues/292#issuecomment-356480809">Antonio Vazquez Brust</a></p>
+</blockquote>
+
+<!-- -->
+
+<blockquote>
+<p>Many people don&rsquo;t realize that Texlive on some Linux systems (say you need a rstudio server) doesn&rsquo;t come with the TeX package manager. If the package you need is not in their system, you are basically screwed as you can&rsquo;t even install it. TinyTeX solves this problem and makes everything sweet and easy. Also, after using it for more than a month, I found the  messages of tinytex are very helpful, comparing with basically NULL in texlive.</p>
+
+<p>&mdash; <a href="https://community.rstudio.com/t/texlive-distribution-on-centos-for-rstudio-server-and-connect/2916">Hao Zhu</a></p>
+</blockquote>
+
+<!-- -->
+
+<blockquote>
+<p>I&rsquo;m a novice with R and I found the entire process of installing rmarkdown, knitr, MiKTeX, and pandoc and then reconciling all their directories very difficult. [&hellip;] The 3-4 hour detour into MiKTeX etc and how to produce PDFs was a frustration experience to say the least. (Up and running with TinyTeX five minutes later&hellip;)</p>
+
+<p>&mdash; Justin Shapiro</p>
+</blockquote>
+
+<!-- -->
+
+<blockquote>
+<p>If you work in a locked down windows corporate enviroment and spent countless hours with MiKTeX or portable MiKTeX, you&rsquo;ll want to buy @xieyihui lunch.</p>
+
+<p>&mdash; <a href="https://twitter.com/ThomasSpeidel/status/957856056108920835">Thomas Speidel</a></p>
+</blockquote>
+
+<!-- -->
+
+<blockquote>
+<p>Too bad, this computer had a good month of TeX-free.</p>
+
+<p>&mdash; <a href="https://twitter.com/romain_francois/status/979022989634174976">Romain François</a></p>
+</blockquote>
+
+<!-- -->
+
+<blockquote>
+<p>I&rsquo;d been avoiding installing LaTeX on my macOS and Windows machines b/c it&rsquo;s always such a hassle. Just learned about about TinyTeX today and easily got setup on both machines.</p>
+
+<p>&mdash; <a href="https://twitter.com/jdblischak/status/974066342780461056">John Blischak</a></p>
+</blockquote>
+
+<!-- -->
+
+<blockquote>
+<p>Like 2 hours later, I&rsquo;m not sure I want to know, but there <em>must</em> be a faster way of updating all my TeX packages than the ftp in TeX Live Utility&hellip;</p>
+
+<p>&mdash; <a href="https://twitter.com/dataandme/status/994531189217259521">Mara Averick</a></p>
+</blockquote>
+
+<!-- -->
+
+<blockquote>
+<p>Installing a complete version of MiKTeX is a freaking nightmare though. Don&rsquo;t know if it&rsquo;s my internet connection or what but I just can&rsquo;t get it all installed in one go. I finally just did the basic install and am selecting batches of pkgs at a time to add.</p>
+
+<p>[&hellip;] I just installed this (TinyTeX) and it was SO EASY and I&rsquo;m kind of upset that I didn&rsquo;t know about it before. Gonna be shouting this one <a href="https://twitter.com/swmpkim/status/1014546819085369344">from the rooftops</a>.</p>
+
+<p>&mdash; <a href="https://twitter.com/swmpkim/status/1014514680088399874">Kim Cressman</a></p>
+</blockquote>
+
+
+  <footer>
+  
+<nav class="post-nav">
+  <span class="nav-prev">&larr; <a href="/tinytex/r/">The R package tinytex</a></span>
+  <span class="nav-next"></span>
+</nav>
+<script type="text/javascript">
+document.addEventListener('keyup', function(e) {
+  if (e.target.nodeName.toUpperCase() != 'BODY') return;
+  var url = false;
+  if (e.which == 37) {  
+    
+    url = '\/tinytex\/r\/';
+    
+  } else if (e.which == 39) {  
+    
+  }
+  if (url) window.location = url;
+});
+</script>
+
+
+
+<section class="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+    this.page.url = "http:\/\/yihui.name" + location.pathname;
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var disqus_js = '//yihui.disqus.com/embed.js';
+    var d = document, s = d.createElement('script');
+    s.src = disqus_js; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    var b = false, l = function() {
+      if (b) return;
+      (d.head || d.body).appendChild(s); b = true;
+    }
+    
+    if (location.hash.match(/^#comment/)) return(l());
+    var t = d.getElementById('disqus_thread');
+    var c = function() {
+      if (b) return;
+      var rect = t.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom >= 0) l();
+    };
+    window.addEventListener('load', c);
+    d.addEventListener('scroll', c);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="/">Yihui Xie</a> 2005 - 2018</div>
+  
+  </footer>
+  </article>
+  
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-1988641-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </body>
+</html>
+

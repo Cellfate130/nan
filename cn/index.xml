@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>中文博客 on Yihui Xie | 谢益辉</title>
+    <link>https://yihui.name/cn/</link>
+    <description>Recent content in 中文博客 on Yihui Xie | 谢益辉</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 31 Jan 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://yihui.name/cn/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>陈芸</title>
+      <link>https://yihui.name/cn/2018/08/chen-yun/</link>
+      <pubDate>Sat, 18 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/cn/2018/08/chen-yun/</guid>
+      <description>书接前文。我看了《浮生六记》上管贻葄的题诗之后，觉得有些空泛，不甚合我意，于是不才如我，斗胆抄起键盘也来凑几首致敬芸娘： 琵琶识文一女流，斋戒</description>
+    </item>
+    
+    <item>
+      <title>为何阅读</title>
+      <link>https://yihui.name/cn/2018/08/reading/</link>
+      <pubDate>Fri, 17 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/cn/2018/08/reading/</guid>
+      <description>看了一篇文章讲沉浸式阅读对大脑的作用。文章略长，生词也多，看得我昏昏欲睡，但主旨很简单，可以以一词概括，就是共情（empathy）。 阅读让我</description>
+    </item>
+    
+    <item>
+      <title>不解之针法谜</title>
+      <link>https://yihui.name/cn/2018/08/knitting-method/</link>
+      <pubDate>Tue, 14 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/cn/2018/08/knitting-method/</guid>
+      <description>几年前我就发现大米袋子的封口针法有神奇之处。如果解开封口线的第一步得当，那么接下来一扯就可以把整条线（确切地说是两条线）轻松扯下来。如果第一</description>
+    </item>
+    
+    <item>
+      <title>甜与辣</title>
+      <link>https://yihui.name/cn/2018/08/sweet-spicy/</link>
+      <pubDate>Tue, 14 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/cn/2018/08/sweet-spicy/</guid>
+      <description>早年间做菜最让我惊奇的调味组合是糖醋。因为我吃菜通常不喜甜（仅限于菜），所以我也不太研究放糖的菜。直到一日看见一个偷懒版本的糖醋排骨，试了一</description>
+    </item>
+    
+  </channel>
+</rss>

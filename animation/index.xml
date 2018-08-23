@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>animation on Yihui Xie | 谢益辉</title>
+    <link>https://yihui.name/animation/</link>
+    <description>Recent content in animation on Yihui Xie | 谢益辉</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 04 Feb 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://yihui.name/animation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>BM.circle()</title>
+      <link>https://yihui.name/animation/example/bm-circle/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/bm-circle/</guid>
+      <description>Several points moving randomly in a circle.
+This is a solution to the question raised in R-help: https://stat.ethz.ch/pipermail/r-help/2008-December/183018.html.
+library(animation) ani.options(interval = 0.1, nmax = 100) par(mar = rep(0.5, 4)) BM.circle(cex = 2, pch = 19)  plot of chunk demo-a
+ </description>
+    </item>
+    
+    <item>
+      <title>MC.hitormiss()</title>
+      <link>https://yihui.name/animation/example/mc-hitormiss/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/mc-hitormiss/</guid>
+      <description>Integrate a function using the Hit-or-Miss Monte Carlo algorithm.
+We compute the proportion of points hitting the area under the curve, and the integral can be estimated by the proportion multiplied by the total area of the rectangle (from xmin to xmax, ymin to ymax).
+library(animation) ani.options(interval = 0.2, nmax = 100) ## should be close to 1/6 MC.hitormiss()$est  plot of chunk demo-a
+ ## [1] 0.1725  ## should be close to 1/12 MC.</description>
+    </item>
+    
+    <item>
+      <title>MC.samplemean()</title>
+      <link>https://yihui.name/animation/example/mc-samplemean/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/mc-samplemean/</guid>
+      <description>Integrate a function from 0 to 1 using the Sample Mean Monte Carlo algorithm
+Sample Mean Monte Carlo integration can compute
+\(I=\int_0^1 f(x) dx\)
+by drawing random numbers \(x_i\) from Uniform(0, 1) distribution and average the values of \(f(x_i)\). As \(n\) goes to infinity, the sample mean will approach to the expectation of \(f(X)\) by Law of Large Numbers.
+The height of the \(i\)-th rectangle in the animation is \(f(x_i)\) and the width is \(1/n\), so the total area of all the rectangles is \(\sum_{i=1}^{n}\frac{1}{n}f(x_i)\), which is just the sample mean.</description>
+    </item>
+    
+    <item>
+      <title>Rosling.bubbles()</title>
+      <link>https://yihui.name/animation/example/rosling-bubbles/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/rosling-bubbles/</guid>
+      <description>In Hans Rosling&amp;rsquo;s attractive talk Debunking third-world myths with the best stats you&#39;ve ever seen, he used a lot of bubble plots to illustrate trends behind the data over time. This function gives an imitation of those moving bubbles, besides, as this function is based on symbols, we can also make use of other symbols such as squares, rectangles, thermometers, etc.
+Suppose we have observations of \(n\) individuals over ani.options(&#39;nmax&#39;) years.</description>
+    </item>
+    
+    <item>
+      <title>ani.options()</title>
+      <link>https://yihui.name/animation/example/ani-options/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/ani-options/</guid>
+      <description>There are various parameters that control the behaviour of the animation, such as time interval, maximum number of animation frames, height and width, etc.
+library(animation) ## see the first example in help(animation) on how to set and ## restore animation options ## use the PDF device: remember to set &#39;ani.type&#39; accordingly ani.options(ani.dev = &amp;quot;pdf&amp;quot;, ani.type = &amp;quot;pdf&amp;quot;, ani.height = 5, ani.width = 7) ## use the Cairo PDF device if (require(&#39;Cairo&#39;)) { ## ani.</description>
+    </item>
+    
+    <item>
+      <title>ani.record()</title>
+      <link>https://yihui.name/animation/example/ani-record/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/ani-record/</guid>
+      <description>These two functions use recordPlot and replayPlot to record image frames and replay the animation respectively.
+One difficulty in capturing images in R (base graphics) is that the off-screen graphics devices cannot capture low-level plotting commands as new image files &amp;ndash; only high-level plotting commands can produce new image files; ani.record uses recordPlot to record the plots when any changes are made on the current plot. For a graphical device to be recordable, you have to call dev.</description>
+    </item>
+    
+    <item>
+      <title>animation-package()</title>
+      <link>https://yihui.name/animation/example/animation-package/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/animation-package/</guid>
+      <description>This package contains a variety functions for animations in statistics which could probably aid in teaching statistics and data analysis; it also has several utilities to export R animations to other formats.
+This package mainly makes use of HTML &amp;amp; JavaScript and R windows graphics devices (such as x11) to demonstrate animations in statistics; other kinds of output such as Flash (SWF) or GIF animations or PDF animations are also available if required software packages have been installed.</description>
+    </item>
+    
+    <item>
+      <title>bisection.method()</title>
+      <link>https://yihui.name/animation/example/bisection-method/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/bisection-method/</guid>
+      <description>This is a visual demonstration of finding the root of an equation \(f(x) = 0\) on an interval using the Bisection Method.
+Suppose we want to solve the equation \(f(x) = 0\). Given two points a and b such that \(f(a)\) and \(f(b)\) have opposite signs, we know by the intermediate value theorem that \(f\) must have at least one root in the interval \([a, b]\) as long as \(f\) is continuous on this interval.</description>
+    </item>
+    
+    <item>
+      <title>boot.iid()</title>
+      <link>https://yihui.name/animation/example/boot-iid/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/boot-iid/</guid>
+      <description>Use a sunflower scatter plot to illustrate the results of resampling, and a histogram to show the distribution of the statistic of interest.
+This is actually a very naive version of bootstrapping but may be useful for novices. By default, the circles denote the original dataset, while the red sunflowers (probably) with leaves denote the points being resampled; the number of leaves just means how many times these points are resampled, as bootstrap samples with replacement.</description>
+    </item>
+    
+    <item>
+      <title>boot.lowess()</title>
+      <link>https://yihui.name/animation/example/boot-lowess/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/boot-lowess/</guid>
+      <description>Sample the original data with replacement and fit LOWESS curves accordingly.
+We keep on resampling the data and finally we will see several bootstrapped LOWESS curves, which may give us a rough idea about a confidence interval of the LOWESS fit.
+library(animation) ani.options(nmax = 100, interval = 0.02) boot.lowess(cars, pch = 20, xlab = &amp;quot;speed&amp;quot;, ylab = &amp;quot;dist&amp;quot;)  plot of chunk demo-a
+ boot.lowess(cars, f = 1/3, pch = 20)  plot of chunk demo-b</description>
+    </item>
+    
+    <item>
+      <title>brownian.motion()</title>
+      <link>https://yihui.name/animation/example/brownian-motion/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/brownian-motion/</guid>
+      <description>Brownian motion, or random walk, can be regarded as the trace of some cumulative normal random numbers.
+The location of the next step is current location + random Gaussian numbers, i.e.,
+$$x_{k+1} = x_{k} + rnorm(1)$$
+$$y_{k + 1} = y_{k} + rnorm(1)$$
+where \((x, y)\) stands for the location of a point.
+library(animation) ani.options(interval = 0.05, nmax = 150) brownian.motion(pch = 21, cex = 5, col = &amp;quot;red&amp;quot;, bg = &amp;quot;yellow&amp;quot;, main = &amp;quot;Demonstration of Brownian Motion&amp;quot;)  plot of chunk demo-a</description>
+    </item>
+    
+    <item>
+      <title>buffon.needle()</title>
+      <link>https://yihui.name/animation/example/buffon-needle/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/buffon-needle/</guid>
+      <description>This function provides a simulation for the problem of Buffon&amp;rsquo;s Needle, which is one of the oldest problems in the field of geometrical probability.
+This is quite an old problem in probability. For mathematical background, please refer to  or http://www.mste.uiuc.edu/reese/buffon/buffon.html.
+&amp;lsquo;Needles&amp;rsquo; are denoted by segments on the 2D plane, and dropped randomly to check whether they cross the parallel lines. Through many times of &amp;lsquo;dropping&amp;rsquo; needles, the approximate value of \(\pi\) can be calculated out.</description>
+    </item>
+    
+    <item>
+      <title>clt.ani()</title>
+      <link>https://yihui.name/animation/example/clt-ani/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/clt-ani/</guid>
+      <description>First of all, a number of obs observations are generated from a certain distribution for each variable \(X_j\), \(j = 1, 2, \cdots, n\), and \(n = 1, 2, \cdots, nmax\), then the sample means are computed, and at last the density of these sample means is plotted as the sample size \(n\) increases (the theoretical limiting distribution is denoted by the dashed line), besides, the P-values from the normality test shapiro.</description>
+    </item>
+    
+    <item>
+      <title>conf.int()</title>
+      <link>https://yihui.name/animation/example/conf-int/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/conf-int/</guid>
+      <description>This function gives a demonstration of the concept of confidence intervals in mathematical statistics.
+Keep on drawing samples from the Normal distribution N(0, 1), computing the intervals based on a given confidence level and plotting them as segments in a graph. In the end, we may check the coverage rate against the given confidence level.
+Intervals that cover the true parameter are denoted in color cl[2], otherwise in color cl[1]. Each time we draw a sample, we can compute the corresponding confidence interval.</description>
+    </item>
+    
+    <item>
+      <title>cv.ani()</title>
+      <link>https://yihui.name/animation/example/cv-ani/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/cv-ani/</guid>
+      <description>This function uses rectangles to illustrate the \(k\) folds and mark the test set and the training set with different colors.
+Briefly speaking, the process of cross-validation is just to split the whole data set into several parts and select one part as the test set and the rest parts as the training set.
+The computation of sample sizes is base on kfcv.
+This is a naive demonstration for the k-fold cross validation.</description>
+    </item>
+    
+    <item>
+      <title>cv.nfeaturesLDA()</title>
+      <link>https://yihui.name/animation/example/cv-nfeatureslda/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/cv-nfeatureslda/</guid>
+      <description>This function provids an illustration of the process of finding out the optimum number of variables using k-fold cross-validation in a linear discriminant analysis (LDA).
+For a classification problem, usually we wish to use as less variables as possible because of difficulties brought by the high dimension.
+The selection procedure is like this:
+ Split the whole data randomly into \(k\) folds: For the number of features \(g = 1, 2, \cdots, g_{max}\), choose \(g\) features that have the largest discriminatory power (measured by the F-statistic in ANOVA): For the fold \(i\) ( \(i = 1, 2, \cdots, k\) ): Train a LDA model without the \(i\)-th fold data, and predict with the \(i\)-th fold for a proportion of correct predictions \(p_{gi}\); Average the \(k\) proportions to get the correct rate \(p_g\); Determine the optimum number of features with the largest \(p\).</description>
+    </item>
+    
+    <item>
+      <title>flip.coin()</title>
+      <link>https://yihui.name/animation/example/flip-coin/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/flip-coin/</guid>
+      <description>This function provides a simulation to the process of flipping coins and computes the frequencies for heads and tails.
+If faces is a single integer, say 2, a sequence of integers from 1 to faces will be used to denote the faces of a coin; otherwise this character vector just gives the names of each face.
+When the \(i\)-th face shows up, a colored thin rectangle will be added to the corresponding place (the \(i\)-th bar), and there will be corresponding annotations for the number of tosses and frequencies.</description>
+    </item>
+    
+    <item>
+      <title>grad.desc()</title>
+      <link>https://yihui.name/animation/example/grad-desc/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/grad-desc/</guid>
+      <description>This function provids a visual illustration for the process of minimizing a real-valued function through Gradient Descent Algorithm.
+Gradient descent is an optimization algorithm. To find a local minimum of a function using gradient descent, one takes steps proportional to the negative of the gradient (or the approximate gradient) of the function at the current point. If instead one takes steps proportional to the gradient, one approaches a local maximum of that function; the procedure is then known as gradient ascent.</description>
+    </item>
+    
+    <item>
+      <title>im.convert()</title>
+      <link>https://yihui.name/animation/example/im-convert/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/im-convert/</guid>
+      <description>The main purpose of these two functions is to create GIF animations.
+The function im.convert simply wraps the arguments of the convert utility of ImageMagick to make it easier to call ImageMagick in R.
+library(animation) ## generate some images owd = setwd(tempdir()) ani.options(interval = 0.05, nmax = 20) png(&amp;quot;bm%03d.png&amp;quot;) brownian.motion(pch = 21, cex = 5, col = &amp;quot;red&amp;quot;, bg = &amp;quot;yellow&amp;quot;, main = &amp;quot;Demonstration of Brownian Motion&amp;quot;) dev.off() ## filenames with a wildcard * im.</description>
+    </item>
+    
+    <item>
+      <title>kmeans.ani()</title>
+      <link>https://yihui.name/animation/example/kmeans-ani/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/kmeans-ani/</guid>
+      <description>This function provides a demo of the k-Means cluster algorithm for data containing only two variables (columns).
+The k-Means cluster algorithm may be regarded as a series of iterations of: finding cluster centers, computing distances between sample points, and redefining cluster membership.
+The data given by x is clustered by the \(k\)-means method, which aims to partition the points into \(k\) groups such that the sum of squares from points to the assigned cluster centers is minimized.</description>
+    </item>
+    
+    <item>
+      <title>knn.ani()</title>
+      <link>https://yihui.name/animation/example/knn-ani/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/knn-ani/</guid>
+      <description>Demonstrate the process of k-Nearest Neighbour classification on the 2D plane.
+For each row of the test set, the \(k\) nearest (in Euclidean distance) training set vectors are found, and the classification is decided by majority vote, with ties broken at random. For a single test sample point, the basic steps are:
+ locate the test point compute the distances between the test point and all points in the training set find \(k\) shortest distances and the corresponding training set points</description>
+    </item>
+    
+    <item>
+      <title>least.squares()</title>
+      <link>https://yihui.name/animation/example/least-squares/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/least-squares/</guid>
+      <description>This is a simple demonstration of the meaning of least squares in univariate linear regression.
+With either the intercept or the slope changing, the lines will be moving in the graph and corresponding residuals will be plotted. We can finally see the best estimate of the intercept and the slope from the residual plot.
+library(animation) par(mar = c(5, 4, 0.5, 0.1)) ani.options(interval = 0.3, nmax = 50) ## default animation: with slope changing least.</description>
+    </item>
+    
+    <item>
+      <title>lln.ani()</title>
+      <link>https://yihui.name/animation/example/lln-ani/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/lln-ani/</guid>
+      <description>This function plots the sample mean as the sample size grows to check whether the sample mean approaches to the population mean.
+np points are plotted to denote the distribution of the sample mean; we will observe that the range of the sample mean just becomes smaller and smaller as the sample size increases and ultimately there will be an obvious trend that the sample mean converges to the population mean mu.</description>
+    </item>
+    
+    <item>
+      <title>moving.block()</title>
+      <link>https://yihui.name/animation/example/moving-block/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/moving-block/</guid>
+      <description>For a long numeric vector or matrix (or data frame), we can plot only a subset of its elements to take a closer look at its structure. With a moving &amp;lsquo;block&amp;rsquo; from the beginning to the end of a vector or matrix or any R objects to which we can apply subset, all elements inside the block are plotted as a line or scatter plot or any customized plots.
+For a vector, the elments from i + 1 to i + block will be plotted in the i-th step; similarly for a matrix or data frame, a (scatter) plot will be created from the i + 1-th row to i + block-th row.</description>
+    </item>
+    
+    <item>
+      <title>mwar.ani()</title>
+      <link>https://yihui.name/animation/example/mwar-ani/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/mwar-ani/</guid>
+      <description>This function just fulfills a very naive idea about moving window regression using rectangles to denote the windows and move them, and the corresponding AR(1) coefficients as long as rough confidence intervals are computed for data points inside the windows during the process of moving.
+The AR(1) coefficients are computed by arima.
+library(animation) ## moving window along a sin curve ani.options(interval = 0.1, nmax = 50) par(mar = c(2, 3, 1, 0.</description>
+    </item>
+    
+    <item>
+      <title>newton.method()</title>
+      <link>https://yihui.name/animation/example/newton-method/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/newton-method/</guid>
+      <description>This function provides an illustration of the iterations in Newton&amp;rsquo;s method.
+Newton&amp;rsquo;s method (also known as the Newton-Raphson method or the Newton-Fourier method) is an efficient algorithm for finding approximations to the zeros (or roots) of a real-valued function f(x).
+The iteration goes on in this way:
+$$x_{k + 1} = x_{k} - \frac{FUN(x_{k})}{FUN&#39;(x_{k})}$$
+From the starting value \(x_0\), vertical lines and points are plotted to show the location of the sequence of iteration values \(x_1, x_2, \ldots\); tangent lines are drawn to illustrate the relationship between successive iterations; the iteration values are in the right margin of the plot.</description>
+    </item>
+    
+    <item>
+      <title>pdftk()</title>
+      <link>https://yihui.name/animation/example/pdftk/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/pdftk/</guid>
+      <description>If the toolkit Pdftk is available in the system, it will be called to manipulate the PDF files (especially to compress the PDF files).
+This is a wrapper to call pdftk. The path of pdftk should be set via ani.options(pdftk = &#39;path/to/pdftk&#39;).
+See the reference for detailed usage of pdftk.
+library(animation) pdf(&amp;quot;huge-plot.pdf&amp;quot;) plot(rnorm(50000)) dev.off() ## Windows ani.options(pdftk = &amp;quot;D:/Installer/pdftk.exe&amp;quot;) pdftk(&amp;quot;huge-plot.pdf&amp;quot;, output = &amp;quot;huge-plot0.pdf&amp;quot;) ## Linux (does not work??) ani.options(pdftk = &amp;quot;pdftk&amp;quot;) pdftk(&amp;quot;huge-plot.</description>
+    </item>
+    
+    <item>
+      <title>price.ani()</title>
+      <link>https://yihui.name/animation/example/price-ani/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/price-ani/</guid>
+      <description>Demonstrate stock prices in animations
+This function can display the frequencies of stock prices in a certain time span with the span changing.
+library(animation) ## see more examples in ?vanke1127 price.ani(vanke1127$price, vanke1127$time, lwd = 2)  plot of chunk demo-a
+ </description>
+    </item>
+    
+    <item>
+      <title>qpdf()</title>
+      <link>https://yihui.name/animation/example/qpdf/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/qpdf/</guid>
+      <description>If the tool qpdf is available in the system, it will be called to manipulate the PDF files (especially to compress the PDF files).
+This is a wrapper to call qpdf. The path of qpdf should be set via ani.options(qpdf = &#39;path/to/qpdf&#39;).
+See the reference for detailed usage of qpdf.
+library(animation) pdf(&amp;quot;huge-plot.pdf&amp;quot;) plot(rnorm(50000)) dev.off() ## Windows ani.options(qpdf = &amp;quot;D:/Installer/qpdf/bin/qpdf.exe&amp;quot;) qpdf(&amp;quot;huge-plot.pdf&amp;quot;, output = &amp;quot;huge-plot0.pdf&amp;quot;) ## Linux ani.options(qpdf = &amp;quot;qpdf&amp;quot;) qpdf(&amp;quot;huge-plot.pdf&amp;quot;, output = &amp;quot;huge-plot1.</description>
+    </item>
+    
+    <item>
+      <title>quincunx()</title>
+      <link>https://yihui.name/animation/example/quincunx/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/quincunx/</guid>
+      <description>Demonstration of the Quincunx (Bean Machine/Galton Box)
+Simulates the quincunx with &amp;lsquo;balls&amp;rsquo; (beans) falling through several layers (denoted by triangles) and the distribution of the final locations at which the balls hit is denoted by a histogram.
+quincunx() is used to model intergenerational variation: balls are dropped from the top and cascade randomly through rows of alternating offset pins, landing in compartments at the bottom as a binomial or approximately normal distribution1.</description>
+    </item>
+    
+    <item>
+      <title>quincunx2()</title>
+      <link>https://yihui.name/animation/example/quincunx2/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/quincunx2/</guid>
+      <description>Demonstration of the Quincunx (Bean Machine/Galton Box)
+Simulates the quincunx with &amp;lsquo;balls&amp;rsquo; (beans) falling through several layers (denoted by triangles) and the distribution of the final locations at which the balls hit is denoted by a histogram.
+quincunx() is used to model intergenerational variation: balls are dropped from the top and cascade randomly through rows of alternating offset pins, landing in compartments at the bottom as a binomial or approximately normal distribution1.</description>
+    </item>
+    
+    <item>
+      <title>sample.cluster()</title>
+      <link>https://yihui.name/animation/example/sample-cluster/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/sample-cluster/</guid>
+      <description>Each rectangle stands for a cluster, and the simple random sampling without replacement is performed for each cluster. All points in the clusters being sampled will be drawn out.
+library(animation) ani.options(nmax = 50) par(mar = rep(1, 4)) sample.cluster(col = c(&amp;quot;bisque&amp;quot;, &amp;quot;white&amp;quot;))  plot of chunk demo-a
+ </description>
+    </item>
+    
+    <item>
+      <title>sample.ratio()</title>
+      <link>https://yihui.name/animation/example/sample-ratio/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/sample-ratio/</guid>
+      <description>This function demonstrates the advantage of ratio estimation when further information (ratio) about x and y is available.
+From this demonstration we can clearly see that the ratio estimation is generally better than the simple sample average when the ratio R really exists, otherwise ratio estimation may not help.
+library(animation) ani.options(interval = 1, nmax = 50) ## observe the location of the red line (closer to the ## population mean) res = sample.</description>
+    </item>
+    
+    <item>
+      <title>sample.simple()</title>
+      <link>https://yihui.name/animation/example/sample-simple/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/sample-simple/</guid>
+      <description>The whole sample frame is denoted by a matrix (nrow * ncol) in the plane just for convenience, and the points being sampled are marked out (by red circles by default). Each member of the population has an equal and known chance of being selected.
+library(animation) ani.options(nmax = 50) par(mar = rep(1, 4)) sample.simple()  plot of chunk demo-a
+ </description>
+    </item>
+    
+    <item>
+      <title>sample.strat()</title>
+      <link>https://yihui.name/animation/example/sample-strat/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/sample-strat/</guid>
+      <description>Each rectangle stands for a stratum, and the simple random sampling without replacement is performed within each stratum. The points being sampled are marked out (by red circles by default).
+library(animation) ani.options(nmax = 50) par(mar = rep(1, 4), lwd = 2) sample.strat(col = c(&amp;quot;bisque&amp;quot;, &amp;quot;white&amp;quot;))  plot of chunk demo-a
+ </description>
+    </item>
+    
+    <item>
+      <title>sample.system()</title>
+      <link>https://yihui.name/animation/example/sample-system/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/sample-system/</guid>
+      <description>The whole sample frame is denoted by a matrix (nrow * ncol) in the plane, and the sample points with equal intervals are drawn out according to a random starting point. The points being sampled are marked by red circles.
+library(animation) ani.options(nmax = 50) par(mar = rep(1, 4), lwd = 2) sample.system()  plot of chunk demo-a
+ </description>
+    </item>
+    
+    <item>
+      <title>saveGIF()</title>
+      <link>https://yihui.name/animation/example/savegif/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/savegif/</guid>
+      <description>This function opens a graphical device (specified in ani.options(&#39;ani.dev&#39;)) first to generate a sequence of images based on expr, then makes use of the command convert in &amp;lsquo;ImageMagick&amp;rsquo; to convert these images to a single animated movie (as a GIF or MPG file). An alternative software package is GraphicsMagick (use convert = &#39;gm convert&#39;), which is smaller than ImageMagick.
+This function calls im.convert (or gm.convert, depending on the argument convert) to convert images to a single animation.</description>
+    </item>
+    
+    <item>
+      <title>saveHTML()</title>
+      <link>https://yihui.name/animation/example/savehtml/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/savehtml/</guid>
+      <description>This function first records all the plots in the R expression as bitmap images, then inserts them into an HTML page and finally creates the animation using the SciAnimator library.
+It mainly uses the SciAnimator library, which is based on jQuery. It has a neat interface (both technically and visually) and is much easier to use or extend. Moreover, this function allows multiple animations in a single HTML page &amp;ndash; just use the same HTML filename.</description>
+    </item>
+    
+    <item>
+      <title>saveLatex()</title>
+      <link>https://yihui.name/animation/example/savelatex/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/savelatex/</guid>
+      <description>Record animation frames and insert them into a LaTeX document with the animate package. Compile the document if an appropriate LaTeX command is provided.
+This is actually a wrapper to generate a LaTeX document using R. The document uses the LaTeX package called animate to insert animations into PDF&amp;rsquo;s. When we pass an R expression to this function, the expression will be evaluated and recorded by a grahpics device (typically png and pdf).</description>
+    </item>
+    
+    <item>
+      <title>saveSWF()</title>
+      <link>https://yihui.name/animation/example/saveswf/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/saveswf/</guid>
+      <description>This function opens a graphical device first to generate a sequence of images based on expr, then makes use of the commands in SWFTools (png2swf, jpeg2swf, pdf2swf) to convert these images to a single Flash animation.
+library(animation) ## from png to swf saveSWF({ par(mar = c(3, 3, 1, 1.5), mgp = c(1.5, 0.5, 0)) knn.ani(test = matrix(rnorm(16), ncol = 2), cl.pch = c(16, 2)) }, swf.name = &amp;quot;kNN.swf&amp;quot;, interval = 1.</description>
+    </item>
+    
+    <item>
+      <title>saveVideo()</title>
+      <link>https://yihui.name/animation/example/savevideo/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/savevideo/</guid>
+      <description>This function opens a graphics device to record the images produced in the code expr, then uses FFmpeg to convert these images to a video.
+This function uses system to call FFmpeg to convert the images to a single video. The command line used in this function is: ffmpeg -y -r &amp;lt;1/interval&amp;gt; -i &amp;lt;img.name&amp;gt;\%d.&amp;lt;ani.type&amp;gt; other.opts video.name
+where interval comes from ani.options(&#39;interval&#39;), and ani.type is from ani.options(&#39;ani.type&#39;). For more details on the numerous options of FFmpeg, please see the reference.</description>
+    </item>
+    
+    <item>
+      <title>sim.qqnorm()</title>
+      <link>https://yihui.name/animation/example/sim-qqnorm/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/sim-qqnorm/</guid>
+      <description>This demo shows the possible QQ plots created by random numbers generated from a Normal distribution so that users can get a rough idea about how QQ plots really look like.
+When the sample size is small, it is hard to get a correct inference about the distribution of data from a QQ plot. Even if the sample size is large, usually there are outliers far away from the straight line.</description>
+    </item>
+    
+    <item>
+      <title>vanke1127()</title>
+      <link>https://yihui.name/animation/example/vanke1127/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/vanke1127/</guid>
+      <description>Barplots of the stock prices of Vanke Co. Ltd on 2009/11/27
+library(animation) tab.price = table(vanke1127$price) plot(as.numeric(names(tab.price)), as.numeric(tab.price), type = &amp;quot;h&amp;quot;, xlab = &amp;quot;price&amp;quot;, ylab = &amp;quot;frequency&amp;quot;)  ani.options(interval = 0.5, loop = FALSE, title = &amp;quot;Stock price of Vanke&amp;quot;) price.ani(vanke1127$price, vanke1127$time, span = 15 * 60, lwd = 2)  plot of chunk demo-a
+ </description>
+    </item>
+    
+    <item>
+      <title>vi.lilac.chaser()</title>
+      <link>https://yihui.name/animation/example/vi-lilac.chaser/</link>
+      <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/example/vi-lilac.chaser/</guid>
+      <description>Stare at the center cross for a few (say 30) seconds to experience the phenomena of the illusion.
+Just try it out.
+library(animation) ani.options(interval = 0.05, nmax = 20) par(pty = &amp;quot;s&amp;quot;) vi.lilac.chaser()  plot of chunk demo-a
+ </description>
+    </item>
+    
+    <item>
+      <title>Examples</title>
+      <link>https://yihui.name/animation/examples/</link>
+      <pubDate>Wed, 29 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/examples/</guid>
+      <description>Below is a list of examples (under construction ) for functions in the animation package. To see or contribute other examples, please go to the resources page.</description>
+    </item>
+    
+    <item>
+      <title>Export animations</title>
+      <link>https://yihui.name/animation/export/</link>
+      <pubDate>Wed, 29 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/export/</guid>
+      <description>If you want to export animations from R, you may use one of these methods:
+ saveHTML() saveGIF() saveVideo() saveLatex() saveSWF()  </description>
+    </item>
+    
+    <item>
+      <title>Resources</title>
+      <link>https://yihui.name/animation/resources/</link>
+      <pubDate>Wed, 29 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yihui.name/animation/resources/</guid>
+      <description>Here we list some additional resources related to the animation package. If you have any links to share with us, please feel free to hit the edit button above on the right to revise this page and send a pull request via Github.
+ ImageMagick: a comprehensive open-source image processing library GraphicsMagick: another image processing system FFmpeg: a complete, cross-platform solution to record, convert and stream audio and video SWFTools: a collection of utilities for working with Adobe Flash files (SWF files) animate: an interface to create portable, JavaScript driven PDF animations from sets of (vector) graphics or rasterized image files or from inline (vector) graphics R packages  the R package magick (bindings to ImageMagick) gganimate: Create easy animations with ggplot2   </description>
+    </item>
+    
+  </channel>
+</rss>

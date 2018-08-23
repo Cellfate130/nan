@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Write An R Package Using Literate Programming Techniques - Yihui Xie | 谢益辉</title>
+    <meta property="og:title" content="Write An R Package Using Literate Programming Techniques - Yihui Xie | 谢益辉">
+    
+    <meta name="twitter:card" content="summary">
+
+    
+      
+    
+
+    
+      
+      <meta property="description" content="This is an example of writing an R package using the Literate Programming (LP) technique, implemented through the knitr package and Makefile. It only shows you the idea, and I do not mean you must use &amp;hellip;">
+      <meta property="og:description" content="This is an example of writing an R package using the Literate Programming (LP) technique, implemented through the knitr package and Makefile. It only shows you the idea, and I do not mean you must use &amp;hellip;">
+      
+    
+
+    
+    
+    <meta name="twitter:image" content="https://assets.yihui.name/figures/LP-demo1/dgamma-1.png">
+    
+    
+    
+    
+
+    
+
+    
+    
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+<link rel="stylesheet" href="/css/custom.css" />
+
+  </head>
+
+  
+  <body class="rlp">
+    <header class="masthead">
+      
+
+<h1><a href="/"><img src="/images/logo.png" alt="Yihui Xie" /></a></h1>
+
+
+
+      <nav class="menu">
+  <ul>
+  
+  
+  <li><a href="/en/about/">About</a></li>
+  
+  <li><a href="/en/">Blog</a></li>
+  
+  <li><a href="/cn/about/">关于</a></li>
+  
+  <li><a href="/cn/">博客</a></li>
+  
+  
+
+<li class="menu-extra"></li>
+
+
+
+<li><a href="https://github.com/yihui/rlp/edit/master/vignettes/LP-demo1.Rmd" target="_blank">Edit this page</a></li>
+
+
+<li><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Attribution-NonCommercial-ShareAlike 4.0 International">License</a></li>
+
+
+  </ul>
+</nav>
+
+    </header>
+
+    <article class="main">
+      <header class="title">
+      
+<h1>Write An R Package Using Literate Programming Techniques</h1>
+
+
+<h3>Yihui Xie / 
+2014-12-29</h3>
+
+<hr>
+
+
+      </header>
+
+
+ <nav id="TableOfContents">
+<ul>
+<li><a href="#literate-programming">Literate Programming</a></li>
+<li><a href="#setup">Setup</a></li>
+<li><a href="#r-code-chunks">R Code Chunks</a></li>
+<li><a href="#from-rmd-to-r">From Rmd to R</a></li>
+<li><a href="#one-button-to-rule-them-all">One Button to Rule Them All</a></li>
+<li><a href="#call-functions-in-this-package">Call Functions in This Package</a></li>
+<li><a href="#a-less-naive-example">A Less Naive Example</a></li>
+<li><a href="#chunk-references">Chunk References</a></li>
+<li><a href="#conclusions">Conclusions</a></li>
+</ul>
+</nav> 
+
+
+<p>This is an example of writing an R package using the <a href="http://en.wikipedia.org/wiki/Literate_programming">Literate Programming</a> (LP) technique, implemented through the <strong>knitr</strong> package and Makefile. It only shows you the idea, and I do not mean you must use <strong>knitr</strong>, R Markdown, or Makefile. The full source code of this <strong>rlp</strong> package is available on <a href="https://github.com/yihui/rlp"><i class="fa fa-github" aria-hidden="true"></i> Github</a>. To build this package, you need to install R packages <strong>knitr</strong> and <strong>rmarkdown</strong>. Windows users also need to install <a href="http://cran.rstudio.com/bin/windows/Rtools/">Rtools</a>, which includes the utility <code>make</code>. Linux and macOS users should have <code>make</code> ready by default.</p>
+
+<h1 id="literate-programming">Literate Programming</h1>
+
+<p>Interestingly, the most popular application of the LP paradigm seems to be documenting software (using a special form of comments) for users instead of &ldquo;programming&rdquo; for authors. In other words, we use LP to document the <em>usage</em> of software, instead of documenting the <em>source code</em>. See <a href="http://en.wikipedia.org/wiki/Doxygen">Doxygen</a>, <a href="http://en.wikipedia.org/wiki/Javadoc">Javadoc</a>, and <a href="http://cran.rstudio.com/package=roxygen2"><strong>roxygen2</strong></a> for examples. There exists one exception, though, in the LaTeX world<sup class="footnote-ref" id="fnref:This-is-not-enti"><a href="#fn:This-is-not-enti">1</a></sup>. Some LaTeX package authors write both LaTeX code and documentation in a single document, and weave it into a PDF document that contains both the source code and documentation. I&rsquo;m not a LaTeX expert, and it is probably well-known that I have big headache when looking at a full screen of backslashes, from <code>\documentclass{}</code>, <code>\begin{document}</code>, <code>\alpha</code>, <code>\beta</code>, <code>\texttt{}</code>, &hellip;, and all the way to <code>\end{document}</code>.</p>
+
+<p>I do not find LP for LaTeX appealing, but that does not mean LP itself is not an appealing idea. On the contrary, I believe it can be very interesting and useful when it is applied to your own favorite language, e.g., R for me. In my opinion, LP has at least two advantages:</p>
+
+<ol>
+<li>You can write much more extensive and richer documentation than you normally could do with comments. In general, comments in code are (or should be) brief and limited to plain text. Normally you will not write five paragraphs of comments to explain a few lines of code, and you cannot write readable<sup class="footnote-ref" id="fnref:By-readable-I-me"><a href="#fn:By-readable-I-me">2</a></sup> math expressions or embed a video in comments.</li>
+<li>You can label code chunks and reference/reuse them using the labels, which allows you to compose your program flexibly using different pieces of code chunks. For example, you can define and explain a code chunk later in the document, but insert it in a previous code chunk using its label. This feature has been emphasized by Knuth, but I do not see it is widely adopted for some reason. Perhaps most people are more comfortable with designing a big program by smaller units like functions instead of code chunks, which is actually a good idea.</li>
+</ol>
+
+<p>Personally I find the first advantage more convincing, although it seems some LP folks just love the second one. For R package development, I guess it will be inconvenient for unit testing if we use the LP idea instead of writing smaller functions, because testing functions is straightforward, but testing code chunks is not. Anyway, I will show both features of LP mentioned above in this document.</p>
+
+<h1 id="setup">Setup</h1>
+
+<p>First, I set a few <strong>knitr</strong> chunk options:</p>
+
+<pre><code class="language-r">knitr::opts_chunk$set(eval = FALSE, tidy = FALSE)
+</code></pre>
+
+<p>I set <code>eval = FALSE</code> because this document mostly serves as the documentation of our R source code, and I do not really need to run the code chunks here. The code will be generated to the <code>R/</code> directory, then built by <code>R CMD build</code> into an R package. If you do want to execute a code chunk, you can use the chunk option <code>eval = TRUE</code> on that code chunk. Another important reason that you may not want to evaluate some code chunks is that they may not be complete, for example, when you insert documentation in the middle of a function to explain a few lines of the function body.</p>
+
+<p>In this document, you will see the chunk option <code>purl = FALSE</code> occasionally, and that means I want to exclude these code chunks when extracting the R code, but I do want to include them when compiling this document to HTML.</p>
+
+<h1 id="r-code-chunks">R Code Chunks</h1>
+
+<p>Now I write some example R code chunks using the R Markdown syntax. Here I define a boring function <code>add_one()</code> with an argument <code>x</code>, and it simply does <code>x + 1</code>:</p>
+
+<pre><code class="language-r">#' A cool function
+#' 
+#' Well, not really cool. Just add 1 to x.
+#' @param x a numeric vector
+#' @export
+#' @examples
+#' add_one(1)
+#' add_one(1:10)
+add_one = function(x) {
+  x + 1
+}
+</code></pre>
+
+<p>Besides the R source code, I also wrote the R documentation using the <strong>roxygen2</strong> syntax. This R code chunk will be extracted and placed under the <code>R/</code> directory later. The critical step is how to extract the code chunk. After this step, you will be in a familiar world of <code>roxygen2::roxygenize()</code>, or <code>devtools::build()</code>, or <code>R CMD build</code>, or whatever package building process you like.</p>
+
+<h1 id="from-rmd-to-r">From Rmd to R</h1>
+
+<p>I put this Rmd file under the <code>vignettes/</code> directory, and you do not have to use this directory. I&rsquo;m using it because I will get a nice by-product after <code>R CMD build</code>, which is the <em>package vignette</em>. I used <strong>rmarkdown</strong> to generate an HTML vignette, which is visually pleasant to read in my eyes.</p>
+
+<p>To extract the code chunks from the Rmd documents, I used a <code>Makefile</code> under the root directory of this package<sup class="footnote-ref" id="fnref:If-you-read-the"><a href="#fn:If-you-read-the">3</a></sup>:</p>
+
+<pre><code class="language-makefile">purl=Rscript -e &quot;knitr::purl('$(1)', '$(2)', quiet=TRUE, documentation=0)&quot;
+
+rfiles:=$(patsubst vignettes/LP-%.Rmd,R/%-GEN.R,$(wildcard vignettes/LP-*.Rmd))
+
+all: $(rfiles)
+
+R/%-GEN.R: vignettes/LP-%.Rmd
+    $(call purl,$^,$@)
+</code></pre>
+
+<p>I defined a function <code>purl</code> in the Makefile, which calls the R function <code>knitr::purl()</code> to extract code chunks from Rmd to R. To make sure I do not purl arbitrary Rmd documents, I added a prefix <code>LP-</code> to the Rmd filenames, and only these files will be processed. Similarly, to make sure <code>make</code> does not use arbitrary R files as targets, I added a suffix <code>-GEN</code> (stands for &ldquo;generated&rdquo;) to the R filenames. To put it short, an Rmd file <code>vignettes/LP-foo.Rmd</code> will generate <code>R/foo-GEN.R</code>. The variable <code>rfiles</code> stores all the potential R scripts to be generated. If you are familiar with <code>make</code>, you will immediately see its advantage here: <code>foo-GEN.R</code> will be re-generated only if <code>LP-foo.Rmd</code> has been updated.</p>
+
+<p>You may have realized that this leads to two copies of R code: one copy in Rmd, and one in R. Therefore you need to remind your collaborators (if you have any) that they must not edit the R code under <code>R/</code> that is generated from Rmd, but should edit the Rmd source documents instead.<sup class="footnote-ref" id="fnref:Or-set-the-R-scr"><a href="#fn:Or-set-the-R-scr">4</a></sup></p>
+
+<h1 id="one-button-to-rule-them-all">One Button to Rule Them All</h1>
+
+<p>Now we have three things to do to fully build this package:</p>
+
+<ol>
+<li>Run <code>make</code> to generate R source code to <code>R/</code>;</li>
+<li>Run <strong>roxygen2</strong> to generate R documentation to <code>man/</code>, <code>NAMESPACE</code>, and other stuff;</li>
+<li>Run <code>R CMD build</code> to build the package as well as the vignettes.</li>
+</ol>
+
+<p>You certainly do not want to type these commands repeatedly. Unfortunately, due to the fact that this is not the standard process of building an R package, there is not a natural solution to combine the three steps into one. For power users, this is certainly not true &ndash; you can always write a shell script to do everything. But some users just do not know how to open a terminal to type commands, and you should not blame them &ndash; not all people do programming for a living, and a command window is not the only or ultimate solution of all problems.</p>
+
+<p>So let&rsquo;s start hacking and find a button to click. I have been secretly hacking the <code>Build &amp; Reload</code> button in my RStudio IDE for a long time. If you open this <strong>rlp</strong> package in RStudio, and go to <code>Tools -&gt; Project Options -&gt; Build Tools</code>, you will see a weird configuration:</p>
+
+<pre><code class="language-bash">-v &amp;&amp; Rscript -e &quot;Rd2roxygen::rab(install=TRUE,before=system('make'))&quot;
+</code></pre>
+
+<p>At this moment, I&rsquo;m not going to explain what it means since it is just a dirty hack, and please do not ask me, either. Let&rsquo;s wait for the RStudio IDE to give us more freedom to customize the package build options in the future. If you are interested in the idea of LP for R packages, just copy my configuration, but bear in mind that it may stop working at some point. I will update this document when that happens.</p>
+
+<p>Note <code>Rd2roxygen::rab()</code> is my own way of building R packages, and you certainly do not have to follow it. For example, if you are more comfortable with <strong>devtools</strong>, you can do<sup class="footnote-ref" id="fnref:Remember-to-repl"><a href="#fn:Remember-to-repl">5</a></sup>:</p>
+
+<pre><code class="language-bash">-v &amp;&amp; make -C rlp &amp;&amp; Rscript -e &quot;devtools::install('rlp',keep_source=T)&quot;
+</code></pre>
+
+<h1 id="call-functions-in-this-package">Call Functions in This Package</h1>
+
+<p>You can certainly load the package and call the functions in this document, because the package vignettes are compiled <em>after</em> the package is temporarily installed<sup class="footnote-ref" id="fnref:If-you-use-devto"><a href="#fn:If-you-use-devto">6</a></sup>. For example, I call <code>add_one()</code> defined above:</p>
+
+<pre><code class="language-r">library(rlp)
+add_one(1)
+</code></pre>
+
+<pre><code>## [1] 2
+</code></pre>
+
+<pre><code class="language-r">add_one(1:10)
+</code></pre>
+
+<pre><code>##  [1]  2  3  4  5  6  7  8  9 10 11
+</code></pre>
+
+<p>Running live examples and generating output like this may help you explain what your functions actually do, so readers can understand your source code better, otherwise they can only reason about the code in their mind.</p>
+
+<h1 id="a-less-naive-example">A Less Naive Example</h1>
+
+<p>Life is certainly not always as simple as <code>add_one()</code>. In this section, I give a slightly more advanced example to show how LP can be useful and relevant to developing R packages. Let&rsquo;s consider the maximum likelihood estimation (MLE) for the parameters of the Gamma distribution <code>\(\Gamma(y; \alpha, \beta)\)</code>.</p>
+
+<p>I will use the function <code>optim()</code> to optimize the log-likelihood function. First, I define an R function with arguments <code>data</code> and <code>start</code>:</p>
+
+<pre><code class="language-r">#' MLE for the Gamma distribution
+#' 
+#' Estimate the parameters (alpha and beta) of the Gamma distribution
+#' using maximum likelihood.
+#' @param data the data vector assumed to be generated from the Gamma 
+#'   distribution
+#' @param start the initial values for the parameters of the Gamma
+#' distribution (passed to \code{\link{optim}()})
+#' @param vcov whether to return an approximate variance-covariance
+#' matrix of the parameter vector
+#' @return A list with elements \code{estimate} (parameter estimates
+#'   for alpha and beta) and, if \code{vcov = TRUE}, \code{vcov} (the
+#'   variance-covariance matrix of the parameter vector).
+#' @export
+mle_gamma = function(data, start = c(1, 1), vcov = FALSE) {
+</code></pre>
+
+<p>The Gamma distribution has two commonly used parameterizations (shape-rate or shape-scale), and I will use the following probability density function (shape-rate):</p>
+
+<p><code>$$f(x|\alpha,\beta)=\frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha-1}\exp(-\beta x);\quad x&gt;0$$</code></p>
+
+<p>The log-density function is:</p>
+
+<p><code>$$\log f=\alpha\log\beta-\log\Gamma(\alpha)+(\alpha-1)\log x-\beta x$$</code></p>
+
+<p>The log-likelihood function given the data vector <code>\(\mathbf{x}=[x_1,x_2,\ldots,x_n]\)</code> will be:</p>
+
+<p><code>$$L(\alpha,\beta|\mathbf{x})=n(\alpha\log(\beta)-\log(\Gamma(\alpha)))+(\alpha-1)\sum_{i=1}^{n}\log(x_{i})-\beta\sum_{i=1}^{n}x_{i}$$</code></p>
+
+<p>And I define it in R as <code>loglike()</code>, where <code>param</code> is the parameter vector <code>\([\alpha, \beta]\)</code>, and <code>x</code> is the data vector:</p>
+
+<pre><code class="language-r">  loglike = function(param, x) {
+    a = param[1]  # alpha (the shape parameter)
+    b = param[2]  # beta (the rate parameter)
+    n = length(x)
+    n * (a * log(b) - lgamma(a)) + (a - 1) * sum(log(x)) - b * sum(x)
+  }
+</code></pre>
+
+<p>It is worth noting that in practice we will rarely translate the math equation to R code like that for the Gamma distribution, since R has the <code>dgamma()</code> function that is much more efficient than the raw log-density function I used above. You would use <code>sum(dgamma(x, shape = param[1], rate = param[2], log = TRUE))</code> instead. Anyway, I took the silly way just for demonstrating the LP idea instead of how to write efficient statistical computing code.</p>
+
+<p>Next I optimize the log-likelihood function by passing the initial guesses and the data vector to it:</p>
+
+<pre><code class="language-r">  opt = optim(start, loglike, x = data, hessian = vcov, control = list(fnscale = -1))
+</code></pre>
+
+<p>You need to be cautious that <code>optim()</code> minimizes the objective function by default, and that is why I used <code>control = list(fnscale = -1)</code>. Then I&rsquo;m minimizing <code>-loglike</code>, and essentially maximizing <code>loglike</code>. I need to make sure the optimization has reached convergence:</p>
+
+<pre><code class="language-r">  if (opt$convergence != 0) stop('optim() failed to converge')
+  res = list(estimate = opt$par)
+</code></pre>
+
+<p>Finally, I give an estimate of the variance-covariance matrix <code>\(Var([\hat{\alpha},\hat{\beta}]')\)</code> if <code>vcov = TRUE</code>:</p>
+
+<pre><code class="language-r">  if (vcov) res$vcov = solve(-opt$hessian)
+</code></pre>
+
+<p>The estimate is the inverse of the negative Hessian matrix, because <code>\(Var(\hat{\theta})=I^{-1}(\theta)\)</code> for the maximum likelihood estimator <code>\(\hat{\theta}\)</code>, where <code>\(I(\theta)\)</code> is the Information matrix, and we know <code>\(I(\theta) = -E(H(\theta))\)</code>. In theory, <code>\(I(\theta)\)</code> is unknown, and I just use the observed information matrix, i.e., the negative Hessian matrix returned from <code>optim()</code>. Note the inverse matrix is computed via <code>solve()</code>.</p>
+
+<pre><code class="language-r">  res
+}
+</code></pre>
+
+<p>The object <code>res</code> is returned, and we can use it to compute the confidence intervals of the parameters since MLE is asymptotically Normal. Now let&rsquo;s try the function:</p>
+
+<pre><code class="language-r">set.seed(1228)
+d = rgamma(100, shape = 5, rate = 2)  # simulate some data from Gamma(5, 2)
+r = mle_gamma(d, vcov = TRUE)
+str(r)
+</code></pre>
+
+<pre><code>## List of 2
+##  $ estimate: num [1:2] 5.3 2.06
+##  $ vcov    : num [1:2, 1:2] 0.529 0.206 0.206 0.088
+</code></pre>
+
+<p>The estimates are not too bad, compared to their true values. I can also give a 95% confidence interval for the parameter <code>\(\alpha\)</code>, of which the estimate is asymptotically Normal:</p>
+
+<pre><code class="language-r">a = r$estimate[1]  # estimate of alpha
+s = sqrt(r$vcov[1, 1])  # standard error of the estimate of alpha
+z = qnorm(1 - 0.05/2)  # 97.5% Normal quantile
+c(a - z * s, a + z * s)  # a 95% CI
+</code></pre>
+
+<pre><code>## [1] 3.875568 6.726619
+</code></pre>
+
+<p>Below is a histogram of the simulated data, with the true density curve, the true mean (solid vertical line), and the estimated mean (dashed line):<sup class="footnote-ref" id="fnref:The-mean-of-the"><a href="#fn:The-mean-of-the">7</a></sup></p>
+
+<pre><code class="language-r">par(mar = c(4, 4, .2, .1))
+hist(d, main = '', col = 'darkgray', border = 'white', freq = FALSE)
+curve(dgamma(x, shape = 5, rate = 2), 0, 6, add = TRUE, lwd = 2)
+abline(v = c(5/2, r$estimate[1]/r$estimate[2]), lty = c(1, 2))
+</code></pre>
+
+<p><img src="https://assets.yihui.name/figures/LP-demo1/dgamma-1.png" alt="plot of chunk dgamma" /></p>
+
+<p>Now you see I can thoroughly explain an R function using LP. I&rsquo;m not saying this is what you should do for all R functions, but sometimes there are cases in which you want something beyond code comments, such as math equations and graphics.</p>
+
+<p>Apparently LP is more for those who want to understand your source code (including your future self!) than for end-users of your package. For most users, they probably just want to read the help page of the function, in which case they just type the question mark in R, e.g., <code>?mle_gamma</code>.</p>
+
+<h1 id="chunk-references">Chunk References</h1>
+
+<p>I mentioned before that we could label code chunks and reference them to compose a bigger code chunk. Now I show a simple example of simulating from a bivariate Normal distribution. A bit background:</p>
+
+<p><code>$$\left[\begin{array}{c}
+X\\
+Y
+\end{array}\right]\sim\mathcal{N}\left(\left[\begin{array}{c}
+\mu_{X}\\
+\mu_{Y}
+\end{array}\right],\left[\begin{array}{cc}
+\sigma_{X}^{2} &amp; \rho\sigma_{X}\sigma_{Y}\\
+\rho\sigma_{X}\sigma_{Y} &amp; \sigma_{Y}^{2}
+\end{array}\right]\right)$$</code></p>
+
+<p>One way to simulate from the bivariate Normal distribution is to first simulate from the marginal distribution <code>\(f(x)\)</code>, then simulate from <code>\(f(y|x)\)</code>. Below is the final simulation function:</p>
+
+<pre><code class="language-r">#' Sample from a bivariate Normal distribution
+#' 
+#' Simulate x from the marginal f(x), then y from f(y|x), and
+#' the pair (x, y) has the desired joint distribution.
+#' @param n the desired sample size
+#' @param m1,m2 the means of X and Y, respectively
+#' @param s1,s2 the standard deviations of X and Y, respectively
+#' @param rho the correlation coefficient between X and Y
+#' @return A numeric matrix of two columns X and Y.
+#' @export
+rbinormal = function(n, m1 = 0, m2 = 0, s1 = 1, s2 = 1, rho = 0) {
+  # warning: this is not an efficient implementation; you should use
+  # vectorization in practice
+  res = replicate(n, {
+    x = rnorm(1, m1, s1)  # simulate from the marginal f(x)
+    m2cond = m2 + s2/s1 * rho * (x - m1)  # conditional mean of Y
+    s2cond = sqrt(1 - rho^2) * s2  # conditional sd of Y
+    y = rnorm(1, m2cond, s2cond)  # simulate from the conditional f(y|x)
+    c(x, y)
+  })
+  res = t(res)  # transpose the 2xn matrix to nx2
+  colnames(res) = c('X', 'Y')
+  res
+}
+</code></pre>
+
+<p>If you are reading the <a href="https://github.com/yihui/rlp/edit/master/vignettes/LP-demo1.Rmd">source R Markdown document</a>, you will see <code>&lt;&lt;simulate_x&gt;&gt;</code> and <code>&lt;&lt;simulate_y&gt;&gt;</code> instead of the real R code. The token <code>&lt;&lt;&gt;&gt;</code> denotes the code chunks defined below with the chunk labels <code>simulate_x</code> and <code>simulate_y</code>, respectively:</p>
+
+<pre><code class="language-r">x = rnorm(1, m1, s1)  # simulate from the marginal f(x)
+</code></pre>
+
+<p>The marginal distribution of <code>\(X\)</code> is <code>\(\mathcal{N}(\mu_X, \sigma^2_X)\)</code>, and we know the conditional distribution of <code>\(Y|X\)</code> is:</p>
+
+<p><code>$$Y|X=x \sim \mathcal{N}\left(\mu_{Y}+\frac{\sigma_{Y}}{\sigma_{X}}\rho(x-\mu_{X}),\,(1-\rho^{2})\sigma_{Y}^{2}\right)$$</code></p>
+
+<pre><code class="language-r">m2cond = m2 + s2/s1 * rho * (x - m1)  # conditional mean of Y
+s2cond = sqrt(1 - rho^2) * s2  # conditional sd of Y
+y = rnorm(1, m2cond, s2cond)  # simulate from the conditional f(y|x)
+</code></pre>
+
+<p>I just reused these code chunks in the function body of <code>rbinormal()</code>, instead of cutting and pasting the code there. As usual, I can test my function by examples:</p>
+
+<pre><code class="language-r">set.seed(1229)
+z = rbinormal(500, m1 = -1, s1 = 5, m2 = 3, s2 = .5, rho = -.7)
+par(mar = c(4, 4, .2, .1))
+plot(z, pch = 20, col = 'darkgray')
+# the center of the bivariate dist
+points(-1, 3, pch = 19, col = 'red', cex = 3)
+</code></pre>
+
+<p><img src="https://assets.yihui.name/figures/LP-demo1/binom-scatter-1.png" alt="plot of chunk binom-scatter" /></p>
+
+<p>In this example, I factored out the code from the main function as two separate code chunks, and explained each later, instead of inserting the explanations in the middle of the function body. Again, the simulation code in this example is computationally inefficient, and it is only for demo purposes<sup class="footnote-ref" id="fnref:It-is-straightfo"><a href="#fn:It-is-straightfo">8</a></sup>.</p>
+
+<h1 id="conclusions">Conclusions</h1>
+
+<p>This document has demonstrated that LP can be useful for package authors to explain their code in fine detail, which may not be easy to achieve by only using comments in code. Not everyone needs or wants to understand your source code, but clear explanations of your code will benefit both your future self, and more importantly, attract potential collaborators and contributors, hence increase the <a href="http://en.wikipedia.org/wiki/Bus_factor">bus factor</a> of your software packages, in this era of &ldquo;<a href="https://github.com">social coding</a>&rdquo;.</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:This-is-not-enti">This is not entirely surprising, considering Knuth&rsquo;s original implementation of LP using TeX and Pascal. <a class="footnote-return" href="#fnref:This-is-not-enti">↩</a></li>
+<li id="fn:By-readable-I-me">By &ldquo;readable&rdquo;, I mean no backslashes. Raw LaTeX math code does not count. At least it is not readable to me. I can never figure out where the brackets start and end by reading raw LaTeX code, for example, when there are more than three pairs of brackets. <a class="footnote-return" href="#fnref:By-readable-I-me">↩</a></li>
+<li id="fn:If-you-read-the">If you read the R Markdown source of this document, you will see I did not copy the Makefile here, but used the <code>cat</code> engine to write the Makefile dynamically to the output. <a class="footnote-return" href="#fnref:If-you-read-the">↩</a></li>
+<li id="fn:Or-set-the-R-scr">Or set the R scripts to be read-only, e.g., use <code>Sys.chmod(mode = '0444')</code> in R. <a class="footnote-return" href="#fnref:Or-set-the-R-scr">↩</a></li>
+<li id="fn:Remember-to-repl">Remember to replace <code>rlp</code> with your package name. <a class="footnote-return" href="#fnref:Remember-to-repl">↩</a></li>
+<li id="fn:If-you-use-devto">If you use <strong>devtools</strong>, please note it does not build vignettes by default, so you have to call <code>devtools::install(..., build_vignettes = TRUE)</code> <a class="footnote-return" href="#fnref:If-you-use-devto">↩</a></li>
+<li id="fn:The-mean-of-the">The mean of the Gamma distribution is <code>\(\alpha/\beta\)</code>. <a class="footnote-return" href="#fnref:The-mean-of-the">↩</a></li>
+<li id="fn:It-is-straightfo">It is straightforward to make it much more efficient by vectorization, i.e., instead of using <code>replicate()</code>, which is basically a loop to generate one random number at a time, you can just generate all <code>n</code> random numbers in one step: <code>x = rnorm(n, m1, s1)</code>, and <code>y = rnorm(n, m2cond, s2cond)</code>. <a class="footnote-return" href="#fnref:It-is-straightfo">↩</a></li>
+</ol>
+</div>
+
+
+  <footer>
+  
+
+
+<section class="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+    this.page.url = "http:\/\/yihui.name" + location.pathname;
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var disqus_js = '//yihui.disqus.com/embed.js';
+    var d = document, s = d.createElement('script');
+    s.src = disqus_js; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    var b = false, l = function() {
+      if (b) return;
+      (d.head || d.body).appendChild(s); b = true;
+    }
+    
+    if (location.hash.match(/^#comment/)) return(l());
+    var t = d.getElementById('disqus_thread');
+    var c = function() {
+      if (b) return;
+      var rect = t.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom >= 0) l();
+    };
+    window.addEventListener('load', c);
+    d.addEventListener('scroll', c);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+<script async src="/js/external-link.js"></script>
+
+<script async src="/js/center-img.js"></script>
+
+<script async src="/js/right-quote.js"></script>
+
+<script async src="/js/no-highlight.js"></script>
+
+<script async src="/js/fix-footnote.js"></script>
+
+<script async src="/js/math-code.js"></script>
+
+
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/tex.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+  
+  <hr>
+  <div class="copyright">&copy; <a href="/">Yihui Xie</a> 2005 - 2018</div>
+  
+  </footer>
+  </article>
+  
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-1988641-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </body>
+</html>
+
