@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>About on 登的窝</title>
+    <link>https://www.dneg.org/zh-cn/categories/about/</link>
+    <description>Recent content in About on 登的窝</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 23 Aug 2018 16:01:23 +0800</lastBuildDate>
+    
+	<atom:link href="https://www.dneg.org/zh-cn/categories/about/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>网站历史修改</title>
+      <link>https://www.dneg.org/zh-cn/post/history-edit/</link>
+      <pubDate>Thu, 23 Aug 2018 16:01:23 +0800</pubDate>
+      
+      <guid>https://www.dneg.org/zh-cn/post/history-edit/</guid>
+      <description>网站历史 20180820 使用HUGO (静态程序)+ GITHUB(存储空间) + NETLIFY(网站建立) + GODADDY(域名) 网站修改简要过程 0x00 要增加的内</description>
+    </item>
+    
+  </channel>
+</rss>
