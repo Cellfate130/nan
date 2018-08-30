@@ -2,38 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tag 6 on 登的窝</title>
-    <link>https://www.dneg.org/zh-cn/tags/tag-6/</link>
+    <link>https://trusting-wing-57d6d7.netlify.com/zh-cn/tags/tag-6/</link>
     <description>Recent content in Tag 6 on 登的窝</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Tue, 06 Mar 2018 16:01:23 +0800</lastBuildDate>
     
-	<atom:link href="https://www.dneg.org/zh-cn/tags/tag-6/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://trusting-wing-57d6d7.netlify.com/zh-cn/tags/tag-6/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Jane 主题预览</title>
-      <link>https://www.dneg.org/zh-cn/post/jane-theme-preview/</link>
+      <link>https://trusting-wing-57d6d7.netlify.com/zh-cn/post/jane-theme-preview/</link>
       <pubDate>Tue, 06 Mar 2018 16:01:23 +0800</pubDate>
       
-      <guid>https://www.dneg.org/zh-cn/post/jane-theme-preview/</guid>
+      <guid>https://trusting-wing-57d6d7.netlify.com/zh-cn/post/jane-theme-preview/</guid>
       <description>主题预览,内容有待填充。dddddaqqwe</description>
     </item>
     
     <item>
       <title>gallery1图片测试</title>
-      <link>https://www.dneg.org/zh-cn/post/gallery1/</link>
+      <link>https://trusting-wing-57d6d7.netlify.com/zh-cn/post/gallery1/</link>
       <pubDate>Tue, 06 Mar 2018 16:01:23 +0800</pubDate>
       
-      <guid>https://www.dneg.org/zh-cn/post/gallery1/</guid>
+      <guid>https://trusting-wing-57d6d7.netlify.com/zh-cn/post/gallery1/</guid>
       <description>主题预览,内容有待填充。 ``` 0fd56fa2 I m g 20180705 160413 Mmexport1531741953691</description>
     </item>
     
     <item>
       <title>Shortcodes Preview</title>
-      <link>https://www.dneg.org/zh-cn/post/shortcodes-preview/</link>
+      <link>https://trusting-wing-57d6d7.netlify.com/zh-cn/post/shortcodes-preview/</link>
       <pubDate>Sun, 04 Mar 2018 16:01:23 +0800</pubDate>
       
-      <guid>https://www.dneg.org/zh-cn/post/shortcodes-preview/</guid>
+      <guid>https://trusting-wing-57d6d7.netlify.com/zh-cn/post/shortcodes-preview/</guid>
       <description>&lt;h2 id=&#34;what-a-shortcode-is&#34;&gt;What a Shortcode is&lt;/h2&gt;
 
 &lt;p&gt;Hugo loves Markdown because of its simple content format, but there are times when Markdown falls short. Often, content authors are forced to add raw HTML (e.g., video &lt;code&gt;&amp;lt;iframes&amp;gt;&lt;/code&gt;) to Markdown content. We think this contradicts the beautiful simplicity of Markdown&amp;rsquo;s syntax.&lt;/p&gt;

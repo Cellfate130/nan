@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://www.dneg.org/sitemap.xml
+Sitemap: https://trusting-wing-57d6d7.netlify.com/sitemap.xml

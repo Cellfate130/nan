@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>登的窝</title>
-    <link>https://www.dneg.org/zh-cn/</link>
+    <link>https://trusting-wing-57d6d7.netlify.com/zh-cn/</link>
     <description>Recent content on 登的窝</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Thu, 23 Aug 2018 21:38:52 +0800</lastBuildDate>
     
-        <atom:link href="https://www.dneg.org/zh-cn/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://trusting-wing-57d6d7.netlify.com/zh-cn/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>关于</title>
-      <link>https://www.dneg.org/zh-cn/about/</link>
+      <link>https://trusting-wing-57d6d7.netlify.com/zh-cn/about/</link>
       <pubDate>Thu, 23 Aug 2018 21:38:52 +0800</pubDate>
       
-      <guid>https://www.dneg.org/zh-cn/about/</guid>
+      <guid>https://trusting-wing-57d6d7.netlify.com/zh-cn/about/</guid>
       
         <description>&lt;p&gt;中文版的关于.需要完善的地方：&lt;/p&gt;
 
@@ -30,10 +30,10 @@
     
     <item>
       <title>网站历史修改</title>
-      <link>https://www.dneg.org/zh-cn/post/history-edit/</link>
+      <link>https://trusting-wing-57d6d7.netlify.com/zh-cn/post/history-edit/</link>
       <pubDate>Thu, 23 Aug 2018 16:01:23 +0800</pubDate>
       
-      <guid>https://www.dneg.org/zh-cn/post/history-edit/</guid>
+      <guid>https://trusting-wing-57d6d7.netlify.com/zh-cn/post/history-edit/</guid>
       
         <description>
 
@@ -148,10 +148,10 @@ name: &amp;#34;Tags&amp;#34;
     
     <item>
       <title>Jane 主题预览</title>
-      <link>https://www.dneg.org/zh-cn/post/jane-theme-preview/</link>
+      <link>https://trusting-wing-57d6d7.netlify.com/zh-cn/post/jane-theme-preview/</link>
       <pubDate>Tue, 06 Mar 2018 16:01:23 +0800</pubDate>
       
-      <guid>https://www.dneg.org/zh-cn/post/jane-theme-preview/</guid>
+      <guid>https://trusting-wing-57d6d7.netlify.com/zh-cn/post/jane-theme-preview/</guid>
       
         <description>&lt;p&gt;主题预览,内容有待填充。dddddaqqwe&lt;/p&gt;
 </description>
@@ -160,49 +160,49 @@ name: &amp;#34;Tags&amp;#34;
     
     <item>
       <title>gallery1图片测试</title>
-      <link>https://www.dneg.org/zh-cn/post/gallery1/</link>
+      <link>https://trusting-wing-57d6d7.netlify.com/zh-cn/post/gallery1/</link>
       <pubDate>Tue, 06 Mar 2018 16:01:23 +0800</pubDate>
       
-      <guid>https://www.dneg.org/zh-cn/post/gallery1/</guid>
+      <guid>https://trusting-wing-57d6d7.netlify.com/zh-cn/post/gallery1/</guid>
       
         <description>&lt;p&gt;主题预览,内容有待填充。&lt;/p&gt;
 
 &lt;p&gt;```
 
-&lt;link rel=&#34;stylesheet&#34; href=&#34;https://www.dneg.org/css/hugo-easy-gallery.css&#34; /&gt;
+&lt;link rel=&#34;stylesheet&#34; href=&#34;https://trusting-wing-57d6d7.netlify.com/css/hugo-easy-gallery.css&#34; /&gt;
 
 &lt;div class=&#34;gallery caption-position-bottom caption-effect-slide hover-effect-zoom hover-transition&#34; itemscope itemtype=&#34;http://schema.org/ImageGallery&#34;&gt;
         &lt;div class=&#34;box&#34;&gt;
           &lt;figure itemprop=&#34;associatedMedia&#34; itemscope itemtype=&#34;http://schema.org/ImageObject&#34;&gt;
-            &lt;div class=&#34;img&#34; style=&#34;background-image: url(&#39;https://www.dneg.org//images/201807//0fd56fa2.jpg&#39;);&#34; &gt;
-              &lt;img itemprop=&#34;thumbnail&#34; src=&#34;https://www.dneg.org//images/201807//0fd56fa2.jpg&#34; alt=&#34;0fd56fa2&#34; /&gt;
+            &lt;div class=&#34;img&#34; style=&#34;background-image: url(&#39;https://trusting-wing-57d6d7.netlify.com//images/201807//0fd56fa2.jpg&#39;);&#34; &gt;
+              &lt;img itemprop=&#34;thumbnail&#34; src=&#34;https://trusting-wing-57d6d7.netlify.com//images/201807//0fd56fa2.jpg&#34; alt=&#34;0fd56fa2&#34; /&gt;
             &lt;/div&gt;
             &lt;figcaption&gt;
               &lt;p&gt;0fd56fa2&lt;/p&gt;
             &lt;/figcaption&gt;
-            &lt;a href=&#34;https://www.dneg.org//images/201807//0fd56fa2.jpg&#34; itemprop=&#34;contentUrl&#34;&gt;&lt;/a&gt;
+            &lt;a href=&#34;https://trusting-wing-57d6d7.netlify.com//images/201807//0fd56fa2.jpg&#34; itemprop=&#34;contentUrl&#34;&gt;&lt;/a&gt;
           &lt;/figure&gt;
         &lt;/div&gt;
         &lt;div class=&#34;box&#34;&gt;
           &lt;figure itemprop=&#34;associatedMedia&#34; itemscope itemtype=&#34;http://schema.org/ImageObject&#34;&gt;
-            &lt;div class=&#34;img&#34; style=&#34;background-image: url(&#39;https://www.dneg.org//images/201807//IMG_20180705_160413.jpg&#39;);&#34; &gt;
-              &lt;img itemprop=&#34;thumbnail&#34; src=&#34;https://www.dneg.org//images/201807//IMG_20180705_160413.jpg&#34; alt=&#34;I m g 20180705 160413&#34; /&gt;
+            &lt;div class=&#34;img&#34; style=&#34;background-image: url(&#39;https://trusting-wing-57d6d7.netlify.com//images/201807//IMG_20180705_160413.jpg&#39;);&#34; &gt;
+              &lt;img itemprop=&#34;thumbnail&#34; src=&#34;https://trusting-wing-57d6d7.netlify.com//images/201807//IMG_20180705_160413.jpg&#34; alt=&#34;I m g 20180705 160413&#34; /&gt;
             &lt;/div&gt;
             &lt;figcaption&gt;
               &lt;p&gt;I m g 20180705 160413&lt;/p&gt;
             &lt;/figcaption&gt;
-            &lt;a href=&#34;https://www.dneg.org//images/201807//IMG_20180705_160413.jpg&#34; itemprop=&#34;contentUrl&#34;&gt;&lt;/a&gt;
+            &lt;a href=&#34;https://trusting-wing-57d6d7.netlify.com//images/201807//IMG_20180705_160413.jpg&#34; itemprop=&#34;contentUrl&#34;&gt;&lt;/a&gt;
           &lt;/figure&gt;
         &lt;/div&gt;
         &lt;div class=&#34;box&#34;&gt;
           &lt;figure itemprop=&#34;associatedMedia&#34; itemscope itemtype=&#34;http://schema.org/ImageObject&#34;&gt;
-            &lt;div class=&#34;img&#34; style=&#34;background-image: url(&#39;https://www.dneg.org//images/201807//mmexport1531741953691.jpg&#39;);&#34; &gt;
-              &lt;img itemprop=&#34;thumbnail&#34; src=&#34;https://www.dneg.org//images/201807//mmexport1531741953691.jpg&#34; alt=&#34;Mmexport1531741953691&#34; /&gt;
+            &lt;div class=&#34;img&#34; style=&#34;background-image: url(&#39;https://trusting-wing-57d6d7.netlify.com//images/201807//mmexport1531741953691.jpg&#39;);&#34; &gt;
+              &lt;img itemprop=&#34;thumbnail&#34; src=&#34;https://trusting-wing-57d6d7.netlify.com//images/201807//mmexport1531741953691.jpg&#34; alt=&#34;Mmexport1531741953691&#34; /&gt;
             &lt;/div&gt;
             &lt;figcaption&gt;
               &lt;p&gt;Mmexport1531741953691&lt;/p&gt;
             &lt;/figcaption&gt;
-            &lt;a href=&#34;https://www.dneg.org//images/201807//mmexport1531741953691.jpg&#34; itemprop=&#34;contentUrl&#34;&gt;&lt;/a&gt;
+            &lt;a href=&#34;https://trusting-wing-57d6d7.netlify.com//images/201807//mmexport1531741953691.jpg&#34; itemprop=&#34;contentUrl&#34;&gt;&lt;/a&gt;
           &lt;/figure&gt;
         &lt;/div&gt;
 &lt;/div&gt;
@@ -213,10 +213,10 @@ name: &amp;#34;Tags&amp;#34;
     
     <item>
       <title>Shortcodes Preview</title>
-      <link>https://www.dneg.org/zh-cn/post/shortcodes-preview/</link>
+      <link>https://trusting-wing-57d6d7.netlify.com/zh-cn/post/shortcodes-preview/</link>
       <pubDate>Sun, 04 Mar 2018 16:01:23 +0800</pubDate>
       
-      <guid>https://www.dneg.org/zh-cn/post/shortcodes-preview/</guid>
+      <guid>https://trusting-wing-57d6d7.netlify.com/zh-cn/post/shortcodes-preview/</guid>
       
         <description>&lt;h2 id=&#34;what-a-shortcode-is&#34;&gt;What a Shortcode is&lt;/h2&gt;
 
@@ -613,10 +613,10 @@ name: &amp;#34;Tags&amp;#34;
     
     <item>
       <title>Image Preview</title>
-      <link>https://www.dneg.org/zh-cn/post/image-preview/</link>
+      <link>https://trusting-wing-57d6d7.netlify.com/zh-cn/post/image-preview/</link>
       <pubDate>Sat, 03 Mar 2018 16:01:23 +0800</pubDate>
       
-      <guid>https://www.dneg.org/zh-cn/post/image-preview/</guid>
+      <guid>https://trusting-wing-57d6d7.netlify.com/zh-cn/post/image-preview/</guid>
       
         <description>&lt;p&gt;Thanks for &lt;a href=&#34;https://github.com/liwenyip/hugo-easy-gallery&#34;&gt;liwenyip/hugo-easy-gallery&lt;/a&gt; &amp;amp; &lt;a href=&#34;https://github.com/xianmin/hugo-theme-jane/pull/48&#34;&gt;Zebradil · Pull Request #48&lt;/a&gt; .&lt;/p&gt;
 
