@@ -1,2 +1,0 @@
-User-agent: *
-Sitemap: https://trusting-wing-57d6d7.netlify.com/sitemap.xml
