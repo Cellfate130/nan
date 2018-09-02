@@ -15,10 +15,6 @@ toc: false
 # reward: false
 # mathjax: false
 
-menu:
-  main:
-    parent: "docs"
-    weight: 4
 ---
 
 More detail: [Syntax Highlighting | Hugo](https://gohugo.io/content-management/syntax-highlighting/)
