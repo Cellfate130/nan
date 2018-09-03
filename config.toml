@@ -1,4 +1,4 @@
-baseURL = "https://endg.github.io/"
+baseURL = "https://shap.netlify.com/"
 title = "Simple but effective"
 enableRobotsTXT = true
 enableEmoji = true
