@@ -1,4 +1,10 @@
-# endg.github.io
+# bou.xyz
+
+20190617建立
+域名购买20190617 6元
+
+
+endg.github.io
 netlify
 准备用来作为DNEG的基础，使用HUGO,使用国人贤民开发的皮肤JANE.
 
