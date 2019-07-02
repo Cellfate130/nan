@@ -16,5 +16,6 @@ $ git submodule add https://github.com/xianmin/hugo-theme-jane
 博客使用 git submodule 的方式引用的 rapid 皮肤，所以，clone 本 repo 后，记得执行：
 
 git submodule init
+
 git submodule update
 
