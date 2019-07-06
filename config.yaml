@@ -1,0 +1,189 @@
+baseurl: "https://www.bou.xyz/"
+languageCode: "en-us"
+title: "BOU | 博"
+theme: "hugo-ivy"
+googleAnalytics: ""
+disqusShortname: ""
+ignoreFiles: ["\\.Rmd$", "_files$", "_cache$"]
+hasCJKLanguage: true
+enableEmoji: true
+footnotereturnlinkcontents: "↩"
+rssLimit: 100
+
+permalinks:
+  cn: "/cn/:year/:month/:slug/"
+  en: "/en/:year/:month/:slug/"
+
+menu:
+  main:
+    - name: "About"
+      url: "/en/about/"
+      weight: 1
+    - name: "Blog"
+      url: "/en/"
+      weight: 2
+    - name: "关于"
+      url: "/cn/about/"
+      weight: 3
+    - name: "博客"
+      url: "/cn/"
+      weight: 4
+    - name: "Categories"
+      url: "/categories/"
+      weight: 5
+    - name: "Tags"
+      url: "/tags/"
+      weight: 6
+  en:
+    - name: "Home"
+      url: "/"
+      weight: 1
+    - name: "About"
+      url: "/en/about/"
+      weight: 2
+    - name: "Blog"
+      url: "/en/"
+      weight: 3
+    - name: "Vitae"
+      url: "/en/vitae/"
+      weight: 4
+    - name: "中文"
+      url: "/cn/"
+      weight: 5
+  cn:
+    - name: "首页"
+      url: "/"
+      weight: 1
+    - name: "关于"
+      url: "/cn/about/"
+      weight: 2
+    - name: "博客"
+      url: "/cn/"
+      weight: 3
+    - name: "简历"
+      url: "/cn/vitae/"
+      weight: 4
+    - name: "菜谱"
+      url: "/cn/recipe/"
+      weight: 5
+    - name: "分类"
+      url: "/categories/"
+      weight: 6
+    - name: "标签"
+      url: "/tags/"
+      weight: 7
+    - name: "English"
+      url: "/en/"
+      weight: 8
+  knitr:
+    - name: "Home"
+      url: "/knitr/"
+      weight: 1
+    - name: "Options"
+      url: "/knitr/options/"
+      weight: 2
+    - name: "Hooks"
+      url: "/knitr/hooks/"
+      weight: 3
+    - name: "Examples"
+      url: "/knitr/demos/"
+      weight: 4
+    - name: "FAQ"
+      url: "/knitr/faq/"
+      weight: 5
+    - name: "index"
+      url: "/"
+      weight: 6
+  animation:
+    - name: "Home"
+      url: "/animation/"
+      weight: 1
+    - name: "Examples"
+      url: "/animation/examples/"
+      weight: 2
+    - name: "Export"
+      url: "/animation/export/"
+      weight: 3
+    - name: "Resources"
+      url: "/animation/resources/"
+      weight: 4
+    - name: "index"
+      url: "/"
+      weight: 5
+  tinytex:
+    - name: "Home"
+      url: "/tinytex/"
+      weight: 1
+    - name: "FAQs"
+      url: "/tinytex/faq/"
+      weight: 2
+    - name: "R package"
+      url: "/tinytex/r/"
+      weight: 3
+    - name: "Hall of Pain"
+      url: "/tinytex/pain/"
+      weight: 4
+    - name: "中文文档"
+      url: "/tinytex/cn/"
+      weight: 5
+    - name: "index"
+      url: "/"
+      weight: 6
+
+params:
+  description: "Personal website of BOU; 博的个人网站"
+  footer: "&copy; [BOU](/) 2015 - 2019"
+  disqusURL: ""
+  customJS:
+    - "js/fix-toc.js"
+    - "js/center-img.js"
+    - "js/right-quote.js"
+    - "js/no-highlight.js"
+    - "js/fix-footnote.js"
+    - "js/math-code.js"
+    - "js/external-link.js"
+    - "js/alt-title.js"
+    - "js/header-link.js"
+  #githubContentURL: "https://github.com/rbind/yihui/edit/master/content/"
+  githubContentURL: "https://github.com/endg/bou.xyz/edit/master/content/"
+  twitterImage: "/images/logo.png"
+
+  # options for highlight.js (version, additional languages, and theme)
+  highlightjsVersion: "9.12.0"
+  highlightjsCDN: "//cdn.bootcss.com"
+  highlightjsLang: ["r", "yaml", "tex"]
+  highlightjsTheme: "github"
+
+  logo:
+    en:
+      img: "/images/logo.png"
+      url: "/"
+      alt: "bou"
+      tag: ""
+    knitr:
+      img: "/knitr/images/knit-logo.png"
+      url: "/knitr/"
+      alt: "knitr logo"
+      tag: "knitr: elegant, flexible, and fast dynamic report generation with R"
+    tinytex:
+      img: "/images/logo-tinytex.png"
+      url: "/tinytex/"
+      alt: "tinytex logo"
+      tag: "TinyTeX: A lightweight and easy-to-maintain LaTeX distribution"
+
+  author:
+    en: "bou"
+    cn: "登"
+    animation: "bou & ying"
+
+  lang:
+    edit:
+      cn: "编辑"
+    license:
+      cn: "版权"
+    subscribe:
+      cn: "订阅"
+
+blackfriday:
+    extensionsmask: ["noIntraEmphasis"]
+    fractions: false
