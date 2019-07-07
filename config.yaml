@@ -47,9 +47,15 @@ menu:
     - name: "Vitae"
       url: "/en/vitae/"
       weight: 4
+    - name: "Categories"
+      url: "/categories/"
+      weight: 5
+    - name: "Tags"
+      url: "/tags/"
+      weight: 6
     - name: "中文"
       url: "/cn/"
-      weight: 5
+      weight: 7
   cn:
     - name: "首页"
       url: "/"
