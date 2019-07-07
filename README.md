@@ -1,6 +1,10 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/afba6090-da3e-41ab-a36e-5237964f0ba4/deploy-status)](https://app.netlify.com/sites/cranky-kepler-1e8a4b/deploys)
+
 bou.xyz
 
 20190617建立 域名购买20190617 6元
+
+render上的网址： https://bou.onrender.com
 
 endg.github.io netlify 准备用来作为DNEG的基础，使用HUGO,使用国人贤民开发的皮肤JANE.
 
