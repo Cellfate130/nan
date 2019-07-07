@@ -3,8 +3,8 @@
 bou.xyz
 
 20190617建立 域名购买20190617 6元
-
-render上的网址： https://bou.onrender.com
+netlify上的Default subdomain： https://cranky-kepler-1e8a4b.netlify.com/
+render 上的Default subdomain： https://bou.onrender.com
 
 endg.github.io netlify 准备用来作为DNEG的基础，使用HUGO,使用国人贤民开发的皮肤JANE.
 
