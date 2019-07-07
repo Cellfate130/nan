@@ -4,6 +4,37 @@ date: '2005-01-11T19:07:00+08:00'
 slug: what-did-we-learn
 ---
 
-考完了这门课，大多数都来自作业题，要不就是完全没问题，要不就是完全不会做，感觉很不爽，这门课确实感觉也挺难，不出做过的题大家肯定会挂一大片，没办法。到底是怪老师没有讲清楚知识呢？还是怪我们自己没有好好学？还是怪这么课本身就不适合在我们学院开？其实看看书的后面部分也可以看出随机过程在金融市场上应用较为广泛，还是挺有用、挺有意思的，但是我们的课程根本不可能讲到那里去，课时太少，由此我又想到本科阶段到底该学些什么；以我跟老师们的接触，他们大多都说该打好基础，我也赞同，但是我们开的这些课有没有达到这种目的呢？哪些课能显著体现统计学的基础？都是值得大家一起思考的问题。比如现在看计量经济学就严重感觉到高等代数中矩阵的知识忘得差不多了，那才能让人感觉到什么叫基础，像我们所开过的社会医学统计、随机过程等课程有基础作用吗？似乎感觉有些偏了......反倒是描述统计、数理统计这些课要好好深入学习学习，但是这些课我们又上好了吗？似乎也没有......我们的课程安排似乎是想让学生尽量多学些东西，但是顾了广度肯定会顾不上深度，这永远是一对矛盾，又是一个权重的问题。
+# Hugo网站托管至Netlify
 
-拚命狂赶了两天，觉得应该不会挂了，但是一点也不值得高兴……
+Sat, May 6, 2017 
+
+ [hugo](https://www.choyang.me/zh/tags/hugo), [netlify](https://www.choyang.me/zh/tags/netlify)
+
+- 
+- 
+- 
+- 
+- 
+
+在用 blogdown 建站之初是托管在Github Pages，具体过程[这篇日志](https://www.choyang.me/zh/post/hugo/)做了详细介绍。看到[Yihui的这篇博客](https://yihui.name/cn/2017/04/url-to-content/)才发现[Netlify](https://www.netlify.com/)部署托管静态网站更加方便，提供了 Jekyll、Hugo 等引擎自动编译静态网站，不需要像 Github Pages 那样用 Git 管理副产品[1](https://www.choyang.me/zh/post/hosting-hugo-on-netlify/#fn:Github-Pages-Net)。更为方便的是，Netlify 支持编译 Github 仓库的代码，这样我们可以把 Hugo 网站源代码上传至 Github 用 Git 管理，然后在 Netlify上发布网站：
+
+1. 用 Github 账户登录 Netlify
+2. 右上角选择`New site from Git`
+3. 选择 Github ，然后关联包含网站源代码的仓库
+4. 设置：
+   - Branch：`master`
+   - Build Command: 建议选择`hugo_0.19`
+   - Publish Directory:`public`[2](https://www.choyang.me/zh/post/hosting-hugo-on-netlify/#fn:publishDir) 
+5. `Deploying`，默默等待一两分钟，Netlify 随机分配一个子域名`*.netlify.com`，可以随意修改`*`的内容。
+
+如果需要自定义自己域名为`www.<your_domain>`，[Netlify中有详细说明文档](https://www.netlify.com/docs/custom-domains/#dns-configuration)，，如下设置即可：
+
+- `A`记录，类型为`@`，`104.198.14.52`
+- `CNAME`记录，类型为`www`，设置为Netlify 中的域名`*.netlify.com`
+
+待处理：去掉`www`前缀，启动`https`
+
+------
+
+1. Github Pages 中需要管理编译生成的网页文件，而结合 Netlify只需要上传生成网站的源代码至 Github，把 `public`文件夹添加至`.gitignore`，Hugo 默认把网站编译到 `public` 文件夹下， 文件夹，如果自定义修改了`config.toml`中的参数`publishDir`，用相应文件夹代替`public`即可 [↩](https://www.choyang.me/zh/post/hosting-hugo-on-netlify/#fnref:Github-Pages-Net)
+2. 或者与`publishDir`一致 [↩](https://www.choyang.me/zh/post/hosting-hugo-on-netlify/#fnref:publishDir)

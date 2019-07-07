@@ -1,9 +1,12 @@
----
+﻿---
 title: Homepage
 date: '2017-01-31'
 disable_mathjax: true
 disable_highlight: true
 ---
+
+[todo](/cn/2019/07/hugo_goal/) 仿照网站yihui.name
+
 
 I'm a software engineer working at [RStudio, Inc](https://www.rstudio.com).
 I earned my PhD from the Department of Statistics, Iowa State University. My
