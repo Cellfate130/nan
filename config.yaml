@@ -28,12 +28,6 @@ menu:
     - name: "博客"
       url: "/cn/"
       weight: 4
-    - name: "Categories"
-      url: "/categories/"
-      weight: 5
-    - name: "Tags"
-      url: "/tags/"
-      weight: 6
   en:
     - name: "Home"
       url: "/"
@@ -66,15 +60,9 @@ menu:
     - name: "菜谱"
       url: "/cn/recipe/"
       weight: 5
-    - name: "分类"
-      url: "/categories/"
-      weight: 6
-    - name: "标签"
-      url: "/tags/"
-      weight: 7
     - name: "English"
       url: "/en/"
-      weight: 8
+      weight: 6
   knitr:
     - name: "Home"
       url: "/knitr/"
@@ -91,9 +79,13 @@ menu:
     - name: "FAQ"
       url: "/knitr/faq/"
       weight: 5
-    - name: "index"
-      url: "/"
+    - name: "Github repo"
+      pre: "github"
+      url: "https://github.com/yihui/knitr"
       weight: 6
+    - name: "Yihui Xie"
+      url: "/"
+      weight: 7
   animation:
     - name: "Home"
       url: "/animation/"
@@ -107,9 +99,13 @@ menu:
     - name: "Resources"
       url: "/animation/resources/"
       weight: 4
-    - name: "index"
-      url: "/"
+    - name: "Github repo"
+      pre: "github"
+      url: "https://github.com/yihui/animation"
       weight: 5
+    - name: "Yihui Xie"
+      url: "/"
+      weight: 6
   tinytex:
     - name: "Home"
       url: "/tinytex/"
@@ -126,9 +122,13 @@ menu:
     - name: "中文文档"
       url: "/tinytex/cn/"
       weight: 5
-    - name: "index"
-      url: "/"
+    - name: "Github repo"
+      pre: "github"
+      url: "https://github.com/yihui/tinytex"
       weight: 6
+    - name: "main"
+      url: "/"
+      weight: 7
 
 params:
   description: "Personal website of BOU; 博的个人网站"
@@ -158,7 +158,7 @@ params:
     en:
       img: "/images/logo.png"
       url: "/"
-      alt: "bou"
+      alt: "Yihui Xie"
       tag: ""
     knitr:
       img: "/knitr/images/knit-logo.png"

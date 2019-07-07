@@ -1,13 +1,11 @@
-bou.xyz
+This is a repo to host the (Markdown) source files of my personal website, including my Chinese and English blogs, as well as several project websites (such as [**knitr**](https://github.com/yihui/knitr).) The content of all pages is licensed under [CC BY-NC-SA 4.0](http://creativecommons.org/licenses/by-nc-sa/4.0/).
 
-20190617建立 域名购买20190617 6元
+To build the website locally, you must clone this repo with its submodule (use the `--recursive` argument), e.g.,
 
-endg.github.io netlify 准备用来作为DNEG的基础，使用HUGO,使用国人贤民开发的皮肤JANE.
+```bash
+git clone --recursive git@github.com:rbind/yihui.git
+```
 
-如何添加皮肤。 $ cd themes $ git submodule add https://github.com/xianmin/hugo-theme-jane
+The website is built via the R package [**blogdown**](https://github.com/rstudio/blogdown). Please read its documentation for how to use it.
 
-博客使用 git submodule 的方式引用的 rapid 皮肤，所以，clone 本 repo 后，记得执行：
-
-git submodule init
-
-git submodule update
+I don't recommend you to study how my website is built, because it is complicated. In particular, the way I manage images is fairly complicated.
