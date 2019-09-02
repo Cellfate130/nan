@@ -1,6 +1,6 @@
-baseurl: "https://www.bou.xyz/"
+baseurl: "https://www/"
 languageCode: "en-us"
-title: "BOU | 博"
+title: "Nan"
 theme: "hugo-ivy"
 googleAnalytics: ""
 disqusShortname: ""
@@ -81,64 +81,11 @@ menu:
     - name: "English"
       url: "/en/"
       weight: 8
-  knitr:
-    - name: "Home"
-      url: "/knitr/"
-      weight: 1
-    - name: "Options"
-      url: "/knitr/options/"
-      weight: 2
-    - name: "Hooks"
-      url: "/knitr/hooks/"
-      weight: 3
-    - name: "Examples"
-      url: "/knitr/demos/"
-      weight: 4
-    - name: "FAQ"
-      url: "/knitr/faq/"
-      weight: 5
-    - name: "index"
-      url: "/"
-      weight: 6
-  animation:
-    - name: "Home"
-      url: "/animation/"
-      weight: 1
-    - name: "Examples"
-      url: "/animation/examples/"
-      weight: 2
-    - name: "Export"
-      url: "/animation/export/"
-      weight: 3
-    - name: "Resources"
-      url: "/animation/resources/"
-      weight: 4
-    - name: "index"
-      url: "/"
-      weight: 5
-  tinytex:
-    - name: "Home"
-      url: "/tinytex/"
-      weight: 1
-    - name: "FAQs"
-      url: "/tinytex/faq/"
-      weight: 2
-    - name: "R package"
-      url: "/tinytex/r/"
-      weight: 3
-    - name: "Hall of Pain"
-      url: "/tinytex/pain/"
-      weight: 4
-    - name: "中文文档"
-      url: "/tinytex/cn/"
-      weight: 5
-    - name: "index"
-      url: "/"
-      weight: 6
+
 
 params:
-  description: "Personal website of BOU; 博的个人网站"
-  footer: "&copy; [BOU](/) 2015 - 2019"
+  description: "Personal website of Nan"
+  footer: "&copy; [nan](/) 2019 - "
   disqusURL: ""
   customJS:
     - "js/fix-toc.js"
@@ -151,8 +98,8 @@ params:
     - "js/alt-title.js"
     - "js/header-link.js"
   #githubContentURL: "https://github.com/rbind/yihui/edit/master/content/"
-  githubContentURL: "https://github.com/endg/bou.xyz/edit/master/content/"
-  twitterImage: "/images/logo.png"
+  githubContentURL: "https://github.com/Cellfate130/nan"
+  twitterImage: "/images/nan_logo.png"
 
   # options for highlight.js (version, additional languages, and theme)
   highlightjsVersion: "9.12.0"
@@ -162,25 +109,14 @@ params:
 
   logo:
     en:
-      img: "/images/logo.png"
+      img: "/images/nan_logo.png"
       url: "/"
-      alt: "bou"
+      alt: "nan"
       tag: ""
-    knitr:
-      img: "/knitr/images/knit-logo.png"
-      url: "/knitr/"
-      alt: "knitr logo"
-      tag: "knitr: elegant, flexible, and fast dynamic report generation with R"
-    tinytex:
-      img: "/images/logo-tinytex.png"
-      url: "/tinytex/"
-      alt: "tinytex logo"
-      tag: "TinyTeX: A lightweight and easy-to-maintain LaTeX distribution"
-
   author:
-    en: "bou"
-    cn: "登"
-    animation: "bou & ying"
+    en: "nan"
+    cn: "南"
+    animation: ""
 
   lang:
     edit:
