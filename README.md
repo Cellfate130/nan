@@ -1,1 +1,1 @@
-The template is [yihui](yihui.name) website.
+The template is from [yihui](yihui.name) website.
