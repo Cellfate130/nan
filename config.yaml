@@ -85,7 +85,7 @@ menu:
 
 params:
   description: "Personal website of Nan"
-  footer: "&copy; [nan](/) 2019 - "
+  footer: "&copy; [Nan](/) 2019 - "
   disqusURL: ""
   customJS:
     - "js/fix-toc.js"
