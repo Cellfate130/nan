@@ -1,6 +1,6 @@
 ---
-title: 菜谱
-date: '2017-12-28'
-slug: cn/recipe
+title: 细胞
+date: '2019-09-10'
+slug: cn/Cell
 ---
 
