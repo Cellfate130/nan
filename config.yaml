@@ -70,7 +70,7 @@ menu:
       url: "/cn/vitae/"
       weight: 4
     - name: "科研"
-      url: "/cn/Cell/"
+      url: "/cn/cell/"
       weight: 5
     - name: "分类"
       url: "/categories/"
