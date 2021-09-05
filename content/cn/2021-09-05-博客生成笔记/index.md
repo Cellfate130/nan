@@ -6,7 +6,9 @@ slug: 博客生成笔记
 ---
 ### 新建博客操作大法
 
-1. Addins/New post
+准备工作：Rstudio中打开网页Project文档
+
+1. Addins/New post（注意选择文件保存类别：cn中文；en英文）
 2. 输入title等等，OK
 3. 写博客
 4. 保存
