@@ -69,8 +69,8 @@ menu:
     - name: "简历"
       url: "/cn/vitae/"
       weight: 4
-    - name: "细胞"
-      url: "/cn/Cell/"
+    - name: "科研"
+      url: "/cn/Research/"
       weight: 5
     - name: "分类"
       url: "/categories/"
