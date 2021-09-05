@@ -6,3 +6,6 @@ slug: MyAppsList
 ---
 ### 我的装机列表
 
+1. Mendeley
+2. R
+3. Rstudio
